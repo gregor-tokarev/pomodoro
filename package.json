@@ -55,12 +55,6 @@
     "vue-loader": "^16.8.3"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
-      "vue-cli-service lint",
-      "git add"
-    ]
+    "pre-commit": "npm run lint"
   }
 }
