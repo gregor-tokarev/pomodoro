@@ -8,13 +8,21 @@ module.exports = {
     '@vue/standard',
     '@vue/typescript/recommended'
   ],
+  globals: {
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    withDefaults: 'readonly'
+  },
   parserOptions: {
     ecmaVersion: 2020
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    '@typescript-eslint/ban-ts-comment': 'off'
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'space-before-function-paren': 'off',
+    'vue/script-setup-uses-vars': 'error',
+    'func-call-spacing': 'off'
   },
   overrides: [
     {

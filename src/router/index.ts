@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import UIKit from '@/views/UIKit.vue'
 
 const routes: Array<RouteRecordRaw> = [
   // {
@@ -14,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
   //   which is lazy-loaded when the route is visited.
   // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
+  {
+    path: '/uikit',
+    name: 'uikit',
+    component: UIKit
+  }
 ]
 
 const router = createRouter({
