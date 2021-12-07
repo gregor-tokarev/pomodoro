@@ -11,11 +11,8 @@
     ></AppCheckbox>
     <div class="basic-text todo-item__text">{{ props.todoitem.text }}</div>
 
-    <div
-      v-if="props.todoitem.status !== 'todo'"
-      class="hint-text todo-item__time"
-    >
-      {{ props.todoitem.time }}
+    <div class="hint-text todo-item__time">
+      {{ getTimeStr(time) }}
     </div>
   </div>
 </template>
@@ -23,12 +20,32 @@
 <script lang="ts" setup>
 import AppCheckbox from '@/components/UI/AppCheckbox.vue'
 import { Todo } from 'models/todo.model'
+import { computed, ref } from 'vue'
+import { diffDates } from '@/assets/ts/diffDates'
+import { secondsToTime } from '@/assets/ts/secondsToTime'
+import { getTimeStr } from '@/assets/ts/getTimeStr'
+import RelativeTime from 'dayjs/plugin/relativeTime'
+import dayjs, { Dayjs } from 'dayjs'
 
 interface Props {
   todoitem: Todo
 }
 
 const props = defineProps<Props>()
+
+dayjs.extend(RelativeTime)
+
+const currentTime = ref<Dayjs>(dayjs())
+setInterval(() => {
+  currentTime.value = dayjs()
+}, 1000)
+
+const time = computed(() => {
+  const timeEnd = props.todoitem.timeEnd ?? currentTime.value.format()
+  const diff = diffDates(props.todoitem.timeStart, timeEnd, 'second')
+
+  return secondsToTime(diff)
+})
 </script>
 
 <style scoped lang="scss">
@@ -50,6 +67,10 @@ const props = defineProps<Props>()
     :deep(.checkbox) {
       border-color: $accent-main;
     }
+  }
+
+  &__text {
+    color: $gray-400;
   }
 
   &__checkbox {

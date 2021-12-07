@@ -19,8 +19,6 @@ const svg = require(`raw-loader!@/assets/icons/${props.iconName}.svg`)
   .replaceAll('\\', '')
   .replace('"<', '<')
   .replace('>";', '>')
-
-console.log(svg)
 </script>
 
 <style scoped lang="scss">

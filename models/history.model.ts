@@ -1,3 +1,8 @@
 export interface History {
-  duration: string
+  id: string;
+  tasks: string[];
+  timeStart: string;
+  timeEnd: string;
+  isBreak: boolean;
+  ownerId: string;
 }

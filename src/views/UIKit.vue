@@ -6,7 +6,14 @@
 
   <AppAddButton>Add task</AppAddButton>
 
-  <AppTodoItem :todoitem="{text: 'some', status: 'todo', time: '12:12'}"></AppTodoItem>
+  <AppTodoItem
+    :todoitem="{
+      text: 'some',
+      status: 'completed',
+      timeStart: '2021-12-07T15:00:55+0300',
+      timeEnd: '2021-12-07T15:15:56+0300',
+    }"
+  ></AppTodoItem>
 
   <AppHistoryItem></AppHistoryItem>
 </template>
