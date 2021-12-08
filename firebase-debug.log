@@ -377,3 +377,286 @@ Dev App Server is now running.
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
+[debug] [2021-12-07T12:59:19.916Z] Received signal SIGINT (Ctrl-C) 1
+[info]  
+[info] i  emulators: Received SIGINT (Ctrl-C) for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGINT (Ctrl-C) signal again to stop right now. 
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  ui: Stopping Emulator UI {"metadata":{"emulator":{"name":"ui"},"message":"Stopping Emulator UI"}}
+[debug] [2021-12-07T12:59:19.922Z] Received signal SIGHUP 1
+[info]  
+[info] i  emulators: Received SIGHUP for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGHUP signal again to stop right now. 
+[debug] [2021-12-07T12:59:19.926Z] Error: write EIO
+    at afterWriteDispatched (internal/stream_base_commons.js:156:25)
+    at writeGeneric (internal/stream_base_commons.js:147:3)
+    at WriteStream.Socket._writeGeneric (net.js:787:11)
+    at WriteStream.Socket._write (net.js:799:8)
+    at writeOrBuffer (internal/streams/writable.js:358:12)
+    at WriteStream.Writable.write (internal/streams/writable.js:303:10)
+    at Console.log (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:428:64)
+    at writeOrBuffer (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:417:5)
+    at Console.Writable.write (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:334:11)
+    at DerivedLogger.ondata (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:681:20)
+    at DerivedLogger.emit (events.js:387:35)
+    at DerivedLogger.emit (domain.js:470:12)
+    at addChunk (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:298:12)
+    at readableAddChunk (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:280:11)
+[error] 
+[error] Error: An unexpected error has occurred.
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  ui: Stopping Emulator UI {"metadata":{"emulator":{"name":"ui"},"message":"Stopping Emulator UI"}}
+[warn] ⚠  Emulator UI has exited upon receiving signal: SIGINT 
+[info] i  functions: Stopping Functions Emulator {"metadata":{"emulator":{"name":"functions"},"message":"Stopping Functions Emulator"}}
+[info] i  functions: Stopping Functions Emulator {"metadata":{"emulator":{"name":"functions"},"message":"Stopping Functions Emulator"}}
+[info] i  hosting: Stopping Hosting Emulator {"metadata":{"emulator":{"name":"hosting"},"message":"Stopping Hosting Emulator"}}
+[info] i  hosting: Stopping Hosting Emulator {"metadata":{"emulator":{"name":"hosting"},"message":"Stopping Hosting Emulator"}}
+[info] i  firestore: Stopping Firestore Emulator {"metadata":{"emulator":{"name":"firestore"},"message":"Stopping Firestore Emulator"}}
+[info] i  firestore: Stopping Firestore Emulator {"metadata":{"emulator":{"name":"firestore"},"message":"Stopping Firestore Emulator"}}
+[debug] [2021-12-07T12:59:19.933Z] [worker-~diagnostic~-c454cd08-9df7-4d15-8258-383ab700424b]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-c454cd08-9df7-4d15-8258-383ab700424b]: exited"}}
+[debug] [2021-12-07T12:59:19.934Z] [worker-~diagnostic~-c454cd08-9df7-4d15-8258-383ab700424b]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-c454cd08-9df7-4d15-8258-383ab700424b]: FINISHED"}}
+[debug] [2021-12-07T12:59:19.934Z] *** shutting down gRPC server since JVM is shutting down {"metadata":{"emulator":{"name":"firestore"},"message":"*** shutting down gRPC server since JVM is shutting down"}}
+[debug] [2021-12-07T12:59:19.935Z] 
+ {"metadata":{"emulator":{"name":"firestore"},"message":"\n"}}
+[debug] [2021-12-07T12:59:19.940Z] *** server shut down {"metadata":{"emulator":{"name":"firestore"},"message":"*** server shut down"}}
+[debug] [2021-12-07T12:59:19.940Z] 
+ {"metadata":{"emulator":{"name":"firestore"},"message":"\n"}}
+[debug] [2021-12-08T14:15:57.742Z] ----------------------------------------------------------------------
+[debug] [2021-12-08T14:15:57.745Z] Command:       /home/gregor/.nvm/versions/node/v14.17.1/bin/node /home/gregor/.nvm/versions/node/v14.17.1/bin/firebase emulators:start
+[debug] [2021-12-08T14:15:57.745Z] CLI Version:   9.23.0
+[debug] [2021-12-08T14:15:57.745Z] Platform:      linux
+[debug] [2021-12-08T14:15:57.745Z] Node Version:  v14.17.1
+[debug] [2021-12-08T14:15:57.750Z] Time:          Wed Dec 08 2021 17:15:57 GMT+0300 (Moscow Standard Time)
+[debug] [2021-12-08T14:15:57.750Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-12-08T14:15:57.752Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2021-12-08T14:15:57.855Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-08T14:15:57.856Z] > authorizing via signed-in user (zippper123915@gmail.com)
+[info] i  emulators: Starting emulators: auth, functions, firestore, hosting, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, hosting, storage"}}
+[debug] [2021-12-08T14:15:57.868Z] [hub] writing locator at /tmp/hub-pomodoro-3b7d3.json
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: database, pubsub {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mdatabase, pubsub\u001b[22m"}}
+[info] ✔  functions: Using node@14 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@14 from host."}}
+[debug] [2021-12-08T14:15:57.882Z] defaultcredentials: writing to file /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json
+[debug] [2021-12-08T14:15:57.883Z] Setting GAC to /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json"}}
+[debug] [2021-12-08T14:15:57.885Z] > refreshing access token with scopes: []
+[debug] [2021-12-08T14:15:57.886Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-08T14:15:59.255Z] <<< HTTP RESPONSE 200 {"date":"Wed, 08 Dec 2021 14:15:59 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-08T14:15:59.263Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig [none]
+[debug] [2021-12-08T14:15:59.558Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2021-12-08T14:15:59.558Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2021-12-08T14:15:59.736Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig 200
+[debug] [2021-12-08T14:15:59.736Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig {"projectId":"pomodoro-3b7d3","storageBucket":"pomodoro-3b7d3.appspot.com","locationId":"europe-west"}
+[debug] [2021-12-08T14:15:59.744Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2021-12-08T14:15:59.744Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-12-08T14:15:59.745Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/gregor/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.1.jar","--host","localhost","--port",8081,"--rules","/home/gregor/work/PetProjects/pomodoro/firestore.rules","--functions_emulator","localhost:5001"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/gregor/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.1.jar\",\"--host\",\"localhost\",\"--port\",8081,\"--rules\",\"/home/gregor/work/PetProjects/pomodoro/firestore.rules\",\"--functions_emulator\",\"localhost:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2021-12-08T14:16:01.308Z] Dec 08, 2021 5:16:01 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://localhost:37179
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Dec 08, 2021 5:16:01 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://localhost:37179\n"}}
+[debug] [2021-12-08T14:16:01.329Z] API endpoint: http://localhost {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://localhost"}}
+[debug] [2021-12-08T14:16:01.329Z] :8081
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=localhost:8081
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":":8081\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=localhost:8081\n\nDev App Server is now running.\n\n"}}
+[debug] [2021-12-08T14:16:04.314Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-12-08T14:16:04.481Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2021-12-08T14:16:05.088Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/pomodoro-3b7d3/sites 
+[debug] [2021-12-08T14:16:06.224Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/pomodoro-3b7d3/sites 200
+[debug] [2021-12-08T14:16:06.224Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/pomodoro-3b7d3/sites {"sites":[{"name":"projects/632755557413/sites/pomodoro-3b7d3","defaultUrl":"https://pomodoro-3b7d3.web.app","appId":"1:632755557413:web:b6d742835711d5b92c1bcc","type":"DEFAULT_SITE"}]}
+[debug] [2021-12-08T14:16:06.225Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/webApps/1:632755557413:web:b6d742835711d5b92c1bcc/config [none]
+[debug] [2021-12-08T14:16:07.340Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/webApps/1:632755557413:web:b6d742835711d5b92c1bcc/config 200
+[debug] [2021-12-08T14:16:07.340Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/webApps/1:632755557413:web:b6d742835711d5b92c1bcc/config {"projectId":"pomodoro-3b7d3","appId":"1:632755557413:web:b6d742835711d5b92c1bcc","storageBucket":"pomodoro-3b7d3.appspot.com","locationId":"europe-west","apiKey":"AIzaSyA9WfJut9ibyVNLh3AmXvos8dVI1AwvQb4","authDomain":"pomodoro-3b7d3.firebaseapp.com","messagingSenderId":"632755557413"}
+[info] i  hosting: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[debug] [2021-12-08T14:16:07.361Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-12-08T14:16:07.362Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-12-08T14:16:07.362Z] Starting Emulator UI with command {"binary":"node","args":["/home/gregor/.cache/firebase/emulators/ui-v1.6.4/server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/home/gregor/.cache/firebase/emulators/ui-v1.6.4/server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2021-12-08T14:16:07.472Z] Web / API server started at localhost:6060
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:6060\n"}}
+[info] i  functions: Watching "/home/gregor/work/PetProjects/pomodoro/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/home/gregor/work/PetProjects/pomodoro/functions\" for Cloud Functions..."}}
+[debug] [2021-12-08T14:16:07.642Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2021-12-08T14:16:07.642Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2021-12-08T14:16:07.643Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2021-12-08T14:16:07.643Z] [worker-~diagnostic~-b533b6c5-50b9-4960-bd00-aa4980cdf69b]: Assigning socketPath: /tmp/fire_emu_100052.sock {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-b533b6c5-50b9-4960-bd00-aa4980cdf69b]: Assigning socketPath: /tmp/fire_emu_100052.sock"}}
+[debug] [2021-12-08T14:16:07.644Z] [worker-~diagnostic~-b533b6c5-50b9-4960-bd00-aa4980cdf69b]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-b533b6c5-50b9-4960-bd00-aa4980cdf69b]: BUSY"}}
+[debug] [2021-12-08T14:16:07.763Z] [runtime-status] [100052] Functions runtime initialized. {"cwd":"/home/gregor/work/PetProjects/pomodoro/functions","node_version":"14.17.1"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] Functions runtime initialized. {\"cwd\":\"/home/gregor/work/PetProjects/pomodoro/functions\",\"node_version\":\"14.17.1\"}"}}
+[debug] [2021-12-08T14:16:07.764Z] [runtime-status] [100052] Disabled runtime features: undefined {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] Disabled runtime features: undefined"}}
+[debug] [2021-12-08T14:16:07.765Z] [runtime-status] [100052] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.12.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2021-12-08T14:16:07.768Z] [runtime-status] [100052] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.16.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-12-08T14:16:07.769Z] [runtime-status] [100052] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2021-12-08T14:16:07.770Z] [runtime-status] [100052] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.16.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-12-08T14:16:07.813Z] [runtime-status] [100052] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] Checked functions.config() {\"config\":{}}"}}
+[debug] [2021-12-08T14:16:07.814Z] [runtime-status] [100052] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"3.16.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js\"}}"}}
+[debug] [2021-12-08T14:16:07.814Z] [runtime-status] [100052] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.16.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-12-08T14:16:07.815Z] [runtime-status] [100052] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.12.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2021-12-08T14:16:07.815Z] [runtime-status] [100052] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.16.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-12-08T14:16:07.816Z] [runtime-status] [100052] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [100052] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"9.12.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:6060                │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ localhost:9099 │ http://localhost:6060/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Functions      │ localhost:5001 │ http://localhost:6060/functions │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ localhost:8081 │ http://localhost:6060/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Hosting        │ localhost:5000 │ n/a                             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ localhost:9199 │ http://localhost:6060/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2021-12-08T14:16:07.821Z] [worker-~diagnostic~-b533b6c5-50b9-4960-bd00-aa4980cdf69b]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-b533b6c5-50b9-4960-bd00-aa4980cdf69b]: IDLE"}}
+[debug] [2021-12-08T14:18:14.120Z] Received signal SIGINT (Ctrl-C) 1
+[info]  
+[info] i  emulators: Received SIGINT (Ctrl-C) for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGINT (Ctrl-C) signal again to stop right now. 
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  ui: Stopping Emulator UI {"metadata":{"emulator":{"name":"ui"},"message":"Stopping Emulator UI"}}
+[warn] ⚠  Emulator UI has exited upon receiving signal: SIGINT 
+[info] i  functions: Stopping Functions Emulator {"metadata":{"emulator":{"name":"functions"},"message":"Stopping Functions Emulator"}}
+[info] i  hosting: Stopping Hosting Emulator {"metadata":{"emulator":{"name":"hosting"},"message":"Stopping Hosting Emulator"}}
+[debug] [2021-12-08T14:18:14.134Z] Error: write EIO
+    at afterWriteDispatched (internal/stream_base_commons.js:156:25)
+    at writeGeneric (internal/stream_base_commons.js:147:3)
+    at WriteStream.Socket._writeGeneric (net.js:787:11)
+    at WriteStream.Socket._write (net.js:799:8)
+    at writeOrBuffer (internal/streams/writable.js:358:12)
+    at WriteStream.Writable.write (internal/streams/writable.js:303:10)
+    at Console.log (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:428:64)
+    at writeOrBuffer (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:417:5)
+    at Console.Writable.write (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:334:11)
+    at DerivedLogger.ondata (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:681:20)
+    at DerivedLogger.emit (events.js:387:35)
+    at DerivedLogger.emit (domain.js:470:12)
+    at addChunk (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:298:12)
+    at readableAddChunk (/home/gregor/.nvm/versions/node/v14.17.1/lib/node_modules/firebase-tools/node_modules/readable-stream/lib/_stream_readable.js:280:11)
+[error] 
+[error] Error: An unexpected error has occurred.
+[info] i  firestore: Stopping Firestore Emulator {"metadata":{"emulator":{"name":"firestore"},"message":"Stopping Firestore Emulator"}}
+[debug] [2021-12-08T14:18:14.140Z] Received signal SIGHUP 1
+[info]  
+[info] i  emulators: Received SIGHUP for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGHUP signal again to stop right now. 
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  firestore: Stopping Firestore Emulator {"metadata":{"emulator":{"name":"firestore"},"message":"Stopping Firestore Emulator"}}
+[debug] [2021-12-08T14:18:14.142Z] [worker-~diagnostic~-b533b6c5-50b9-4960-bd00-aa4980cdf69b]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-b533b6c5-50b9-4960-bd00-aa4980cdf69b]: exited"}}
+[debug] [2021-12-08T14:18:14.143Z] [worker-~diagnostic~-b533b6c5-50b9-4960-bd00-aa4980cdf69b]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-b533b6c5-50b9-4960-bd00-aa4980cdf69b]: FINISHED"}}
+[debug] [2021-12-08T14:18:14.143Z] *** shutting down gRPC server since JVM is shutting down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** shutting down gRPC server since JVM is shutting down\n"}}
+[debug] [2021-12-08T14:18:14.147Z] *** server shut down {"metadata":{"emulator":{"name":"firestore"},"message":"*** server shut down"}}
+[debug] [2021-12-08T14:18:14.148Z] 
+ {"metadata":{"emulator":{"name":"firestore"},"message":"\n"}}
+[debug] [2021-12-08T14:19:39.571Z] ----------------------------------------------------------------------
+[debug] [2021-12-08T14:19:39.574Z] Command:       /home/gregor/.nvm/versions/node/v14.17.1/bin/node /home/gregor/.nvm/versions/node/v14.17.1/bin/firebase emulators:start
+[debug] [2021-12-08T14:19:39.575Z] CLI Version:   9.23.0
+[debug] [2021-12-08T14:19:39.575Z] Platform:      linux
+[debug] [2021-12-08T14:19:39.575Z] Node Version:  v14.17.1
+[debug] [2021-12-08T14:19:39.575Z] Time:          Wed Dec 08 2021 17:19:39 GMT+0300 (Moscow Standard Time)
+[debug] [2021-12-08T14:19:39.575Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-12-08T14:19:39.630Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-08T14:19:39.630Z] > authorizing via signed-in user (zippper123915@gmail.com)
+[info] i  emulators: Starting emulators: auth, functions, firestore, hosting, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, hosting, storage"}}
+[warn] ⚠  emulators: It seems that you are running multiple instances of the emulator suite for project pomodoro-3b7d3. This may result in unexpected behavior. 
+[debug] [2021-12-08T14:19:39.642Z] [hub] writing locator at /tmp/hub-pomodoro-3b7d3.json
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: database, pubsub {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mdatabase, pubsub\u001b[22m"}}
+[info] ✔  functions: Using node@14 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@14 from host."}}
+[debug] [2021-12-08T14:19:39.657Z] defaultcredentials: writing to file /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json
+[debug] [2021-12-08T14:19:39.658Z] Setting GAC to /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json"}}
+[debug] [2021-12-08T14:19:39.660Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig [none]
+[debug] [2021-12-08T14:19:40.186Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig 200
+[debug] [2021-12-08T14:19:40.186Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig {"projectId":"pomodoro-3b7d3","storageBucket":"pomodoro-3b7d3.appspot.com","locationId":"europe-west"}
+[debug] [2021-12-08T14:19:40.196Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2021-12-08T14:19:40.197Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-12-08T14:19:40.197Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/gregor/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.1.jar","--host","localhost","--port",8081,"--rules","/home/gregor/work/PetProjects/pomodoro/firestore.rules","--functions_emulator","localhost:5001"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/gregor/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.1.jar\",\"--host\",\"localhost\",\"--port\",8081,\"--rules\",\"/home/gregor/work/PetProjects/pomodoro/firestore.rules\",\"--functions_emulator\",\"localhost:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2021-12-08T14:19:41.257Z] Dec 08, 2021 5:19:41 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://localhost:41557
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Dec 08, 2021 5:19:41 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://localhost:41557\n"}}
+[debug] [2021-12-08T14:19:41.284Z] API endpoint: http://localhost:8081
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=localhost:8081
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://localhost:8081\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=localhost:8081\n\nDev App Server is now running.\n\n"}}
+[debug] [2021-12-08T14:19:45.045Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-12-08T14:19:45.238Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2021-12-08T14:19:45.831Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/pomodoro-3b7d3/sites 
+[debug] [2021-12-08T14:19:47.200Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/pomodoro-3b7d3/sites 200
+[debug] [2021-12-08T14:19:47.200Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/pomodoro-3b7d3/sites {"sites":[{"name":"projects/632755557413/sites/pomodoro-3b7d3","defaultUrl":"https://pomodoro-3b7d3.web.app","appId":"1:632755557413:web:b6d742835711d5b92c1bcc","type":"DEFAULT_SITE"}]}
+[debug] [2021-12-08T14:19:47.201Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/webApps/1:632755557413:web:b6d742835711d5b92c1bcc/config [none]
+[debug] [2021-12-08T14:19:48.507Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/webApps/1:632755557413:web:b6d742835711d5b92c1bcc/config 200
+[debug] [2021-12-08T14:19:48.507Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/webApps/1:632755557413:web:b6d742835711d5b92c1bcc/config {"projectId":"pomodoro-3b7d3","appId":"1:632755557413:web:b6d742835711d5b92c1bcc","storageBucket":"pomodoro-3b7d3.appspot.com","locationId":"europe-west","apiKey":"AIzaSyA9WfJut9ibyVNLh3AmXvos8dVI1AwvQb4","authDomain":"pomodoro-3b7d3.firebaseapp.com","messagingSenderId":"632755557413"}
+[info] i  hosting: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[debug] [2021-12-08T14:19:48.540Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-12-08T14:19:48.541Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-12-08T14:19:48.541Z] Starting Emulator UI with command {"binary":"node","args":["/home/gregor/.cache/firebase/emulators/ui-v1.6.4/server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/home/gregor/.cache/firebase/emulators/ui-v1.6.4/server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2021-12-08T14:19:48.632Z] Web / API server started at localhost:6060
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:6060\n"}}
+[info] i  functions: Watching "/home/gregor/work/PetProjects/pomodoro/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/home/gregor/work/PetProjects/pomodoro/functions\" for Cloud Functions..."}}
+[debug] [2021-12-08T14:19:48.811Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2021-12-08T14:19:48.811Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2021-12-08T14:19:48.811Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2021-12-08T14:19:48.812Z] [worker-~diagnostic~-8d6184f2-4677-4b4e-9228-65f86580ccd6]: Assigning socketPath: /tmp/fire_emu_101294.sock {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-8d6184f2-4677-4b4e-9228-65f86580ccd6]: Assigning socketPath: /tmp/fire_emu_101294.sock"}}
+[debug] [2021-12-08T14:19:48.812Z] [worker-~diagnostic~-8d6184f2-4677-4b4e-9228-65f86580ccd6]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-8d6184f2-4677-4b4e-9228-65f86580ccd6]: BUSY"}}
+[debug] [2021-12-08T14:19:48.923Z] [runtime-status] [101294] Functions runtime initialized. {"cwd":"/home/gregor/work/PetProjects/pomodoro/functions","node_version":"14.17.1"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] Functions runtime initialized. {\"cwd\":\"/home/gregor/work/PetProjects/pomodoro/functions\",\"node_version\":\"14.17.1\"}"}}
+[debug] [2021-12-08T14:19:48.923Z] [runtime-status] [101294] Disabled runtime features: undefined {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] Disabled runtime features: undefined"}}
+[debug] [2021-12-08T14:19:48.925Z] [runtime-status] [101294] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.12.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2021-12-08T14:19:48.927Z] [runtime-status] [101294] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.16.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-12-08T14:19:48.928Z] [runtime-status] [101294] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2021-12-08T14:19:48.929Z] [runtime-status] [101294] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.16.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-12-08T14:19:48.958Z] [runtime-status] [101294] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] Checked functions.config() {\"config\":{}}"}}
+[debug] [2021-12-08T14:19:48.958Z] [runtime-status] [101294] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"3.16.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js\"}}"}}
+[debug] [2021-12-08T14:19:48.958Z] [runtime-status] [101294] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.16.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-12-08T14:19:48.959Z] [runtime-status] [101294] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.12.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2021-12-08T14:19:48.959Z] [runtime-status] [101294] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.16.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-12-08T14:19:48.960Z] [runtime-status] [101294] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [101294] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"9.12.0\",\"resolution\":\"/home/gregor/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:6060                │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ localhost:9099 │ http://localhost:6060/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Functions      │ localhost:5001 │ http://localhost:6060/functions │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ localhost:8081 │ http://localhost:6060/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Hosting        │ localhost:5000 │ n/a                             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ localhost:9199 │ http://localhost:6060/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2021-12-08T14:19:48.964Z] [worker-~diagnostic~-8d6184f2-4677-4b4e-9228-65f86580ccd6]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-8d6184f2-4677-4b4e-9228-65f86580ccd6]: IDLE"}}

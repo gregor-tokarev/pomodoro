@@ -12,7 +12,7 @@
     <div class="basic-text todo-item__text">{{ props.todoitem.text }}</div>
 
     <div class="hint-text todo-item__time">
-      {{ getTimeStr(time) }}
+      {{ time }}
     </div>
   </div>
 </template>
@@ -40,11 +40,12 @@ setInterval(() => {
   currentTime.value = dayjs()
 }, 1000)
 
-const time = computed(() => {
+const time = computed<string>(() => {
   const timeEnd = props.todoitem.timeEnd ?? currentTime.value.format()
   const diff = diffDates(props.todoitem.timeStart, timeEnd, 'second')
 
-  return secondsToTime(diff)
+  const res = secondsToTime(diff)
+  return getTimeStr(res)
 })
 </script>
 

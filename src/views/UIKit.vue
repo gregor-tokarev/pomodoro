@@ -15,7 +15,14 @@
     }"
   ></AppTodoItem>
 
-  <AppHistoryItem></AppHistoryItem>
+  <AppHistoryItem
+    :history="{
+      isBreak: false,
+      timeStart: '2021-12-07T15:00:55+0300',
+      timeEnd: '2021-12-07T15:23:55+0300',
+      tasks: []
+    }"
+  ></AppHistoryItem>
 </template>
 
 <script lang="ts" setup>
