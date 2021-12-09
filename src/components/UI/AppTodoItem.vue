@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import AppCheckbox from '@/components/UI/AppCheckbox.vue'
-import { Todo } from 'models/todo.model'
+import { Task } from 'models/task.model'
 import { computed, ref } from 'vue'
 import { diffDates } from '@/assets/ts/diffDates'
 import { secondsToTime } from '@/assets/ts/secondsToTime'
@@ -28,7 +28,7 @@ import RelativeTime from 'dayjs/plugin/relativeTime'
 import dayjs, { Dayjs } from 'dayjs'
 
 interface Props {
-  todoitem: Todo
+  todoitem: Task
 }
 
 const props = defineProps<Props>()

@@ -23,6 +23,10 @@
       tasks: []
     }"
   ></AppHistoryItem>
+
+  <AppTextarea placeholder="some"></AppTextarea>
+
+  <AppSelect style="margin-top: 10px;" v-model="selectValue" :options="selectOptions" placeholder="some"></AppSelect>
 </template>
 
 <script lang="ts" setup>
@@ -32,8 +36,13 @@ import AppCheckbox from '@/components/UI/AppCheckbox.vue'
 import AppAddButton from '@/components/UI/AppAddButton.vue'
 import AppTodoItem from '@/components/UI/AppTodoItem.vue'
 import AppHistoryItem from '@/components/UI/AppHistoryItem.vue'
+import AppTextarea from '@/components/UI/AppTextarea.vue'
+import AppSelect from '@/components/UI/AppSelect.vue'
+import { ref } from 'vue'
+
+const selectOptions = ref<string[]>(['some1', 'some2', 'some3'])
+const selectValue = ref<string>()
 </script>
 
 <style scoped lang="scss">
-
 </style>

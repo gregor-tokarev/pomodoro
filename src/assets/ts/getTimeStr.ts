@@ -1,8 +1,7 @@
 import { Time } from '@/assets/ts/secondsToTime'
 import { checkSingleDigit } from '@/assets/ts/checkSingleDigit'
 
-export type timeFormat = ':' | 'sw' | 'lw'
-export function getTimeStr(time: Time, format: timeFormat): string {
+export function getTimeStr(time: Time): string {
   let res = ''
   if (time.hours) {
     res += `${checkSingleDigit(time.hours)}:`

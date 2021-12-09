@@ -33,6 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
   transition: all 0.2s;
   outline: none;
   border: none;
+  line-height: 1;
 
   &--common {
     background-color: $accent-main;

@@ -11,7 +11,7 @@ module.exports = ({ config: baseConfig }) => {
         loader: 'sass-resources-loader',
         options: {
           resources: [
-            path.resolve(__dirname, '../src/assets/scss/main.scss')
+            path.resolve(__dirname, '../src/assets/scss/resources.scss')
           ]
         }
       }

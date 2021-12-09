@@ -1,14 +1,14 @@
 <template>
-  <input
-    type="text"
-    class="input base-field button-text"
+  <textarea
+    v-autosize
+    class="textarea base-field button-text"
     @input="emit('update:modelValue', $event.currentTarget.value)"
     :value="props.modelValue"
     :placeholder="props.placeholder"
     :class="{
       'base-field--error': props.error
     }"
-  >
+  ></textarea>
 </template>
 
 <script lang="ts" setup>
@@ -24,12 +24,14 @@ const props = withDefaults(defineProps<Props>(), {
   error: false
 })
 
-const emit = defineEmits<{(e: 'update:modelValue', value: string): void }>()
+const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>()
 </script>
 
 <style scoped lang="scss">
-.input {
-  height: 60px;
-  padding: 0 15px;
+.textarea {
+  resize: none;
+  width: 100%;
+  outline: none;
+  padding: 15px 20px;
 }
 </style>
