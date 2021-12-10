@@ -1,16 +1,37 @@
 import { Directive } from 'vue'
 
-let fn: ((event: MouseEvent) => void) | null = null
+let element: HTMLElement
+let fn: (() => void) | null = null
 export const clickOutside: Directive<HTMLElement> = {
   mounted(el, bindng) {
+    element = el
     fn = bindng.value
     window.addEventListener('click', clickHandler)
   },
   unmounted(el) {
-    el.removeEventListener('click', clickHandler)
+    window.removeEventListener('click', clickHandler)
   }
 }
 
 function clickHandler(event: MouseEvent): void {
-  const target = event.target
+  event.stopPropagation()
+
+  const target = event.target as HTMLElement
+  if (!checkParent(element, target) && element !== target) {
+    fn!()
+  }
+}
+
+function checkParent(parent: HTMLElement, child: HTMLElement): boolean {
+  let element: HTMLElement | null = child.parentElement
+
+  console.log(parent, child)
+  while (element !== null) {
+    if (element === parent) {
+      return true
+    }
+    element = element.parentElement
+  }
+
+  return false
 }

@@ -1,7 +1,7 @@
 <template>
-  <div class="select">
+  <div class="select" v-click-outside="onClickOutside">
     <div
-      @click="isOpen = !isOpen"
+      @click.stop="isOpen = !isOpen"
       class="base-field button-text select__body"
       :class="{'select__body--placeholder': !props.modelValue}"
     >
@@ -19,7 +19,7 @@
         class="select__option"
         :class="{'select__option--active': option === props.modelValue}"
 
-        @click="emitValue(option)"
+        @click.stop="emitValue(option)"
       >
         {{ option }}
       </li>
@@ -48,9 +48,9 @@ const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>()
 
 const isOpen = ref<boolean>(false)
 
-// function onClickOutside() {
-//   isOpen.value = false
-// }
+function onClickOutside() {
+  isOpen.value = false
+}
 
 function emitValue(option: string): void {
   emit('update:modelValue', option)

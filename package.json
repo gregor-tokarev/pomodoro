@@ -17,7 +17,6 @@
     "firebase": "^9.5.0",
     "gsap": "^3.8.0",
     "nanoid": "^3.1.30",
-    "v-click-outside": "^3.1.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuelidate": "^0.7.6",
