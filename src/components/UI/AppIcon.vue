@@ -3,12 +3,16 @@
 </template>
 
 <script lang="ts" setup>
+import { Colors } from '@/assets/ts/UI/colors'
+
 interface Props {
-  iconName: string
+  iconName: string;
+  color: Colors;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  iconName: undefined
+  iconName: undefined,
+  color: Colors.GRAY_400
 })
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-webpack-loader-syntax
@@ -26,5 +30,9 @@ const svg = require(`raw-loader!@/assets/icons/${props.iconName}.svg`)
   display: flex;
   align-items: center;
   justify-content: center;
+
+  :deep(path) {
+    fill: v-bind('props.color');
+  }
 }
 </style>

@@ -31,16 +31,16 @@
 
 <script lang="ts" setup>
 import { nanoid } from 'nanoid'
-import { History } from '../../../models/history.model'
+import { IHistory } from '../../../models/history.model'
 import { computed, ref } from 'vue'
 import dayjs from 'dayjs'
 import { diffDates } from '@/assets/ts/diffDates'
 import { secondsToTime, Time } from '@/assets/ts/secondsToTime'
-import { Task } from '../../../models/task.model'
+import { ITask } from '../../../models/task.model'
 import ExpandTransition from '@/components/transitions/expand-transition.vue'
 
 interface Props {
-  history: History
+  history: IHistory
 }
 
 const props = defineProps<Props>()
@@ -64,7 +64,7 @@ const isTasksOpen = ref<boolean>(false)
 
 const ownerId = nanoid()
 // todo remove it's hard code
-const tasks = ref<Task[]>([
+const tasks = ref<ITask[]>([
   {
     id: nanoid(),
     text: 'some',
@@ -90,7 +90,7 @@ const tasks = ref<Task[]>([
     ownerId
   }
 ])
-type formattedTask = Task & { duration: number }
+type formattedTask = ITask & { duration: number }
 const formattedTasks = computed<formattedTask[]>(() =>
   tasks.value.map(task => ({
     ...task,

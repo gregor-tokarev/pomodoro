@@ -1,6 +1,6 @@
 type todoitemStatus = 'todo' | 'inprogress' | 'completed'
 
-export interface Task {
+export interface ITask {
   id: string;
   status: todoitemStatus;
   text: string;

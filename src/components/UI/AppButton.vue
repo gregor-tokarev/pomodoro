@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
 .button {
   cursor: pointer;
   padding: 15px 35px;
-  min-width: 200px;
+  min-width: 150px;
   border-radius: 10px;
   transition: all 0.2s;
   outline: none;

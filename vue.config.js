@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require('path')
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -9,23 +12,17 @@ module.exports = {
   configureWebpack: config => {
     const rules = config.module.rules
     const svgRuleIndex = rules.findIndex(rule => rule.test.toString() === /\.(svg)(\?.*)?$/.toString())
-    rules.splice(svgRuleIndex, 1)
 
-    config.module.rules.push({
+    rules[svgRuleIndex].exclude = [
+      path.resolve(__dirname, 'src/assets/icons')
+    ]
+
+    config.module.rules.unshift({
       test: /\.svg$/,
+      include: [
+        path.resolve(__dirname, 'src/assets/icons')
+      ],
       loader: 'raw-loader'
     })
-    // module: {
-    //   rules: [
-    //     {
-    // test: /\.svg$/,
-    // use: [
-    //   {
-    //     loader: 'html-loader'
-    //   }
-    // ]
-    // }
-    // ]
-    // }
   }
 }

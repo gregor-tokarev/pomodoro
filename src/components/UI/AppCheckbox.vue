@@ -4,7 +4,7 @@
     class="checkbox"
     :class="{'checkbox--checked': props.modelValue}"
   >
-    <AppIcon v-if="props.modelValue" icon-name="check"></AppIcon>
+    <AppIcon v-if="props.modelValue" color="#FFFFFF" icon-name="check"></AppIcon>
   </div>
 </template>
 
