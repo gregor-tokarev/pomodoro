@@ -21,8 +21,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const wave = ref<Ref<HTMLElement>>(null)
-const timer = ref<Ref<HTMLElement>>(null)
+const wave = ref<HTMLElement>(null)
+const timer = ref<HTMLElement>(null)
 
 const liftHeight = computed<string>(() => {
   const waveHeight = wave.value.offsetHeight
@@ -50,6 +50,7 @@ $wave-height: 50px;
   &__numbers {
     position: relative;
     z-index: 20;
+    mix-blend-mode: luminosity;
     color: $gray-400;
   }
 

@@ -1,4 +1,5 @@
 export enum Colors {
+  NONE = 'NONE',
   BG = '#F5F5F5',
 
   ACCENT_MAIN = '#F6298F',
@@ -12,7 +13,7 @@ export enum Colors {
   GRAY_000 = '#FFFFFF',
 
   SYSTEM_SUCCESS = '#35D070',
-  SYSTEM_ERROR = '#D03535',
+  SYSTEM_ERROR = '#ED4A4A',
   SYSTEM_WARNING = '#F7D82C',
   SYSTEM_PLACEHOLDER = 'rgba(#5D5B5C, 0.3)',
   SYSTEM_DISABLED = '#D3D4DB'

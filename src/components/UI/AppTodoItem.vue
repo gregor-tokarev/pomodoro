@@ -11,7 +11,7 @@
     ></AppCheckbox>
     <div class="basic-text todo-item__text">{{ props.todoitem.text }}</div>
 
-    <div class="hint-text todo-item__time">
+    <div v-if="time" class="hint-text todo-item__time">
       {{ time }}
     </div>
   </div>
@@ -36,12 +36,17 @@ const props = defineProps<Props>()
 dayjs.extend(RelativeTime)
 
 const currentTime = ref<Dayjs>(dayjs())
-setInterval(() => {
-  currentTime.value = dayjs()
-}, 1000)
 
-const time = computed<string>(() => {
+if (props.todoitem.timeStart) {
+  setInterval(() => {
+    currentTime.value = dayjs()
+  }, 1000)
+}
+const time = computed<string | undefined>(() => {
   const timeEnd = props.todoitem.timeEnd ?? currentTime.value.format()
+  if (!props.todoitem.timeStart) {
+    return
+  }
   const diff = diffDates(props.todoitem.timeStart, timeEnd, 'second')
 
   const res = secondsToTime(diff)

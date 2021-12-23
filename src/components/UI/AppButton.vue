@@ -3,9 +3,9 @@
     class="button button-text"
     :class="{
       'button--disabled': props.disabled,
-      'button--common': props.type === 'common',
-      'button--light': props.type === 'light',
-      'button--ghost': props.type === 'ghost'
+      'button--common': props.styleType === 'common',
+      'button--light': props.styleType === 'light',
+      'button--ghost': props.styleType === 'ghost'
     }"
   >
     <slot></slot>
@@ -15,12 +15,12 @@
 <script lang="ts" setup>
 interface Props {
   disabled: boolean,
-  type: 'common' | 'light' | 'ghost'
+  styleType: 'common' | 'light' | 'ghost'
 }
 
 const props = withDefaults(defineProps<Props>(), {
   disabled: false,
-  type: 'common'
+  styleType: 'common'
 })
 </script>
 

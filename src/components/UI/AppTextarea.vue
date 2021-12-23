@@ -1,6 +1,7 @@
 <template>
   <textarea
-    v-autosize
+    v-autogrow
+    @keydown.shift.enter.exact="addBreak"
     class="textarea base-field button-text"
     @input="emit('update:modelValue', $event.currentTarget.value)"
     :value="props.modelValue"
@@ -13,8 +14,8 @@
 
 <script lang="ts" setup>
 interface Props {
-  placeholder: string,
-  modelValue: string,
+  placeholder: string
+  modelValue: string
   error: boolean
 }
 
@@ -25,6 +26,12 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>()
+
+function addBreak(event: KeyboardEvent): void {
+  const target = event.currentTarget as HTMLTextAreaElement
+
+  target.value += '\n'
+}
 </script>
 
 <style scoped lang="scss">

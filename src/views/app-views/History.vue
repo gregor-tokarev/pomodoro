@@ -1,5 +1,7 @@
 <template>
-  <div class="timer"></div>
+  <div class="history">
+    <h1 class="title-text">History</h1>
+  </div>
 </template>
 
 <script lang="ts" setup>

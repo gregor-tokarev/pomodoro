@@ -11,7 +11,6 @@
 </template>
 
 <script lang="ts" setup>
-
 import AppIcon from '@/components/UI/AppIcon.vue'
 </script>
 

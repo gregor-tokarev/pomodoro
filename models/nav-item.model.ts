@@ -1,6 +1,5 @@
 export interface INavItem {
-  text: string;
-  isActive: boolean;
-  iconName: string;
-  path: string;
+  name: string
+  iconName: string
+  path: string
 }

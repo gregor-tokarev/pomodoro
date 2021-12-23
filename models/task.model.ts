@@ -1,10 +1,11 @@
-type todoitemStatus = 'todo' | 'inprogress' | 'completed'
+export type taskStatus = 'todo' | 'inprogress' | 'completed'
 
 export interface ITask {
-  id: string;
-  status: todoitemStatus;
-  text: string;
-  timeStart: string;
-  timeEnd: string
-  ownerId: string;
+  id: string
+  status: taskStatus
+  text: string
+  order: number
+  timeStart?: string
+  timeEnd?: string
+  ownerId: string
 }

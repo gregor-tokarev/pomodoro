@@ -11,18 +11,24 @@ module.exports = {
   },
   configureWebpack: config => {
     const rules = config.module.rules
-    const svgRuleIndex = rules.findIndex(rule => rule.test.toString() === /\.(svg)(\?.*)?$/.toString())
 
+    const svgRuleIndex = rules.findIndex(rule => rule.test.toString() === /\.(svg)(\?.*)?$/.toString())
     rules[svgRuleIndex].exclude = [
       path.resolve(__dirname, 'src/assets/icons')
     ]
 
-    config.module.rules.unshift({
+    rules.unshift({
       test: /\.svg$/,
       include: [
         path.resolve(__dirname, 'src/assets/icons')
       ],
       loader: 'raw-loader'
+    })
+
+    rules.push({
+      resourceQuery: /blockType=i18n/,
+      type: 'javascript/auto',
+      loader: '@intlify/vue-i18n-loader'
     })
   }
 }

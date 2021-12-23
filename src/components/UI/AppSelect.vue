@@ -90,7 +90,6 @@ $padding-x: 13px;
     width: 100%;
     padding: 20px 0;
     background-color: $gray-100;
-    list-style-type: none;
     border-radius: 0 0 20px 20px;
   }
 

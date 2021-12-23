@@ -28,7 +28,7 @@
 
   <AppSelect style="margin-top: 10px;" v-model="selectValue" :options="selectOptions" placeholder="some"></AppSelect>
 
-  <AppTimer time="12:43" :coveragePercent="0"></AppTimer>
+  <AppTimer time="12:43" :coveragePercent="50"></AppTimer>
 </template>
 
 <script lang="ts" setup>

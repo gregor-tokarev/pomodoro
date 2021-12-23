@@ -1,11 +1,11 @@
 <template>
-  <div class="nav-item" :class="{'nav-item--active': props.navItem.isActive}">
+  <div class="nav-item" :class="{'nav-item--active': props.isActive}">
     <AppIcon
       class="nav-item__icon"
       :icon-name="props.navItem.iconName"
-      :color="props.navItem.isActive ? Colors.ACCENT_MAIN : Colors.GRAY_400"
+      :color="props.isActive ? Colors.ACCENT_MAIN : Colors.GRAY_400"
     ></AppIcon>
-    <div class="basic-text nav-item__text">{{ props.navItem.text }}</div>
+    <div class="basic-text nav-item__text">{{ props.navItem.name }}</div>
 
     <div class="nav-item__right">
       <slot name="right"></slot>
@@ -19,7 +19,8 @@ import AppIcon from '@/components/UI/AppIcon.vue'
 import { Colors } from '@/assets/ts/UI/colors'
 
 interface Props {
-  navItem: INavItem
+  navItem: INavItem,
+  isActive: boolean
 }
 
 const props = defineProps<Props>()

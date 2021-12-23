@@ -22,7 +22,8 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     'space-before-function-paren': 'off',
     'vue/script-setup-uses-vars': 'error',
-    'func-call-spacing': 'off'
+    'func-call-spacing': 'off',
+    'no-useless-return': 'off',
   },
   overrides: [
     {

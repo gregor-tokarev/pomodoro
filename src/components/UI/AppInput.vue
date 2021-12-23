@@ -29,6 +29,7 @@ const emit = defineEmits<{(e: 'update:modelValue', value: string): void }>()
 
 <style scoped lang="scss">
 .input {
+  width: 100%;
   height: 60px;
   padding: 0 15px;
 }

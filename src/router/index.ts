@@ -1,19 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import UIKit from '@/views/UIKit.vue'
+import App from '@/views/app-views/AppLayout.vue'
+import { appRoutes } from '@/router/app-routes'
+import { authRoutes } from '@/router/auth-routes'
 
-import Timer from '@/views/app/Timer.vue'
-import Todo from '@/views/app/Todo.vue'
-import History from '@/views/app/History.vue'
-import Settings from '@/views/app/Settings.vue'
-
-import App from '@/layout/App.vue'
-
-const routes: Array<RouteRecordRaw> = [
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // },
+const routes: RouteRecordRaw[] = [
   // {
   //   path: '/about',
   //   name: 'About',
@@ -25,35 +15,15 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/uikit',
     name: 'uikit',
-    component: UIKit
+    component: () => import('@/views/UIKit.vue')
   },
   {
     path: '/app',
     name: 'app',
     component: App,
-    children: [
-      {
-        path: 'timer',
-        name: 'app-timer',
-        component: Timer
-      },
-      {
-        path: 'todo',
-        name: 'app-todo',
-        component: Todo
-      },
-      {
-        path: 'history',
-        name: 'app-history',
-        component: History
-      },
-      {
-        path: 'settings',
-        name: 'app-settings',
-        component: Settings
-      }
-    ]
-  }
+    children: appRoutes
+  },
+  ...authRoutes
 ]
 
 const router = createRouter({

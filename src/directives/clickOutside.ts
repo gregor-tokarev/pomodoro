@@ -8,7 +8,7 @@ export const clickOutside: Directive<HTMLElement> = {
     fn = bindng.value
     window.addEventListener('click', clickHandler)
   },
-  unmounted(el) {
+  unmounted() {
     window.removeEventListener('click', clickHandler)
   }
 }
@@ -25,7 +25,6 @@ function clickHandler(event: MouseEvent): void {
 function checkParent(parent: HTMLElement, child: HTMLElement): boolean {
   let element: HTMLElement | null = child.parentElement
 
-  console.log(parent, child)
   while (element !== null) {
     if (element === parent) {
       return true

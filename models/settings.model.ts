@@ -1,6 +1,6 @@
 export interface ISettings {
-  id: string;
+  id: string
   ownerId: string
-  timeActive: string;
-  timeBreak: string;
+  timeActive: string
+  timeBreak: string
 }

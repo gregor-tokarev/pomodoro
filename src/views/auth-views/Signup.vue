@@ -1,5 +1,5 @@
 <template>
-  <div class="todo"></div>
+  <div class="signup"></div>
 </template>
 
 <script lang="ts" setup>
