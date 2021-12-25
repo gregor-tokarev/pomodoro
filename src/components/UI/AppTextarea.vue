@@ -1,15 +1,17 @@
 <template>
-  <textarea
-    v-autogrow
-    @keydown.shift.enter.exact="addBreak"
-    class="textarea base-field button-text"
-    @input="emit('update:modelValue', $event.currentTarget.value)"
-    :value="props.modelValue"
-    :placeholder="props.placeholder"
-    :class="{
+  <div class="textarea base-field">
+    <textarea
+      v-autogrow
+      rows="1"
+      class="button-text textarea__field"
+      @input="emit('update:modelValue', $event.currentTarget.value)"
+      :value="props.modelValue"
+      :placeholder="props.placeholder"
+      :class="{
       'base-field--error': props.error
     }"
-  ></textarea>
+    ></textarea>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -36,9 +38,19 @@ function addBreak(event: KeyboardEvent): void {
 
 <style scoped lang="scss">
 .textarea {
-  resize: none;
-  width: 100%;
-  outline: none;
   padding: 15px 20px;
+
+  &__field {
+    border: none;
+    color: inherit;
+    background-color: transparent;
+    resize: none;
+    width: 100%;
+    outline: none;
+
+    &::placeholder {
+      color: $system-placeholder;
+    }
+  }
 }
 </style>

@@ -55,7 +55,7 @@ import { useStore } from 'vuex'
 import { sameAsField } from '@/lib/custom-validarots'
 import { useRouter } from 'vue-router'
 import useVuelidate from '@vuelidate/core'
-import { IUser } from '../../../models/user.model'
+import { User } from '../../../models/user.model'
 
 const store = useStore()
 const router = useRouter()
@@ -100,7 +100,7 @@ async function submit(): Promise<void> {
 
     emailExistsError.value = false
 
-    const user: IUser = await store.dispatch('authModule/createUser', auth.currentUser)
+    const user: User = await store.dispatch('authModule/createUser', auth.currentUser)
 
     router.push({
       name: 'auth-verify-email',

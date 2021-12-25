@@ -5,6 +5,13 @@
       'todo-item--inprogress': props.todoitem.status === 'inprogress'
     }"
   >
+    <AppIcon
+      v-if="props.isDraggable"
+      :color="Colors.GRAY_200"
+      icon-name="drag-dots"
+      class="todo-item__drag"
+    ></AppIcon>
+
     <AppCheckbox
       class="todo-item__checkbox"
       :modelValue="props.todoitem.status === 'completed'"
@@ -18,23 +25,28 @@
 </template>
 
 <script lang="ts" setup>
+import { Colors } from '@/lib/UI/colors'
 import AppCheckbox from '@/components/UI/AppCheckbox.vue'
-import { ITask } from 'models/task.model'
+import { Task } from 'models/task.model'
 import { computed, ref } from 'vue'
 import { diffDates } from '@/lib/diffDates'
 import { secondsToTime } from '@/lib/secondsToTime'
 import { getTimeStr } from '@/lib/getTimeStr'
 import RelativeTime from 'dayjs/plugin/relativeTime'
 import dayjs, { Dayjs } from 'dayjs'
+import AppIcon from '@/components/UI/AppIcon.vue'
 
 interface Props {
-  todoitem: ITask
+  todoitem: Task,
+  isDraggable: boolean
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  todoitem: undefined,
+  isDraggable: false
+})
 
 dayjs.extend(RelativeTime)
-
 const currentTime = ref<Dayjs>(dayjs())
 
 if (props.todoitem.timeStart) {
@@ -59,6 +71,7 @@ const time = computed<string | undefined>(() => {
   position: relative;
   display: flex;
   align-items: center;
+  background-color: $gray-000;
   padding: 20px 15px;
   border-bottom: 1px solid $gray-300;
 
@@ -73,6 +86,16 @@ const time = computed<string | undefined>(() => {
     :deep(.checkbox) {
       border-color: $accent-main;
     }
+  }
+
+  &.draggable-source--is-dragging {
+    border: 2px dashed $accent-main;
+    background-color: $accent-light;
+  }
+
+  &__drag {
+    cursor: pointer;
+    margin-right: 10px;
   }
 
   &__text {

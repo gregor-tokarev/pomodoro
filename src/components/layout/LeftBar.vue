@@ -20,14 +20,14 @@
 <script lang="ts" setup>
 import NavItem from '@/components/layout/NavItem.vue'
 import { deepPathCheck } from '@/lib/routeChecks'
-import { INavItem } from '../../../models/nav-item.model'
+import { Nav } from '../../../models/nav-item.model'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const route = useRoute()
 
-const navItems: INavItem[] = [
+const navItems: Nav[] = [
   {
     name: t('timer'),
     iconName: 'clock',

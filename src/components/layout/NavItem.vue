@@ -14,12 +14,12 @@
 </template>
 
 <script lang="ts" setup>
-import { INavItem } from '../../../models/nav-item.model'
+import { Nav } from '../../../models/nav-item.model'
 import AppIcon from '@/components/UI/AppIcon.vue'
 import { Colors } from '@/lib/UI/colors'
 
 interface Props {
-  navItem: INavItem,
+  navItem: Nav,
   isActive: boolean
 }
 
@@ -43,7 +43,7 @@ const props = defineProps<Props>()
     }
 
     .nav-item__icon {
-      :slotted(.icon) :deep(path) {
+      :deep(path) {
         fill: $accent-main;
       }
     }

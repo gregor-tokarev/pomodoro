@@ -8,23 +8,30 @@ export const autogrow: Directive<HTMLInputElement> = {
         setWidth(el)
       })
 
-      el.addEventListener('input', () => {
-        setWidth(el)
-      })
+      el.addEventListener('input', widthHandler)
     } else {
       el.style.overflowY = 'hidden'
       el.style.resize = 'none'
 
       setHeight(el)
-      el.addEventListener('input', event => {
-        console.log(event)
-        setHeight(el)
-      })
+      el.addEventListener('input', heightHandler)
+    }
+  },
+
+  unmounted(el, binding) {
+    if (binding.arg === 'horizontal') {
+      el.removeEventListener('input', widthHandler)
+    } else {
+      el.removeEventListener('input', heightHandler)
     }
   }
-  // unmounted(el) {
-  //   el.removeEventListener('input')
-  // }
+}
+
+function heightHandler(event: Event) {
+  setHeight(event.currentTarget as HTMLInputElement)
+}
+function widthHandler(event: Event) {
+  setWidth(event.currentTarget as HTMLInputElement)
 }
 
 function setHeight(el: HTMLInputElement): void {

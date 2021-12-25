@@ -4,12 +4,13 @@
     class="checkbox"
     :class="{'checkbox--checked': props.modelValue}"
   >
-    <AppIcon v-if="props.modelValue" color="#FFFFFF" icon-name="check"></AppIcon>
+    <AppIcon v-if="props.modelValue" :color="Colors.GRAY_000" icon-name="check"></AppIcon>
   </div>
 </template>
 
 <script lang="ts" setup>
 import AppIcon from '@/components/UI/AppIcon.vue'
+import { Colors } from '@/lib/UI/colors'
 
 interface Props {
   modelValue: boolean

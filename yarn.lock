@@ -2084,6 +2084,11 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@shopify/draggable@^1.0.0-beta.8":
+  version "1.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@shopify/draggable/-/draggable-1.0.0-beta.8.tgz#2eb3c2f72298ce3e53fe16f34ab124cc495cd4fc"
+  integrity sha512-9IeBPQM93Ad4qFKUopwuTClzoST/1OId4MaSd/8FB5ScCL2tl25UaOGNR8E2hjiL7xK4LN5+I1Ews6amS7YAiA==
+
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/@soda/friendly-errors-webpack-plugin/-/friendly-errors-webpack-plugin-1.8.1.tgz#4d4fbb1108993aaa362116247c3d18188a2c6c85"
@@ -2915,6 +2920,10 @@
     vue-docgen-loader "^1.5.0"
     vue-loader "^16.0.0"
     webpack "4"
+
+"@types/@shopify/draggable":
+  version "1.0.0-beta.13"
+  resolved "https://codeload.github.com/shopify/draggable/tar.gz/6f5539b1f396a34b08fcbf0b52651ca1ee669665"
 
 "@types/animejs@^3.1.4":
   version "3.1.4"

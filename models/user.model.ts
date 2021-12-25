@@ -1,6 +1,6 @@
 export type provider = 'google.com' | 'email' | 'facebook.com'
 
-export interface IUser {
+export interface User {
   id: string
   username: string
   email: string

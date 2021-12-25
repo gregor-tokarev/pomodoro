@@ -3,7 +3,7 @@ export enum Colors {
   BG = '#F5F5F5',
 
   ACCENT_MAIN = '#F6298F',
-  ACCENT_LIGHT = 'rgba(#F6298F, 0.15)',
+  ACCENT_LIGHT = '#FEDFEE',
   ACCENT_HOVER = '#C42072',
 
   GRAY_400 = '#585657',

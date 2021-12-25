@@ -1,4 +1,4 @@
-import { ITask } from '../../../models/task.model'
+import { Task } from '../../../models/task.model'
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 import { Update } from '../../../types/update'
 import { RootState } from '@/store'
@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid'
 import { firestore } from '@/lib/firebase'
 
 interface TaskState {
-  tasks: ITask[]
+  tasks: Task[]
 }
 
 const state: TaskState = {
@@ -14,13 +14,10 @@ const state: TaskState = {
 }
 
 const mutations: MutationTree<TaskState> = {
-  SET_TASKS(state, tasks: ITask[]): void {
+  SET_TASKS(state, tasks: Task[]): void {
     state.tasks = tasks
   },
-  ADD_TASK(state, task: ITask): void {
-    const maxOrderTask: number = Math.max(...state.tasks.map(task => task.order))
-
-    task.order = maxOrderTask + 1
+  ADD_TASK(state, task: Task): void {
     state.tasks.push(task)
   },
   DELETE_TASK(state, taskId: string): void {
@@ -32,7 +29,7 @@ const mutations: MutationTree<TaskState> = {
 
     greaterOrderTasks.forEach(task => task.order++)
   },
-  EDIT_TASK(state, update: Update<ITask>): void {
+  EDIT_TASK(state, update: Update<Task>): void {
     const taskIndex = state.tasks.findIndex(task => task.id === update.id)
 
     state.tasks[taskIndex] = {
@@ -47,18 +44,22 @@ const actions: ActionTree<TaskState, RootState> = {
     commit,
     getters,
     rootGetters
-  }, taskValues: Partial<ITask>): Promise<ITask | undefined> {
+  }, taskValues: Partial<Task>): Promise<Task | undefined> {
     const userId = rootGetters['authModule/userId']
 
     const taskId = nanoid()
-    const task: Omit<ITask, 'id'> = {
+    const task: Omit<Task, 'id'> = {
       ownerId: userId,
-      order: getters.getMaxOrderValue,
+      order: getters.getMaxOrderValue + 1,
       status: 'todo',
       text: taskValues.text ?? ''
     }
+
     try {
-      commit('ADD_TASK', task)
+      commit('ADD_TASK', {
+        ...task,
+        id: taskId
+      })
       await firestore.collection('tasks').doc(taskId).set(task)
 
       return {
@@ -72,7 +73,7 @@ const actions: ActionTree<TaskState, RootState> = {
   async fetchTasks({
     commit,
     rootGetters
-  }): Promise<ITask[] | undefined> {
+  }): Promise<Task[] | undefined> {
     const userId = rootGetters['authModule/userId']
 
     try {
@@ -80,7 +81,7 @@ const actions: ActionTree<TaskState, RootState> = {
       const result = await query.get()
 
       const tasks = result.docs.map(task => ({
-        ...task.data() as Omit<ITask, 'id'>,
+        ...task.data() as Omit<Task, 'id'>,
         id: task.id
       }))
 
@@ -93,11 +94,12 @@ const actions: ActionTree<TaskState, RootState> = {
 }
 
 const getters: GetterTree<TaskState, RootState> = {
-  tasks(state): ITask[] {
+  tasks(state): Task[] {
     return state.tasks.sort((prev, next) => prev.order - next.order)
   },
   getMaxOrderValue(state): number {
-    return Math.max(...state.tasks.map(task => task.order)) ?? 0
+    const maxOrder = Math.max(...state.tasks.map(task => task.order))
+    return !state.tasks.length ? -1 : maxOrder
   }
 }
 

@@ -1,11 +1,11 @@
-import { IUser, provider } from '../../../models/user.model'
+import { User, provider } from '../../../models/user.model'
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 import { RootState } from '@/store'
 import { auth, firestore } from '@/lib/firebase'
 import firebase from 'firebase/compat'
 
 interface AuthState {
-  user: IUser | null,
+  user: User | null,
 }
 
 const state: AuthState = {
@@ -13,7 +13,7 @@ const state: AuthState = {
 }
 
 const mutations: MutationTree<AuthState> = {
-  SET_USER(state, user: IUser): void {
+  SET_USER(state, user: User): void {
     state.user = user
   },
   REMOVE_USER(state): void {
@@ -34,7 +34,7 @@ const actions: ActionTree<AuthState, RootState> = {
         return
       }
 
-      const user = { id: document.id, ...document.data() } as IUser
+      const user = { id: document.id, ...document.data() } as User
 
       localStorage.setItem('userId', user.id)
       commit('SET_USER', user)
@@ -45,7 +45,7 @@ const actions: ActionTree<AuthState, RootState> = {
   },
   async createUser({ commit }, userData: firebase.User) {
     try {
-      const user: Omit<IUser, 'id'> = {
+      const user: Omit<User, 'id'> = {
         email: userData.email!,
         username: userData.displayName ?? '',
         emailVerified: process.env.NODE_ENV === 'production' ? userData.emailVerified : true,
@@ -73,7 +73,7 @@ const actions: ActionTree<AuthState, RootState> = {
 }
 
 const getters: GetterTree<AuthState, RootState> = {
-  getUser(state): IUser | null {
+  getUser(state): User | null {
     return state.user
   },
   userId(state): string | null {

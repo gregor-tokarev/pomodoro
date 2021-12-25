@@ -1,4 +1,4 @@
-export interface IHistory {
+export interface History {
   id: string
   tasks: string[]
   timeStart: string

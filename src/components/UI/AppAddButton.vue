@@ -16,7 +16,7 @@ import AppIcon from '@/components/UI/AppIcon.vue'
 
 <style scoped lang="scss">
 .add-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   cursor: pointer;
 
@@ -41,7 +41,7 @@ import AppIcon from '@/components/UI/AppIcon.vue'
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    margin-right: 8px;
+    margin-right: 5px;
     transition: background-color 0.2s;
 
     :deep(path) {
