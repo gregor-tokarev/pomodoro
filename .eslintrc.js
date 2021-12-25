@@ -23,7 +23,7 @@ module.exports = {
     'space-before-function-paren': 'off',
     'vue/script-setup-uses-vars': 'error',
     'func-call-spacing': 'off',
-    'no-useless-return': 'off',
+    'no-useless-return': 'off'
   },
   overrides: [
     {

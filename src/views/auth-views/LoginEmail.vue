@@ -44,7 +44,7 @@ import AppInput from '@/components/UI/AppInput.vue'
 import AppButton from '@/components/UI/AppButton.vue'
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
-import { auth } from '@/assets/ts/firebase'
+import { auth } from '@/lib/firebase'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 

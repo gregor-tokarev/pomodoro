@@ -3,7 +3,7 @@ import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 import { Update } from '../../../types/update'
 import { RootState } from '@/store'
 import { nanoid } from 'nanoid'
-import { firestore } from '@/assets/ts/firebase'
+import { firestore } from '@/lib/firebase'
 
 interface TaskState {
   tasks: ITask[]

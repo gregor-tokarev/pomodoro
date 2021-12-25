@@ -1,5 +1,5 @@
-import { Time } from '@/assets/ts/secondsToTime'
-import { checkSingleDigit } from '@/assets/ts/checkSingleDigit'
+import { Time } from '@/lib/secondsToTime'
+import { checkSingleDigit } from '@/lib/checkSingleDigit'
 
 export function getTimeStr(time: Time): string {
   let res = ''

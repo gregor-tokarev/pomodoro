@@ -1,7 +1,7 @@
 import { IUser, provider } from '../../../models/user.model'
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 import { RootState } from '@/store'
-import { auth, firestore } from '@/assets/ts/firebase'
+import { auth, firestore } from '@/lib/firebase'
 import firebase from 'firebase/compat'
 
 interface AuthState {

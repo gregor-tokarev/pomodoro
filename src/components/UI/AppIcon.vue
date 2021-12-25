@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Colors } from '@/assets/ts/UI/colors'
+import { Colors } from '@/lib/UI/colors'
 
 interface Props {
   iconName: string;

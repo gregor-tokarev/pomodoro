@@ -5,7 +5,7 @@
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
 import { onMounted } from 'vue'
-import { isInAppRoute } from '@/assets/ts/routeChecks'
+import { isInAppRoute } from '@/lib/routeChecks'
 
 const store = useStore()
 const router = useRouter()

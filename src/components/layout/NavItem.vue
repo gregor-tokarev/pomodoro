@@ -16,7 +16,7 @@
 <script lang="ts" setup>
 import { INavItem } from '../../../models/nav-item.model'
 import AppIcon from '@/components/UI/AppIcon.vue'
-import { Colors } from '@/assets/ts/UI/colors'
+import { Colors } from '@/lib/UI/colors'
 
 interface Props {
   navItem: INavItem,

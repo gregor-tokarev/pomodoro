@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import NavItem from '@/components/layout/NavItem.vue'
-import { deepPathCheck } from '@/assets/ts/routeChecks'
+import { deepPathCheck } from '@/lib/routeChecks'
 import { INavItem } from '../../../models/nav-item.model'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'

@@ -31,7 +31,7 @@
 
 <script lang="ts" setup>
 import firebase from 'firebase/compat'
-import { auth } from '@/assets/ts/firebase'
+import { auth } from '@/lib/firebase'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 

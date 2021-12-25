@@ -21,9 +21,9 @@
 import AppCheckbox from '@/components/UI/AppCheckbox.vue'
 import { ITask } from 'models/task.model'
 import { computed, ref } from 'vue'
-import { diffDates } from '@/assets/ts/diffDates'
-import { secondsToTime } from '@/assets/ts/secondsToTime'
-import { getTimeStr } from '@/assets/ts/getTimeStr'
+import { diffDates } from '@/lib/diffDates'
+import { secondsToTime } from '@/lib/secondsToTime'
+import { getTimeStr } from '@/lib/getTimeStr'
 import RelativeTime from 'dayjs/plugin/relativeTime'
 import dayjs, { Dayjs } from 'dayjs'
 
