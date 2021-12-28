@@ -1,0 +1,386 @@
+[debug] [2021-12-27T13:44:10.845Z] ----------------------------------------------------------------------
+[debug] [2021-12-27T13:44:10.847Z] Command:       /home/gregor/.nvm/versions/node/v14.18.2/bin/node /home/gregor/.nvm/versions/node/v14.18.2/bin/firebase functions:shell
+[debug] [2021-12-27T13:44:10.847Z] CLI Version:   10.0.1
+[debug] [2021-12-27T13:44:10.847Z] Platform:      linux
+[debug] [2021-12-27T13:44:10.847Z] Node Version:  v14.18.2
+[debug] [2021-12-27T13:44:10.848Z] Time:          Mon Dec 27 2021 16:44:10 GMT+0300 (Moscow Standard Time)
+[debug] [2021-12-27T13:44:10.848Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-12-27T13:44:10.905Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-27T13:44:10.905Z] > authorizing via signed-in user (zippper123915@gmail.com)
+[debug] [2021-12-27T13:44:10.905Z] [iam] checking project pomodoro-3b7d3 for permissions ["firebase.projects.get"]
+[debug] [2021-12-27T13:44:10.907Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-12-27T13:44:10.907Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-27T13:44:11.188Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Mon, 27 Dec 2021 13:44:11 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-27T13:44:11.195Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/pomodoro-3b7d3:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2021-12-27T13:44:12.151Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 27 Dec 2021 13:44:12 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=716","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-27T13:44:12.168Z] [functions] Using node@14 from host.
+[debug] [2021-12-27T13:44:12.169Z] defaultcredentials: writing to file /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json
+[debug] [2021-12-27T13:44:12.171Z] DEBUG: Setting GAC to /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json
+[debug] [2021-12-27T13:44:12.174Z] > refreshing access token with scopes: []
+[debug] [2021-12-27T13:44:12.174Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-27T13:44:12.358Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Mon, 27 Dec 2021 13:44:12 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-27T13:44:12.365Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig [none]
+[debug] [2021-12-27T13:44:12.763Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig 200
+[debug] [2021-12-27T13:44:12.763Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig {"projectId":"pomodoro-3b7d3","storageBucket":"pomodoro-3b7d3.appspot.com","locationId":"europe-west"}
+[debug] [2021-12-27T13:44:12.773Z] [functions] Watching "/media/gregor/Новый том/work/PetProjects/pomodoro/functions" for Cloud Functions...
+[debug] [2021-12-27T13:44:12.787Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-27T13:44:12.787Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2021-12-27T13:44:12.787Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-27T13:44:12.787Z] DEBUG: [worker-~diagnostic~-8b72dbe2-93c1-4d63-85ce-e20832fd39ae]: Assigning socketPath: /tmp/fire_emu_23972.sock
+[debug] [2021-12-27T13:44:12.788Z] DEBUG: [worker-~diagnostic~-8b72dbe2-93c1-4d63-85ce-e20832fd39ae]: BUSY
+[debug] [2021-12-27T13:44:12.894Z] DEBUG: [runtime-status] [23972] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-27T13:44:12.895Z] DEBUG: [runtime-status] [23972] Disabled runtime features: undefined
+[debug] [2021-12-27T13:44:12.898Z] DEBUG: [runtime-status] [23972] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:44:12.902Z] DEBUG: [runtime-status] [23972] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:12.903Z] DEBUG: [runtime-status] [23972] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-27T13:44:12.905Z] DEBUG: [runtime-status] [23972] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:12.981Z] DEBUG: [runtime-status] [23972] Checked functions.config() {"config":{}}
+[debug] [2021-12-27T13:44:12.981Z] DEBUG: [runtime-status] [23972] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-27T13:44:12.982Z] DEBUG: [runtime-status] [23972] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:12.985Z] DEBUG: [runtime-status] [23972] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:44:12.986Z] DEBUG: [runtime-status] [23972] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:12.987Z] DEBUG: [runtime-status] [23972] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[warn] ⚠  /media/gregor/Новый том/work/PetProjects/pomodoro/functions/lib/index.js:2
+import * as functions from 'firebase-functions';
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at wrapSafe (internal/modules/cjs/loader.js:1001:16)
+    at Module._compile (internal/modules/cjs/loader.js:1049:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:93:18)
+    at initializeRuntime (/home/gregor/.nvm/versions/node/v14.18.2/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:640:29)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at async handleMessage (/home/gregor/.nvm/versions/node/v14.18.2/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:684:20) {"metadata":{"emulator":{"name":"functions"},"message":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/lib/index.js:2\nimport * as functions from 'firebase-functions';\n^^^^^^\n\nSyntaxError: Cannot use import statement outside a module\n    at wrapSafe (internal/modules/cjs/loader.js:1001:16)\n    at Module._compile (internal/modules/cjs/loader.js:1049:27)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:93:18)\n    at initializeRuntime (/home/gregor/.nvm/versions/node/v14.18.2/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:640:29)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)\n    at async handleMessage (/home/gregor/.nvm/versions/node/v14.18.2/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:684:20)"}}
+[warn] ⚠  We were unable to load your functions code. (see above)
+   - It appears your code is written in Typescript, which must be compiled before emulation.
+   - You may be able to run "npm run build" in your functions directory to resolve this. {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2021-12-27T13:44:13.005Z] DEBUG: [worker-~diagnostic~-8b72dbe2-93c1-4d63-85ce-e20832fd39ae]: exited
+[debug] [2021-12-27T13:44:13.005Z] DEBUG: [worker-~diagnostic~-8b72dbe2-93c1-4d63-85ce-e20832fd39ae]: FINISHED
+[debug] [2021-12-27T13:44:40.097Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/tsconfig.json changed, reloading triggers
+[debug] [2021-12-27T13:44:41.099Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 1 --> 0
+[debug] [2021-12-27T13:44:41.106Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-27T13:44:41.106Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2021-12-27T13:44:41.106Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-27T13:44:41.106Z] DEBUG: [worker-~diagnostic~-7b8a8005-ee4d-4fc7-8883-28e89b4bf3dc]: Assigning socketPath: /tmp/fire_emu_24018.sock
+[debug] [2021-12-27T13:44:41.107Z] DEBUG: [worker-~diagnostic~-7b8a8005-ee4d-4fc7-8883-28e89b4bf3dc]: BUSY
+[debug] [2021-12-27T13:44:41.216Z] DEBUG: [runtime-status] [24018] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-27T13:44:41.217Z] DEBUG: [runtime-status] [24018] Disabled runtime features: undefined
+[debug] [2021-12-27T13:44:41.222Z] DEBUG: [runtime-status] [24018] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:44:41.225Z] DEBUG: [runtime-status] [24018] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:41.226Z] DEBUG: [runtime-status] [24018] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-27T13:44:41.228Z] DEBUG: [runtime-status] [24018] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:41.308Z] DEBUG: [runtime-status] [24018] Checked functions.config() {"config":{}}
+[debug] [2021-12-27T13:44:41.309Z] DEBUG: [runtime-status] [24018] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-27T13:44:41.310Z] DEBUG: [runtime-status] [24018] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:41.314Z] DEBUG: [runtime-status] [24018] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:44:41.314Z] DEBUG: [runtime-status] [24018] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:41.315Z] DEBUG: [runtime-status] [24018] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[warn] ⚠  /media/gregor/Новый том/work/PetProjects/pomodoro/functions/lib/index.js:2
+import * as functions from 'firebase-functions';
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at wrapSafe (internal/modules/cjs/loader.js:1001:16)
+    at Module._compile (internal/modules/cjs/loader.js:1049:27)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:93:18)
+    at initializeRuntime (/home/gregor/.nvm/versions/node/v14.18.2/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:640:29)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at async handleMessage (/home/gregor/.nvm/versions/node/v14.18.2/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:684:20) {"metadata":{"emulator":{"name":"functions"},"message":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/lib/index.js:2\nimport * as functions from 'firebase-functions';\n^^^^^^\n\nSyntaxError: Cannot use import statement outside a module\n    at wrapSafe (internal/modules/cjs/loader.js:1001:16)\n    at Module._compile (internal/modules/cjs/loader.js:1049:27)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)\n    at Module.load (internal/modules/cjs/loader.js:950:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:790:12)\n    at Module.require (internal/modules/cjs/loader.js:974:19)\n    at require (internal/modules/cjs/helpers.js:93:18)\n    at initializeRuntime (/home/gregor/.nvm/versions/node/v14.18.2/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:640:29)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)\n    at async handleMessage (/home/gregor/.nvm/versions/node/v14.18.2/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:684:20)"}}
+[warn] ⚠  We were unable to load your functions code. (see above)
+   - It appears your code is written in Typescript, which must be compiled before emulation.
+   - You may be able to run "npm run build" in your functions directory to resolve this. {"metadata":{"emulator":{"name":"functions"}}}
+[debug] [2021-12-27T13:44:41.331Z] DEBUG: [worker-~diagnostic~-7b8a8005-ee4d-4fc7-8883-28e89b4bf3dc]: exited
+[debug] [2021-12-27T13:44:41.332Z] DEBUG: [worker-~diagnostic~-7b8a8005-ee4d-4fc7-8883-28e89b4bf3dc]: FINISHED
+[debug] [2021-12-27T13:44:47.964Z] ----------------------------------------------------------------------
+[debug] [2021-12-27T13:44:47.966Z] Command:       /home/gregor/.nvm/versions/node/v14.18.2/bin/node /home/gregor/.nvm/versions/node/v14.18.2/bin/firebase functions:shell
+[debug] [2021-12-27T13:44:47.966Z] CLI Version:   10.0.1
+[debug] [2021-12-27T13:44:47.966Z] Platform:      linux
+[debug] [2021-12-27T13:44:47.966Z] Node Version:  v14.18.2
+[debug] [2021-12-27T13:44:47.967Z] Time:          Mon Dec 27 2021 16:44:47 GMT+0300 (Moscow Standard Time)
+[debug] [2021-12-27T13:44:47.967Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-12-27T13:44:48.024Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-27T13:44:48.024Z] > authorizing via signed-in user (zippper123915@gmail.com)
+[debug] [2021-12-27T13:44:48.024Z] [iam] checking project pomodoro-3b7d3 for permissions ["firebase.projects.get"]
+[debug] [2021-12-27T13:44:48.026Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-12-27T13:44:48.026Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-27T13:44:48.292Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Mon, 27 Dec 2021 13:44:48 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-27T13:44:48.297Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/pomodoro-3b7d3:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2021-12-27T13:44:49.378Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 27 Dec 2021 13:44:49 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=742","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-27T13:44:49.395Z] [functions] Using node@14 from host.
+[debug] [2021-12-27T13:44:49.396Z] defaultcredentials: writing to file /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json
+[debug] [2021-12-27T13:44:49.398Z] DEBUG: Setting GAC to /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json
+[debug] [2021-12-27T13:44:49.401Z] > refreshing access token with scopes: []
+[debug] [2021-12-27T13:44:49.401Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-27T13:44:49.587Z] <<< HTTP RESPONSE 200 {"date":"Mon, 27 Dec 2021 13:44:49 GMT","pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-27T13:44:49.595Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig [none]
+[debug] [2021-12-27T13:44:50.107Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig 200
+[debug] [2021-12-27T13:44:50.107Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig {"projectId":"pomodoro-3b7d3","storageBucket":"pomodoro-3b7d3.appspot.com","locationId":"europe-west"}
+[debug] [2021-12-27T13:44:50.114Z] [functions] Watching "/media/gregor/Новый том/work/PetProjects/pomodoro/functions" for Cloud Functions...
+[debug] [2021-12-27T13:44:50.126Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-27T13:44:50.126Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2021-12-27T13:44:50.126Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-27T13:44:50.127Z] DEBUG: [worker-~diagnostic~-6e05d9b6-a8d7-4302-8458-07779ae38639]: Assigning socketPath: /tmp/fire_emu_24074.sock
+[debug] [2021-12-27T13:44:50.127Z] DEBUG: [worker-~diagnostic~-6e05d9b6-a8d7-4302-8458-07779ae38639]: BUSY
+[debug] [2021-12-27T13:44:50.252Z] DEBUG: [runtime-status] [24074] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-27T13:44:50.253Z] DEBUG: [runtime-status] [24074] Disabled runtime features: undefined
+[debug] [2021-12-27T13:44:50.257Z] DEBUG: [runtime-status] [24074] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:44:50.261Z] DEBUG: [runtime-status] [24074] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:50.262Z] DEBUG: [runtime-status] [24074] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-27T13:44:50.264Z] DEBUG: [runtime-status] [24074] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:50.343Z] DEBUG: [runtime-status] [24074] Checked functions.config() {"config":{}}
+[debug] [2021-12-27T13:44:50.344Z] DEBUG: [runtime-status] [24074] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-27T13:44:50.348Z] DEBUG: [runtime-status] [24074] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:50.349Z] DEBUG: [runtime-status] [24074] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:44:50.350Z] DEBUG: [runtime-status] [24074] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:44:50.351Z] DEBUG: [runtime-status] [24074] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2021-12-27T13:44:50.361Z] [functions[us-central1-deleteTask]] function ignored because the firestore emulator does not exist or is not running.
+[info] i  functions: Loaded functions: deleteTask 
+[warn] ⚠  functions: The following emulators are not running, calls to these services will affect production: firestore, database, pubsub, storage 
+[debug] [2021-12-27T13:44:50.374Z] DEBUG: [worker-~diagnostic~-6e05d9b6-a8d7-4302-8458-07779ae38639]: IDLE
+[debug] [2021-12-27T13:45:31.182Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/src/index.ts changed, reloading triggers
+[debug] [2021-12-27T13:45:32.183Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2021-12-27T13:45:32.183Z] DEBUG: [worker-~diagnostic~-6e05d9b6-a8d7-4302-8458-07779ae38639]: FINISHING
+[debug] [2021-12-27T13:45:32.194Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-27T13:45:32.195Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2021-12-27T13:45:32.195Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-27T13:45:32.195Z] DEBUG: [worker-~diagnostic~-b80efb01-6572-4aad-915b-5df7bc6a57c0]: Assigning socketPath: /tmp/fire_emu_24102.sock
+[debug] [2021-12-27T13:45:32.196Z] DEBUG: [worker-~diagnostic~-b80efb01-6572-4aad-915b-5df7bc6a57c0]: BUSY
+[debug] [2021-12-27T13:45:32.199Z] DEBUG: [worker-~diagnostic~-6e05d9b6-a8d7-4302-8458-07779ae38639]: exited
+[debug] [2021-12-27T13:45:32.200Z] DEBUG: [worker-~diagnostic~-6e05d9b6-a8d7-4302-8458-07779ae38639]: FINISHED
+[debug] [2021-12-27T13:45:32.323Z] DEBUG: [runtime-status] [24102] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-27T13:45:32.325Z] DEBUG: [runtime-status] [24102] Disabled runtime features: undefined
+[debug] [2021-12-27T13:45:32.452Z] DEBUG: [runtime-status] [24102] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:45:32.457Z] DEBUG: [runtime-status] [24102] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:45:32.460Z] DEBUG: [runtime-status] [24102] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-27T13:45:32.460Z] DEBUG: [runtime-status] [24102] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:45:32.538Z] DEBUG: [runtime-status] [24102] Checked functions.config() {"config":{}}
+[debug] [2021-12-27T13:45:32.538Z] DEBUG: [runtime-status] [24102] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-27T13:45:32.540Z] DEBUG: [runtime-status] [24102] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:45:32.544Z] DEBUG: [runtime-status] [24102] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:45:32.548Z] DEBUG: [runtime-status] [24102] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:45:32.548Z] DEBUG: [runtime-status] [24102] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2021-12-27T13:45:32.553Z] DEBUG: [worker-~diagnostic~-b80efb01-6572-4aad-915b-5df7bc6a57c0]: IDLE
+[debug] [2021-12-27T13:45:50.927Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/src/index.ts changed, reloading triggers
+[debug] [2021-12-27T13:45:51.929Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2021-12-27T13:45:51.929Z] DEBUG: [worker-~diagnostic~-b80efb01-6572-4aad-915b-5df7bc6a57c0]: FINISHING
+[debug] [2021-12-27T13:45:51.930Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2021-12-27T13:45:51.939Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-27T13:45:51.939Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2021-12-27T13:45:51.939Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-27T13:45:51.940Z] DEBUG: [worker-~diagnostic~-7bee72bd-e23e-4c02-bd59-5b0896d2073f]: Assigning socketPath: /tmp/fire_emu_24122.sock
+[debug] [2021-12-27T13:45:51.940Z] DEBUG: [worker-~diagnostic~-7bee72bd-e23e-4c02-bd59-5b0896d2073f]: BUSY
+[debug] [2021-12-27T13:45:51.941Z] DEBUG: [worker-~diagnostic~-b80efb01-6572-4aad-915b-5df7bc6a57c0]: exited
+[debug] [2021-12-27T13:45:51.941Z] DEBUG: [worker-~diagnostic~-b80efb01-6572-4aad-915b-5df7bc6a57c0]: FINISHED
+[debug] [2021-12-27T13:45:52.059Z] DEBUG: [runtime-status] [24122] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-27T13:45:52.060Z] DEBUG: [runtime-status] [24122] Disabled runtime features: undefined
+[debug] [2021-12-27T13:45:52.064Z] DEBUG: [runtime-status] [24122] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:45:52.070Z] DEBUG: [runtime-status] [24122] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:45:52.071Z] DEBUG: [runtime-status] [24122] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-27T13:45:52.071Z] DEBUG: [runtime-status] [24122] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:45:52.136Z] DEBUG: [runtime-status] [24122] Checked functions.config() {"config":{}}
+[debug] [2021-12-27T13:45:52.137Z] DEBUG: [runtime-status] [24122] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-27T13:45:52.138Z] DEBUG: [runtime-status] [24122] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:45:52.141Z] DEBUG: [runtime-status] [24122] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:45:52.145Z] DEBUG: [runtime-status] [24122] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:45:52.146Z] DEBUG: [runtime-status] [24122] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2021-12-27T13:45:52.150Z] DEBUG: [worker-~diagnostic~-7bee72bd-e23e-4c02-bd59-5b0896d2073f]: IDLE
+[debug] [2021-12-27T13:45:57.985Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/src/index.ts changed, reloading triggers
+[debug] [2021-12-27T13:45:58.809Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/src/index.ts changed, reloading triggers
+[debug] [2021-12-27T13:45:59.810Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2021-12-27T13:45:59.811Z] DEBUG: [worker-~diagnostic~-7bee72bd-e23e-4c02-bd59-5b0896d2073f]: FINISHING
+[debug] [2021-12-27T13:45:59.811Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2021-12-27T13:45:59.821Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-27T13:45:59.821Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2021-12-27T13:45:59.821Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-27T13:45:59.821Z] DEBUG: [worker-~diagnostic~-1d2520e9-4db9-42b0-9637-3e31467dcb68]: Assigning socketPath: /tmp/fire_emu_24151.sock
+[debug] [2021-12-27T13:45:59.822Z] DEBUG: [worker-~diagnostic~-1d2520e9-4db9-42b0-9637-3e31467dcb68]: BUSY
+[debug] [2021-12-27T13:45:59.823Z] DEBUG: [worker-~diagnostic~-7bee72bd-e23e-4c02-bd59-5b0896d2073f]: exited
+[debug] [2021-12-27T13:45:59.823Z] DEBUG: [worker-~diagnostic~-7bee72bd-e23e-4c02-bd59-5b0896d2073f]: FINISHED
+[debug] [2021-12-27T13:45:59.929Z] DEBUG: [runtime-status] [24151] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-27T13:45:59.931Z] DEBUG: [runtime-status] [24151] Disabled runtime features: undefined
+[debug] [2021-12-27T13:45:59.933Z] DEBUG: [runtime-status] [24151] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:45:59.936Z] DEBUG: [runtime-status] [24151] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:45:59.942Z] DEBUG: [runtime-status] [24151] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-27T13:45:59.942Z] DEBUG: [runtime-status] [24151] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:46:00.009Z] DEBUG: [runtime-status] [24151] Checked functions.config() {"config":{}}
+[debug] [2021-12-27T13:46:00.010Z] DEBUG: [runtime-status] [24151] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-27T13:46:00.012Z] DEBUG: [runtime-status] [24151] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:46:00.015Z] DEBUG: [runtime-status] [24151] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:46:00.016Z] DEBUG: [runtime-status] [24151] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:46:00.017Z] DEBUG: [runtime-status] [24151] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2021-12-27T13:46:00.023Z] DEBUG: [worker-~diagnostic~-1d2520e9-4db9-42b0-9637-3e31467dcb68]: IDLE
+[debug] [2021-12-27T13:46:02.768Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/src/index.ts changed, reloading triggers
+[debug] [2021-12-27T13:46:03.769Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2021-12-27T13:46:03.769Z] DEBUG: [worker-~diagnostic~-1d2520e9-4db9-42b0-9637-3e31467dcb68]: FINISHING
+[debug] [2021-12-27T13:46:03.770Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2021-12-27T13:46:03.778Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-27T13:46:03.778Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2021-12-27T13:46:03.779Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-27T13:46:03.779Z] DEBUG: [worker-~diagnostic~-76e31553-88bc-41a6-bd81-6a73d91e4b59]: Assigning socketPath: /tmp/fire_emu_24161.sock
+[debug] [2021-12-27T13:46:03.779Z] DEBUG: [worker-~diagnostic~-76e31553-88bc-41a6-bd81-6a73d91e4b59]: BUSY
+[debug] [2021-12-27T13:46:03.780Z] DEBUG: [worker-~diagnostic~-1d2520e9-4db9-42b0-9637-3e31467dcb68]: exited
+[debug] [2021-12-27T13:46:03.780Z] DEBUG: [worker-~diagnostic~-1d2520e9-4db9-42b0-9637-3e31467dcb68]: FINISHED
+[debug] [2021-12-27T13:46:03.896Z] DEBUG: [runtime-status] [24161] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-27T13:46:03.898Z] DEBUG: [runtime-status] [24161] Disabled runtime features: undefined
+[debug] [2021-12-27T13:46:03.902Z] DEBUG: [runtime-status] [24161] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:46:03.905Z] DEBUG: [runtime-status] [24161] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:46:03.908Z] DEBUG: [runtime-status] [24161] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-27T13:46:03.910Z] DEBUG: [runtime-status] [24161] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:46:03.983Z] DEBUG: [runtime-status] [24161] Checked functions.config() {"config":{}}
+[debug] [2021-12-27T13:46:03.983Z] DEBUG: [runtime-status] [24161] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-27T13:46:03.985Z] DEBUG: [runtime-status] [24161] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:46:03.987Z] DEBUG: [runtime-status] [24161] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-27T13:46:03.991Z] DEBUG: [runtime-status] [24161] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-27T13:46:03.991Z] DEBUG: [runtime-status] [24161] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2021-12-27T13:46:03.994Z] DEBUG: [worker-~diagnostic~-76e31553-88bc-41a6-bd81-6a73d91e4b59]: IDLE
+[debug] [2021-12-28T05:26:33.546Z] ----------------------------------------------------------------------
+[debug] [2021-12-28T05:26:33.547Z] Command:       /home/gregor/.nvm/versions/node/v14.18.2/bin/node /home/gregor/.nvm/versions/node/v14.18.2/bin/firebase functions:shell
+[debug] [2021-12-28T05:26:33.547Z] CLI Version:   10.0.1
+[debug] [2021-12-28T05:26:33.548Z] Platform:      linux
+[debug] [2021-12-28T05:26:33.548Z] Node Version:  v14.18.2
+[debug] [2021-12-28T05:26:33.548Z] Time:          Tue Dec 28 2021 08:26:33 GMT+0300 (Moscow Standard Time)
+[debug] [2021-12-28T05:26:33.548Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-12-28T05:26:33.599Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-28T05:26:33.599Z] > authorizing via signed-in user (zippper123915@gmail.com)
+[debug] [2021-12-28T05:26:33.600Z] [iam] checking project pomodoro-3b7d3 for permissions ["firebase.projects.get"]
+[debug] [2021-12-28T05:26:33.601Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-12-28T05:26:33.601Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-28T05:26:35.191Z] <<< HTTP RESPONSE 200 {"date":"Tue, 28 Dec 2021 05:26:34 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-28T05:26:35.201Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/pomodoro-3b7d3:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2021-12-28T05:26:51.689Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 28 Dec 2021 05:26:51 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=735","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-28T05:26:51.690Z] >>> HTTP REQUEST GET http://localhost:4400/emulators  
+ 
+[debug] [2021-12-28T05:26:51.696Z] <<< HTTP RESPONSE 200 {"x-powered-by":"Express","vary":"Origin","content-type":"application/json; charset=utf-8","content-length":"489","etag":"W/\"1e9-u/HExS47C35gwuypyrWL0S/RhaM\"","date":"Tue, 28 Dec 2021 05:26:51 GMT","connection":"keep-alive","keep-alive":"timeout=5"}
+[debug] [2021-12-28T05:26:51.697Z] Running emulators:  {"hub":{"name":"hub","host":"localhost","port":4400},"ui":{"name":"ui","host":"localhost","port":6060,"pid":14023},"logging":{"name":"logging","host":"localhost","port":4500},"auth":{"name":"auth","host":"localhost","port":9099},"functions":{"name":"functions","host":"localhost","port":5001},"firestore":{"name":"firestore","host":"localhost","port":8081,"pid":13867},"hosting":{"name":"hosting","host":"localhost","port":5000},"storage":{"name":"storage","host":"localhost","port":9199}}
+[warn] ⚠  functions: You are already running the Cloud Functions emulator on port 5001. Running the emulator and the Functions shell simultaenously can result in unexpected behavior. 
+[debug] [2021-12-28T05:26:51.717Z] [functions] Using node@14 from host.
+[debug] [2021-12-28T05:26:51.718Z] defaultcredentials: writing to file /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json
+[debug] [2021-12-28T05:26:51.720Z] DEBUG: Setting GAC to /home/gregor/.config/firebase/zippper123915_gmail_com_application_default_credentials.json
+[debug] [2021-12-28T05:26:51.723Z] > refreshing access token with scopes: []
+[debug] [2021-12-28T05:26:51.724Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-12-28T05:26:51.977Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Tue, 28 Dec 2021 05:26:51 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-12-28T05:26:51.987Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig [none]
+[debug] [2021-12-28T05:26:52.427Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig 200
+[debug] [2021-12-28T05:26:52.428Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/pomodoro-3b7d3/adminSdkConfig {"projectId":"pomodoro-3b7d3","storageBucket":"pomodoro-3b7d3.appspot.com","locationId":"europe-west"}
+[debug] [2021-12-28T05:26:52.441Z] [functions] Watching "/media/gregor/Новый том/work/PetProjects/pomodoro/functions" for Cloud Functions...
+[debug] [2021-12-28T05:26:52.459Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-28T05:26:52.459Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2021-12-28T05:26:52.459Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-28T05:26:52.459Z] DEBUG: [worker-~diagnostic~-5018b1f6-6a2c-49c4-b26c-4c0807d27252]: Assigning socketPath: /tmp/fire_emu_18634.sock
+[debug] [2021-12-28T05:26:52.460Z] DEBUG: [worker-~diagnostic~-5018b1f6-6a2c-49c4-b26c-4c0807d27252]: BUSY
+[debug] [2021-12-28T05:26:52.580Z] DEBUG: [runtime-status] [18634] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-28T05:26:52.581Z] DEBUG: [runtime-status] [18634] Disabled runtime features: undefined
+[debug] [2021-12-28T05:26:52.584Z] DEBUG: [runtime-status] [18634] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-28T05:26:52.587Z] DEBUG: [runtime-status] [18634] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:26:52.588Z] DEBUG: [runtime-status] [18634] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-28T05:26:52.590Z] DEBUG: [runtime-status] [18634] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:26:52.678Z] DEBUG: [runtime-status] [18634] Checked functions.config() {"config":{}}
+[debug] [2021-12-28T05:26:52.679Z] DEBUG: [runtime-status] [18634] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-28T05:26:52.680Z] DEBUG: [runtime-status] [18634] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:26:52.683Z] DEBUG: [runtime-status] [18634] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-28T05:26:52.686Z] DEBUG: [runtime-status] [18634] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:26:52.687Z] DEBUG: [runtime-status] [18634] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2021-12-28T05:26:52.694Z] [functions[us-central1-deleteTask]] function ignored because the firestore emulator does not exist or is not running.
+[info] i  functions: Loaded functions: deleteTask 
+[info] i  functions: Connected to running firestore emulator at localhost:8081, calls to this service will affect the emulator 
+[info] i  functions: Connected to running storage emulator at localhost:9199, calls to this service will affect the emulator 
+[warn] ⚠  functions: The following emulators are not running, calls to these services will affect production: database, pubsub 
+[debug] [2021-12-28T05:26:52.705Z] DEBUG: [worker-~diagnostic~-5018b1f6-6a2c-49c4-b26c-4c0807d27252]: IDLE
+[debug] [2021-12-28T05:27:00.063Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/package.json changed, reloading triggers
+[debug] [2021-12-28T05:27:01.065Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2021-12-28T05:27:01.065Z] DEBUG: [worker-~diagnostic~-5018b1f6-6a2c-49c4-b26c-4c0807d27252]: FINISHING
+[debug] [2021-12-28T05:27:01.075Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-28T05:27:01.075Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2021-12-28T05:27:01.075Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-28T05:27:01.075Z] DEBUG: [worker-~diagnostic~-766a9d2a-9110-4548-8b83-e60ea4a349ad]: Assigning socketPath: /tmp/fire_emu_18651.sock
+[debug] [2021-12-28T05:27:01.077Z] DEBUG: [worker-~diagnostic~-766a9d2a-9110-4548-8b83-e60ea4a349ad]: BUSY
+[debug] [2021-12-28T05:27:01.079Z] DEBUG: [worker-~diagnostic~-5018b1f6-6a2c-49c4-b26c-4c0807d27252]: exited
+[debug] [2021-12-28T05:27:01.079Z] DEBUG: [worker-~diagnostic~-5018b1f6-6a2c-49c4-b26c-4c0807d27252]: FINISHED
+[debug] [2021-12-28T05:27:01.190Z] DEBUG: [runtime-status] [18651] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-28T05:27:01.192Z] DEBUG: [runtime-status] [18651] Disabled runtime features: undefined
+[debug] [2021-12-28T05:27:01.194Z] DEBUG: [runtime-status] [18651] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-28T05:27:01.198Z] DEBUG: [runtime-status] [18651] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:27:01.202Z] DEBUG: [runtime-status] [18651] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-28T05:27:01.204Z] DEBUG: [runtime-status] [18651] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:27:01.306Z] DEBUG: [runtime-status] [18651] Checked functions.config() {"config":{}}
+[debug] [2021-12-28T05:27:01.307Z] DEBUG: [runtime-status] [18651] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-28T05:27:01.309Z] DEBUG: [runtime-status] [18651] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:27:01.313Z] DEBUG: [runtime-status] [18651] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-28T05:27:01.315Z] DEBUG: [runtime-status] [18651] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:27:01.315Z] DEBUG: [runtime-status] [18651] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2021-12-28T05:27:01.322Z] DEBUG: [runtime-status] [18651] initializeApp(DEFAULT) {"storageBucket":"pomodoro-3b7d3.appspot.com","projectId":"pomodoro-3b7d3"}
+[debug] [2021-12-28T05:27:01.325Z] DEBUG: [worker-~diagnostic~-766a9d2a-9110-4548-8b83-e60ea4a349ad]: IDLE
+[debug] [2021-12-28T05:28:37.151Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/src/index.ts changed, reloading triggers
+[debug] [2021-12-28T05:28:37.613Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/lib/functions/src/index.js.map changed, reloading triggers
+[debug] [2021-12-28T05:28:37.614Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/lib/functions/src/index.js changed, reloading triggers
+[debug] [2021-12-28T05:28:38.615Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2021-12-28T05:28:38.615Z] DEBUG: [worker-~diagnostic~-766a9d2a-9110-4548-8b83-e60ea4a349ad]: FINISHING
+[debug] [2021-12-28T05:28:38.616Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2021-12-28T05:28:38.623Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-28T05:28:38.623Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2021-12-28T05:28:38.624Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-28T05:28:38.624Z] DEBUG: [worker-~diagnostic~-fff28cc2-6330-41d6-9c77-ad20776fa08f]: Assigning socketPath: /tmp/fire_emu_18898.sock
+[debug] [2021-12-28T05:28:38.624Z] DEBUG: [worker-~diagnostic~-fff28cc2-6330-41d6-9c77-ad20776fa08f]: BUSY
+[debug] [2021-12-28T05:28:38.625Z] DEBUG: [worker-~diagnostic~-766a9d2a-9110-4548-8b83-e60ea4a349ad]: exited
+[debug] [2021-12-28T05:28:38.625Z] DEBUG: [worker-~diagnostic~-766a9d2a-9110-4548-8b83-e60ea4a349ad]: FINISHED
+[debug] [2021-12-28T05:28:38.738Z] DEBUG: [runtime-status] [18898] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-28T05:28:38.740Z] DEBUG: [runtime-status] [18898] Disabled runtime features: undefined
+[debug] [2021-12-28T05:28:38.744Z] DEBUG: [runtime-status] [18898] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-28T05:28:38.748Z] DEBUG: [runtime-status] [18898] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:28:38.752Z] DEBUG: [runtime-status] [18898] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-28T05:28:38.752Z] DEBUG: [runtime-status] [18898] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:28:38.835Z] DEBUG: [runtime-status] [18898] Checked functions.config() {"config":{}}
+[debug] [2021-12-28T05:28:38.835Z] DEBUG: [runtime-status] [18898] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-28T05:28:38.838Z] DEBUG: [runtime-status] [18898] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:28:38.843Z] DEBUG: [runtime-status] [18898] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-28T05:28:38.845Z] DEBUG: [runtime-status] [18898] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:28:38.846Z] DEBUG: [runtime-status] [18898] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2021-12-28T05:28:38.852Z] DEBUG: [runtime-status] [18898] initializeApp(DEFAULT) {"storageBucket":"pomodoro-3b7d3.appspot.com","projectId":"pomodoro-3b7d3"}
+[debug] [2021-12-28T05:28:38.856Z] DEBUG: [worker-~diagnostic~-fff28cc2-6330-41d6-9c77-ad20776fa08f]: IDLE
+[debug] [2021-12-28T05:31:01.520Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/src/index.ts changed, reloading triggers
+[debug] [2021-12-28T05:31:02.148Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/lib/functions/src/index.js.map changed, reloading triggers
+[debug] [2021-12-28T05:31:02.149Z] DEBUG: File /media/gregor/Новый том/work/PetProjects/pomodoro/functions/lib/functions/src/index.js changed, reloading triggers
+[debug] [2021-12-28T05:31:03.150Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2021-12-28T05:31:03.151Z] DEBUG: [worker-~diagnostic~-fff28cc2-6330-41d6-9c77-ad20776fa08f]: FINISHING
+[debug] [2021-12-28T05:31:03.151Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2021-12-28T05:31:03.162Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2021-12-28T05:31:03.162Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2021-12-28T05:31:03.162Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2021-12-28T05:31:03.162Z] DEBUG: [worker-~diagnostic~-a4667c2e-f90f-4002-af9e-351827b61a53]: Assigning socketPath: /tmp/fire_emu_19214.sock
+[debug] [2021-12-28T05:31:03.162Z] DEBUG: [worker-~diagnostic~-a4667c2e-f90f-4002-af9e-351827b61a53]: BUSY
+[debug] [2021-12-28T05:31:03.164Z] DEBUG: [worker-~diagnostic~-fff28cc2-6330-41d6-9c77-ad20776fa08f]: exited
+[debug] [2021-12-28T05:31:03.164Z] DEBUG: [worker-~diagnostic~-fff28cc2-6330-41d6-9c77-ad20776fa08f]: FINISHED
+[debug] [2021-12-28T05:31:03.275Z] DEBUG: [runtime-status] [19214] Functions runtime initialized. {"cwd":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions","node_version":"14.18.2"}
+[debug] [2021-12-28T05:31:03.276Z] DEBUG: [runtime-status] [19214] Disabled runtime features: undefined
+[debug] [2021-12-28T05:31:03.282Z] DEBUG: [runtime-status] [19214] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-28T05:31:03.285Z] DEBUG: [runtime-status] [19214] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:31:03.287Z] DEBUG: [runtime-status] [19214] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2021-12-28T05:31:03.289Z] DEBUG: [runtime-status] [19214] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:31:03.378Z] DEBUG: [runtime-status] [19214] Checked functions.config() {"config":{}}
+[debug] [2021-12-28T05:31:03.378Z] DEBUG: [runtime-status] [19214] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}}
+[debug] [2021-12-28T05:31:03.384Z] DEBUG: [runtime-status] [19214] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:31:03.384Z] DEBUG: [runtime-status] [19214] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2021-12-28T05:31:03.385Z] DEBUG: [runtime-status] [19214] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.16.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2021-12-28T05:31:03.386Z] DEBUG: [runtime-status] [19214] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.12.0","resolution":"/media/gregor/Новый том/work/PetProjects/pomodoro/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2021-12-28T05:31:03.395Z] DEBUG: [runtime-status] [19214] initializeApp(DEFAULT) {"storageBucket":"pomodoro-3b7d3.appspot.com","projectId":"pomodoro-3b7d3"}
+[debug] [2021-12-28T05:31:03.398Z] DEBUG: [worker-~diagnostic~-a4667c2e-f90f-4002-af9e-351827b61a53]: IDLE

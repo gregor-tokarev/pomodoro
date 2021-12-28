@@ -3,7 +3,7 @@
     <Sortable class="todo__list" @dragEnd="dragEnd" handleSelector=".todo-item__drag">
       <li class="todo__item" v-for="task in tasks" :key="task.id">
         <div class="todo__item-overlay"></div>
-        <AppTodoItem is-draggable :todoitem="task"></AppTodoItem>
+        <AppTodoItem is-draggable @delete="deleteTask" :todoitem="task"></AppTodoItem>
       </li>
     </Sortable>
 
@@ -80,10 +80,17 @@ function addTask(): void {
 
   store.dispatch('tasksModule/addTask', taskForm.value)
   taskForm.value.text = ''
+
+  const parent = root.value!.parentElement!
+  if (parent.clientHeight < parent.scrollHeight) {
+    parent.scrollTo(0, 1000000)
+    console.log(parent.scrollTop, parent.scrollHeight - parent.clientHeight)
+  }
 }
 
-// function dragEnd(event: SortableStopEvent): void {
-// }
+async function deleteTask(taskId: string): Promise<void> {
+  await store.dispatch('tasksModule/deleteTask', taskId)
+}
 </script>
 
 <style scoped lang="scss">

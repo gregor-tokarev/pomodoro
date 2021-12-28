@@ -1,0 +1,12 @@
+.link {
+  color: $accent-main;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $accent-hover;
+  }
+
+  &--underlined {
+    text-decoration: underline;
+  }
+}

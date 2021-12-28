@@ -1,5 +1,7 @@
 <template>
   <div
+    ref="root"
+    v-click-outside="clickOutsideConfig"
     class="todo-item"
     :class="{
       'todo-item--inprogress': props.todoitem.status === 'inprogress'
@@ -7,6 +9,8 @@
   >
     <AppIcon
       v-if="props.isDraggable"
+      @contextmenu="isContextmenu = true"
+      @mousedown="isContextmenu = false"
       :color="Colors.GRAY_200"
       icon-name="drag-dots"
       class="todo-item__drag"
@@ -21,6 +25,21 @@
     <div v-if="time" class="hint-text todo-item__time">
       {{ time }}
     </div>
+
+    <AppContextMenu v-model="isContextmenu">
+      <li class="hint-text context-menu__item">
+        <AppIcon :color="Colors.GRAY_300" icon-name="order-up"></AppIcon>
+        Sort up
+      </li>
+      <li class="hint-text context-menu__item">
+        <AppIcon :color="Colors.GRAY_300" icon-name="order-down"></AppIcon>
+        Sort down
+      </li>
+      <li @click="emit('delete', props.todoitem.id)" class="hint-text context-menu__item context-menu__item--error">
+        <AppIcon :color="Colors.SYSTEM_ERROR" icon-name="basket"></AppIcon>
+        Delete
+      </li>
+    </AppContextMenu>
   </div>
 </template>
 
@@ -35,6 +54,7 @@ import { getTimeStr } from '@/lib/getTimeStr'
 import RelativeTime from 'dayjs/plugin/relativeTime'
 import dayjs, { Dayjs } from 'dayjs'
 import AppIcon from '@/components/UI/AppIcon.vue'
+import AppContextMenu from '@/components/UI/AppContextMenu.vue'
 
 interface Props {
   todoitem: Task,
@@ -45,6 +65,9 @@ const props = withDefaults(defineProps<Props>(), {
   todoitem: undefined,
   isDraggable: false
 })
+const emit = defineEmits<{ (e: 'delete', value: string): void }>()
+
+const root = ref<HTMLElement>()
 
 dayjs.extend(RelativeTime)
 const currentTime = ref<Dayjs>(dayjs())
@@ -54,6 +77,7 @@ if (props.todoitem.timeStart) {
     currentTime.value = dayjs()
   }, 1000)
 }
+
 const time = computed<string | undefined>(() => {
   const timeEnd = props.todoitem.timeEnd ?? currentTime.value.format()
   if (!props.todoitem.timeStart) {
@@ -64,6 +88,14 @@ const time = computed<string | undefined>(() => {
   const res = secondsToTime(diff)
   return getTimeStr(res)
 })
+
+const isContextmenu = ref<boolean>(false)
+const clickOutsideConfig = {
+  handler() {
+    isContextmenu.value = false
+  },
+  events: ['click', 'contextmenu']
+}
 </script>
 
 <style scoped lang="scss">

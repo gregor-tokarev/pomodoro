@@ -1,0 +1,41 @@
+@import "uikit/blocks/auth";
+@import "uikit/blocks/link";
+@import "uikit/blocks/base-field";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+fieldset {
+  border: none;
+}
+
+.firebase-emulator-warning {
+  display: none;
+}
+
+::selection {
+  background-color: $accent-main;
+  color: $gray-000;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $accent-main;
+  border-radius: 5px;
+  width: 5px;
+}

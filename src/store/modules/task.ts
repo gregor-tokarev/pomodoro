@@ -70,6 +70,17 @@ const actions: ActionTree<TaskState, RootState> = {
       console.error(err)
     }
   },
+  async deleteTask({ commit }, taskId: string): Promise<string> {
+    try {
+      commit('DELETE_TASK', taskId)
+      await firestore.collection('tasks').doc(taskId).delete()
+
+      return taskId
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  },
   async fetchTasks({
     commit,
     rootGetters

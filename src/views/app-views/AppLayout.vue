@@ -23,6 +23,7 @@ $page-padding-top: 30px;
 .app {
   background-color: $bg;
   padding: $page-padding-top 0 0 0;
+  overflow-y: hidden;
   min-height: 100vh;
 
   &__wrapper {
@@ -39,17 +40,15 @@ $page-padding-top: 30px;
   }
 
   &__body {
+    max-height: calc(100vh - #{$page-padding-top});
     width: 75%;
     padding: 30px 40px;
     border-radius: 30px;
     background-color: $gray-000;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }
-
-//.fade-enter-from {
-//  opacity: 1;
-//  transform: translateX(0);
-//}
 
 .fade-enter-from {
   opacity: 0;

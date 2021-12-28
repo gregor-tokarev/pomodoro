@@ -69,6 +69,7 @@ const tasks = ref<Task[]>([
     id: nanoid(),
     text: 'some',
     status: 'completed',
+    order: 0,
     timeStart: '2021-12-07T15:00:55+0300',
     timeEnd: '2021-12-07T15:15:56+0300',
     ownerId
@@ -77,6 +78,7 @@ const tasks = ref<Task[]>([
     id: nanoid(),
     text: 'some',
     status: 'completed',
+    order: 1,
     timeStart: '2021-12-07T15:15:55+0300',
     timeEnd: '2021-12-07T15:20:56+0300',
     ownerId
@@ -85,6 +87,7 @@ const tasks = ref<Task[]>([
     id: nanoid(),
     text: 'some',
     status: 'completed',
+    order: 2,
     timeStart: '2021-12-07T15:20:55+0300',
     timeEnd: '2021-12-07T15:23:56+0300',
     ownerId
@@ -92,12 +95,14 @@ const tasks = ref<Task[]>([
 ])
 type formattedTask = Task & { duration: number }
 const formattedTasks = computed<formattedTask[]>(() =>
-  tasks.value.map(task => ({
-    ...task,
-    timeStart: dayjs(task.timeStart).format('HH:mm'),
-    timeEnd: dayjs(task.timeEnd).format('HH:mm'),
-    duration: diffDates(task.timeStart, task.timeEnd, 'minutes')
-  })))
+  tasks.value.map(task => {
+    return {
+      ...task,
+      timeStart: dayjs(task.timeStart).format('HH:mm'),
+      timeEnd: dayjs(task.timeEnd).format('HH:mm'),
+      duration: diffDates(task.timeStart, task.timeEnd, 'minutes')
+    }
+  }))
 </script>
 
 <style scoped lang="scss">
