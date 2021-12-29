@@ -81,10 +81,76 @@ const actions: ActionTree<TaskState, RootState> = {
       throw err
     }
   },
+  async changeTaskOrder({
+    commit,
+    getters
+  }, {
+    taskId,
+    newOrder
+  }: { taskId: string, newOrder: number }): Promise<void> {
+    let promises: Promise<void>[] = []
+
+    try {
+      const task: Task = getters.taskById(taskId)
+      if (newOrder < task.order) {
+        const tasksToByReordered: Task[] = getters
+          .tasksOrderInterval(newOrder, task.order)
+          .filter((task: Task) => task.id !== taskId)
+
+        promises = tasksToByReordered.map(task => {
+          commit('EDIT_TASK', {
+            id: task.id,
+            changes: {
+              order: task.order + 1
+            }
+          })
+
+          return firestore
+            .collection('tasks')
+            .doc(task.id)
+            .update({ order: task.order + 1 })
+        })
+      } else {
+        const tasksToByReordered: Task[] = getters
+          .tasksOrderInterval(task.order, newOrder)
+          .filter((task: Task) => task.id !== taskId)
+
+        promises = tasksToByReordered.map(task => {
+          commit('EDIT_TASK', {
+            id: task.id,
+            changes: {
+              order: task.order - 1
+            }
+          })
+
+          return firestore
+            .collection('tasks')
+            .doc(task.id)
+            .update({ order: task.order - 1 })
+        })
+      }
+
+      await Promise.all(promises)
+
+      commit('EDIT_TASK', {
+        id: taskId,
+        changes: { order: newOrder }
+      })
+      await firestore
+        .collection('tasks')
+        .doc(taskId)
+        .update({ order: newOrder })
+
+      return getters.taskById(taskId)
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  },
   async fetchTasks({
     commit,
     rootGetters
-  }): Promise<Task[] | undefined> {
+  }): Promise<Task[]> {
     const userId = rootGetters['authModule/userId']
 
     try {
@@ -100,6 +166,7 @@ const actions: ActionTree<TaskState, RootState> = {
       return tasks
     } catch (err) {
       console.error(err)
+      throw err
     }
   }
 }
@@ -107,6 +174,13 @@ const actions: ActionTree<TaskState, RootState> = {
 const getters: GetterTree<TaskState, RootState> = {
   tasks(state): Task[] {
     return state.tasks.sort((prev, next) => prev.order - next.order)
+  },
+  tasksOrderInterval(state): (startOrder: number, stopOrder: number) => Task[] {
+    return (startOrder, stopOrder) =>
+      state.tasks.filter(task => startOrder <= task.order && task.order <= stopOrder)
+  },
+  taskById(state): (taskId: string) => Task | undefined {
+    return taskId => state.tasks.find(task => task.id === taskId)
   },
   getMaxOrderValue(state): number {
     const maxOrder = Math.max(...state.tasks.map(task => task.order))

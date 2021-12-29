@@ -27,11 +27,13 @@
     </div>
 
     <AppContextMenu v-model="isContextmenu" container-selector=".app__body">
-      <li class="hint-text context-menu__item">
+      <li @click="changeOrder('up')"
+          class="hint-text context-menu__item">
         <AppIcon :color="Colors.GRAY_300" icon-name="order-up"></AppIcon>
         Sort up
       </li>
-      <li class="hint-text context-menu__item">
+      <li @click="changeOrder('down')"
+          class="hint-text context-menu__item">
         <AppIcon :color="Colors.GRAY_300" icon-name="order-down"></AppIcon>
         Sort down
       </li>
@@ -65,7 +67,10 @@ const props = withDefaults(defineProps<Props>(), {
   todoitem: undefined,
   isDraggable: false
 })
-const emit = defineEmits<{ (e: 'delete', value: string): void }>()
+const emit = defineEmits<{
+  (e: 'delete', value: string): void
+  (e: 'changeOrder', value: { taskId: string, newOrder: number }): void
+}>()
 
 const root = ref<HTMLElement>()
 
@@ -95,6 +100,15 @@ const clickOutsideConfig = {
     isContextmenu.value = false
   },
   events: ['click', 'contextmenu']
+}
+
+function changeOrder(direction: 'up' | 'down'): void {
+  emit('changeOrder', {
+    taskId: props.todoitem.id,
+    newOrder: direction === 'down' ? props.todoitem.order + 1 : props.todoitem.order - 1
+  })
+
+  isContextmenu.value = false
 }
 </script>
 

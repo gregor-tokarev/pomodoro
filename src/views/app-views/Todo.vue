@@ -3,7 +3,8 @@
     <Sortable class="todo__list" @dragEnd="dragEnd" handleSelector=".todo-item__drag">
       <li class="todo__item" v-for="task in tasks" :key="task.id">
         <div class="todo__item-overlay"></div>
-        <AppTodoItem is-draggable @delete="deleteTask" :todoitem="task"></AppTodoItem>
+        <AppTodoItem is-draggable @delete="deleteTask" @changeOrder="changeOrder($event.taskId, $event.newOrder)"
+                     :todoitem="task"></AppTodoItem>
       </li>
     </Sortable>
 
@@ -38,6 +39,7 @@ import AppTodoItem from '@/components/UI/AppTodoItem.vue'
 import AppAddButton from '@/components/UI/AppAddButton.vue'
 import AppTextarea from '@/components/UI/AppTextarea.vue'
 import AppButton from '@/components/UI/AppButton.vue'
+import { SortableStopEvent } from '@shopify/draggable'
 import { useI18n } from 'vue-i18n'
 import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
@@ -49,7 +51,7 @@ const store = useStore()
 onMounted(async () => {
   await store.dispatch('tasksModule/fetchTasks')
 })
-const tasks = computed<Task>(() => {
+const tasks = computed<Task[]>(() => {
   return store.getters['tasksModule/tasks']
 })
 
@@ -84,12 +86,23 @@ function addTask(): void {
   const parent = root.value!.parentElement!
   if (parent.clientHeight < parent.scrollHeight) {
     parent.scrollTo(0, 1000000)
-    console.log(parent.scrollTop, parent.scrollHeight - parent.clientHeight)
   }
 }
 
 async function deleteTask(taskId: string): Promise<void> {
   await store.dispatch('tasksModule/deleteTask', taskId)
+}
+
+function changeOrder(taskId: string, newOrder: number): void {
+  store.dispatch('tasksModule/changeTaskOrder', {
+    newOrder,
+    taskId
+  })
+}
+
+function dragEnd(event: SortableStopEvent): void {
+  console.log(event.oldIndex, event.newIndex)
+  // store.dispatch('tasksModule/changeTaskOrder', {newOrder: event.newIndex, taskId})
 }
 </script>
 

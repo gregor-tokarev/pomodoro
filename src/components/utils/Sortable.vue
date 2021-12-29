@@ -25,7 +25,7 @@ const emit = defineEmits<{
 }>()
 
 onMounted(() => {
-  const sortable = new Sortable(root.value, {
+  const sortable: Sortable = new Sortable(root.value, {
     draggable: props.draggedElement,
     handle: props.handleSelector,
     plugins: [Plugins.SwapAnimation],
@@ -39,6 +39,7 @@ onMounted(() => {
       constrainDimensions: true
     }
   })
+
   sortable.on('sortable:stop', (event: SortableStopEvent) => emit('dragEnd', event))
   sortable.on('sortable:start', (event: SortableStartEvent) => emit('dragStart', event))
 })
