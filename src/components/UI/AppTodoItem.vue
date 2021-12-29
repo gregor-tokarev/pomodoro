@@ -1,6 +1,7 @@
 <template>
   <div
     ref="root"
+    @contextmenu="isContextmenu = true"
     v-click-outside="clickOutsideConfig"
     class="todo-item"
     :class="{
@@ -9,7 +10,6 @@
   >
     <AppIcon
       v-if="props.isDraggable"
-      @contextmenu="isContextmenu = true"
       @mousedown="isContextmenu = false"
       :color="Colors.GRAY_200"
       icon-name="drag-dots"
@@ -26,7 +26,7 @@
       {{ time }}
     </div>
 
-    <AppContextMenu v-model="isContextmenu">
+    <AppContextMenu v-model="isContextmenu" container-selector=".app__body">
       <li class="hint-text context-menu__item">
         <AppIcon :color="Colors.GRAY_300" icon-name="order-up"></AppIcon>
         Sort up
