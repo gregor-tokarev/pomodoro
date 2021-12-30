@@ -29,12 +29,7 @@ const liftHeight = computed<string>(() => {
   const timerHeight = timer.value.offsetHeight
 
   const availableLiftHeight = timerHeight - waveHeight
-  console.log(availableLiftHeight)
   return availableLiftHeight * (props.coveragePercent / 100) + 'px'
-})
-
-onMounted(() => {
-  console.log(liftHeight.value)
 })
 </script>
 
