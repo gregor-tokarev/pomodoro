@@ -26,3 +26,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+firestore-debug.log
+pubsub-debug.log
+.stylelintcache
+.fuse_hidden00026a6900000001

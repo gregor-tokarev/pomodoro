@@ -14,6 +14,7 @@
 
     <form v-else class="todo__add-form" @submit.prevent="addTask">
       <AppTextarea :placeholder="t('taskPlaceholder')" v-model="taskForm.text"
+                   @keydown.esc="isAddForm = false"
                    @keydown.enter.exact.prevent="addTask"></AppTextarea>
 
       <div class="todo__form-actions">
