@@ -20,7 +20,16 @@
       class="todo-item__checkbox"
       :modelValue="props.todoitem.status === 'completed'"
     ></AppCheckbox>
-    <div class="basic-text todo-item__text">{{ props.todoitem.text }}</div>
+
+    <textarea
+      rows="1"
+      :readonly="!props.canEdit"
+      v-autogrow
+      class="basic-text todo-item__text"
+      v-model.lazy="text"
+      @focus.prevent
+      @keydown.enter.exact.prevent="saveText($event.currentTarget.value)"
+    ></textarea>
 
     <div v-if="time" class="hint-text todo-item__time">
       {{ time }}
@@ -59,17 +68,20 @@ import AppIcon from '@/components/UI/AppIcon.vue'
 import AppContextMenu from '@/components/UI/AppContextMenu.vue'
 
 interface Props {
-  todoitem: Task,
+  todoitem: Task
   isDraggable: boolean
+  canEdit: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   todoitem: undefined,
-  isDraggable: false
+  isDraggable: false,
+  canEdit: false
 })
 const emit = defineEmits<{
   (e: 'delete', value: string): void
   (e: 'changeOrder', value: { taskId: string, newOrder: number }): void
+  (e: 'changeText', value: { taskId: string, text: string }): void
 }>()
 
 const root = ref<HTMLElement>()
@@ -83,6 +95,14 @@ if (props.todoitem.timeStart) {
   }, 1000)
 }
 
+const isContextmenu = ref<boolean>(false)
+const clickOutsideConfig = {
+  handler() {
+    isContextmenu.value = false
+  },
+  events: ['click', 'contextmenu']
+}
+
 const time = computed<string | undefined>(() => {
   const timeEnd = props.todoitem.timeEnd ?? currentTime.value.format()
   if (!props.todoitem.timeStart) {
@@ -94,12 +114,24 @@ const time = computed<string | undefined>(() => {
   return getTimeStr(res)
 })
 
-const isContextmenu = ref<boolean>(false)
-const clickOutsideConfig = {
-  handler() {
-    isContextmenu.value = false
+const textarea = computed<HTMLTextAreaElement | null | undefined>(() => root.value?.querySelector('textarea'))
+const text = computed<string>({
+  get(): string {
+    return props.todoitem.text
   },
-  events: ['click', 'contextmenu']
+  set(value: string): void {
+    saveText(value)
+  }
+})
+
+function saveText(text: string): void {
+  emit('changeText', {
+    text,
+    taskId: props.todoitem.id
+  })
+
+  // eslint-disable-next-line no-unused-expressions
+  textarea.value?.blur()
 }
 
 function changeOrder(direction: 'up' | 'down'): void {
@@ -116,7 +148,7 @@ function changeOrder(direction: 'up' | 'down'): void {
 .todo-item {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 20px 15px;
   background-color: $gray-000;
   border-bottom: 1px solid $gray-300;
@@ -140,12 +172,17 @@ function changeOrder(direction: 'up' | 'down'): void {
   }
 
   &__drag {
+    margin-top: 5.5px;
     margin-right: 10px;
     cursor: pointer;
   }
 
   &__text {
+    width: 100%;
+    margin-top: 3px;
     color: $gray-400;
+    outline: none;
+    border: none;
   }
 
   &__checkbox {

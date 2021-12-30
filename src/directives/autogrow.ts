@@ -3,17 +3,18 @@ import { Directive } from 'vue'
 export const autogrow: Directive<HTMLInputElement> = {
   mounted(el, binding) {
     if (binding.arg === 'horizontal') {
-      // @ts-ignore
-      setImmediate(() => {
+      setTimeout(() => {
         setWidth(el)
-      })
+      }, 0)
 
       el.addEventListener('input', widthHandler)
     } else {
       el.style.overflowY = 'hidden'
       el.style.resize = 'none'
 
-      setHeight(el)
+      setTimeout(() => {
+        setHeight(el)
+      }, 0)
       el.addEventListener('input', heightHandler)
     }
   },
@@ -30,15 +31,12 @@ export const autogrow: Directive<HTMLInputElement> = {
 function heightHandler(event: Event) {
   setHeight(event.currentTarget as HTMLInputElement)
 }
+
 function widthHandler(event: Event) {
   setWidth(event.currentTarget as HTMLInputElement)
 }
 
 function setHeight(el: HTMLInputElement): void {
-  if (el.value === '') {
-    return
-  }
-
   const initialHeight = el.style.height
 
   el.style.height = '0px'

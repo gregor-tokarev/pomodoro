@@ -3,7 +3,10 @@
     <Sortable class="todo__list" @dragEnd="dragEnd" handleSelector=".todo-item__drag">
       <li class="todo__item" v-for="task in tasks" :key="task.id">
         <div class="todo__item-overlay"></div>
-        <AppTodoItem is-draggable @delete="deleteTask" @changeOrder="changeOrder($event.taskId, $event.newOrder)"
+        <AppTodoItem is-draggable @delete="deleteTask"
+                     can-edit
+                     @changeText="changeText($event.taskId, $event.text)"
+                     @changeOrder="changeOrder($event.taskId, $event.newOrder)"
                      :todoitem="task"></AppTodoItem>
       </li>
     </Sortable>
@@ -98,6 +101,13 @@ function changeOrder(taskId: string, newOrder: number): void {
   store.dispatch('tasksModule/changeTaskOrder', {
     newOrder,
     taskId
+  })
+}
+
+function changeText(taskId: string, newText: string): void {
+  store.dispatch('tasksModule/editTask', {
+    id: taskId,
+    changes: { text: newText }
   })
 }
 

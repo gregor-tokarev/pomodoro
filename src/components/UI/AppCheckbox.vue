@@ -30,8 +30,8 @@ const emit = defineEmits<{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 33px;
-  height: 33px;
+  min-width: 33px;
+  min-height: 33px;
   cursor: pointer;
   border: 2px solid $gray-300;
   border-radius: 50%;

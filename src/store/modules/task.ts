@@ -70,6 +70,23 @@ const actions: ActionTree<TaskState, RootState> = {
       console.error(err)
     }
   },
+  async editTask({
+    commit,
+    getters
+  }, update: Update<Task>): Promise<Task> {
+    try {
+      commit('EDIT_TASK', update)
+      await firestore
+        .collection('tasks')
+        .doc(update.id)
+        .update(update.changes)
+
+      return getters.taskById(update.id)
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  },
   async deleteTask({ commit }, taskId: string): Promise<string> {
     try {
       commit('DELETE_TASK', taskId)
