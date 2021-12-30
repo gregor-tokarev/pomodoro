@@ -572,3 +572,56 @@ INFO: Detected non-HTTP/2 connection.
 [debug] [2021-12-30T06:45:43.891Z] Dec 30, 2021 9:45:43 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
 INFO: Detected non-HTTP/2 connection.
  {"metadata":{"emulator":{"name":"firestore"},"message":"Dec 30, 2021 9:45:43 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2021-12-30T06:46:29.891Z] Dec 30, 2021 9:46:29 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Dec 30, 2021 9:46:29 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2021-12-30T06:46:40.595Z] ----------------------------------------------------------------------
+[debug] [2021-12-30T06:46:40.597Z] Command:       /home/gregor/.nvm/versions/node/v14.18.2/bin/node /home/gregor/.nvm/versions/node/v14.18.2/bin/firebase emulators:export --force .firebase-emulator
+[debug] [2021-12-30T06:46:40.597Z] CLI Version:   10.0.1
+[debug] [2021-12-30T06:46:40.597Z] Platform:      linux
+[debug] [2021-12-30T06:46:40.597Z] Node Version:  v14.18.2
+[debug] [2021-12-30T06:46:40.597Z] Time:          Thu Dec 30 2021 09:46:40 GMT+0300 (Moscow Standard Time)
+[debug] [2021-12-30T06:46:40.598Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-12-30T06:46:40.657Z] >>> HTTP REQUEST GET http://localhost:4400/  
+ 
+[debug] [2021-12-30T06:46:40.672Z] <<< HTTP RESPONSE 200 {"x-powered-by":"Express","vary":"Origin","content-type":"application/json; charset=utf-8","content-length":"51","etag":"W/\"33-A9TG/TzORNHyLBb1JFKxXM8ZA3Y\"","date":"Thu, 30 Dec 2021 06:46:40 GMT","connection":"keep-alive","keep-alive":"timeout=5"}
+[info] i  Found running emulator hub for project pomodoro-3b7d3 at http://localhost:4400 
+[info] i  Exporting data to: /media/gregor/Новый том/work/PetProjects/pomodoro/.firebase-emulator 
+[debug] [2021-12-30T06:46:40.675Z] >>> HTTP REQUEST POST http://localhost:4400/_admin/export  
+ {"path":"/media/gregor/Новый том/work/PetProjects/pomodoro/.firebase-emulator"}
+[info] i  emulators: Received export request. Exporting data to /media/gregor/Новый том/work/PetProjects/pomodoro/.firebase-emulator. 
+[debug] [2021-12-30T06:46:40.681Z] >>> HTTP REQUEST POST http://localhost:8081/emulator/v1/projects/pomodoro-3b7d3:export  
+ {"database":"projects/pomodoro-3b7d3/databases/(default)","export_directory":"firebase-export-1640846800680PMTcmf","export_name":"firestore_export"}
+[debug] [2021-12-30T06:46:40.683Z] Dec 30, 2021 9:46:40 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Dec 30, 2021 9:46:40 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2021-12-30T06:46:40.708Z] <<< HTTP RESPONSE 200 {"content-type":"application/json","content-length":"4"}
+[debug] [2021-12-30T06:46:40.709Z] Exporting auth users in Project pomodoro-3b7d3 to firebase-export-1640846800680PMTcmf/auth_export/accounts.json
+[debug] [2021-12-30T06:46:40.713Z] Exporting project config in Project pomodoro-3b7d3 to firebase-export-1640846800680PMTcmf/auth_export/accounts.json
+[debug] [2021-12-30T06:46:40.716Z] >>> HTTP REQUEST POST http://localhost:9199/internal/export  
+ {"path":"firebase-export-1640846800680PMTcmf/storage_export"}
+[debug] [2021-12-30T06:46:40.723Z] <<< HTTP RESPONSE 200 {"x-powered-by":"Express","vary":"Origin","access-control-expose-headers":"content-type,x-firebase-storage-version,x-goog-upload-url,x-goog-upload-status,x-goog-upload-command,x-gupload-uploadid,x-goog-upload-header-content-length,x-goog-upload-header-content-type,x-goog-upload-protocol,x-goog-upload-status,x-goog-upload-chunk-granularity,x-goog-upload-control-url","content-type":"text/plain; charset=utf-8","content-length":"2","etag":"W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\"","date":"Thu, 30 Dec 2021 06:46:40 GMT","connection":"keep-alive","keep-alive":"timeout=5"}
+[debug] [2021-12-30T06:46:40.723Z] hubExport: swapping firebase-export-1640846800680PMTcmf with /media/gregor/Новый том/work/PetProjects/pomodoro/.firebase-emulator
+[info] ✔  emulators: Export complete. 
+[debug] [2021-12-30T06:46:40.752Z] <<< HTTP RESPONSE 200 {"x-powered-by":"Express","vary":"Origin","content-type":"application/json; charset=utf-8","content-length":"16","etag":"W/\"10-MxB4y4MLcx6QDsp8b8vgp7iFMFo\"","date":"Thu, 30 Dec 2021 06:46:40 GMT","connection":"keep-alive","keep-alive":"timeout=5"}
+[info] i  emulators: Received export request. Exporting data to /media/gregor/Новый том/work/PetProjects/pomodoro/.firebase-emulator. 
+[debug] [2021-12-30T06:47:13.243Z] >>> HTTP REQUEST POST http://localhost:8081/emulator/v1/projects/pomodoro-3b7d3:export  
+ {"database":"projects/pomodoro-3b7d3/databases/(default)","export_directory":"firebase-export-1640846833242XQ61Kd","export_name":"firestore_export"}
+[debug] [2021-12-30T06:47:13.245Z] Dec 30, 2021 9:47:13 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Dec 30, 2021 9:47:13 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2021-12-30T06:47:13.254Z] <<< HTTP RESPONSE 200 {"content-type":"application/json","content-length":"4"}
+[debug] [2021-12-30T06:47:13.254Z] Exporting auth users in Project pomodoro-3b7d3 to firebase-export-1640846833242XQ61Kd/auth_export/accounts.json
+[debug] [2021-12-30T06:47:13.258Z] Exporting project config in Project pomodoro-3b7d3 to firebase-export-1640846833242XQ61Kd/auth_export/accounts.json
+[debug] [2021-12-30T06:47:13.262Z] >>> HTTP REQUEST POST http://localhost:9199/internal/export  
+ {"path":"firebase-export-1640846833242XQ61Kd/storage_export"}
+[debug] [2021-12-30T06:47:13.266Z] <<< HTTP RESPONSE 200 {"x-powered-by":"Express","vary":"Origin","access-control-expose-headers":"content-type,x-firebase-storage-version,x-goog-upload-url,x-goog-upload-status,x-goog-upload-command,x-gupload-uploadid,x-goog-upload-header-content-length,x-goog-upload-header-content-type,x-goog-upload-protocol,x-goog-upload-status,x-goog-upload-chunk-granularity,x-goog-upload-control-url","content-type":"text/plain; charset=utf-8","content-length":"2","etag":"W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\"","date":"Thu, 30 Dec 2021 06:47:13 GMT","connection":"keep-alive","keep-alive":"timeout=5"}
+[debug] [2021-12-30T06:47:13.266Z] hubExport: swapping firebase-export-1640846833242XQ61Kd with /media/gregor/Новый том/work/PetProjects/pomodoro/.firebase-emulator
+[info] ✔  emulators: Export complete. 
+[debug] [2021-12-30T06:47:15.891Z] Dec 30, 2021 9:47:15 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Dec 30, 2021 9:47:15 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2021-12-30T06:48:01.891Z] Dec 30, 2021 9:48:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Dec 30, 2021 9:48:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
