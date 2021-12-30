@@ -54,12 +54,12 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    padding: 20px 30px;
     width: 700px;
-    transform: translate(-50%, -50%);
+    padding: 20px 30px;
     background-color: $gray-000;
     border-radius: 20px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 25%);
+    transform: translate(-50%, -50%);
   }
 
   &__title {
@@ -68,9 +68,9 @@
   }
 
   &__list {
-    overflow-y: auto;
-    margin-top: 30px;
     max-height: 430px;
+    margin-top: 30px;
+    overflow-y: auto;
   }
 
   &__group {

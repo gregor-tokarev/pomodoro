@@ -41,11 +41,11 @@ function addBreak(event: KeyboardEvent): void {
   padding: 15px 20px;
 
   &__field {
-    border: none;
-    color: inherit;
-    background-color: transparent;
-    resize: none;
     width: 100%;
+    color: inherit;
+    resize: none;
+    background-color: transparent;
+    border: none;
     outline: none;
 
     &::placeholder {

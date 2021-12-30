@@ -47,7 +47,6 @@ const props = defineProps<Props>()
         fill: $accent-main;
       }
     }
-
   }
 
   &__icon {

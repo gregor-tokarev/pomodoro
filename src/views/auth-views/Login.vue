@@ -72,12 +72,12 @@ async function signupEmail(): Promise<void> {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 35px 0 0 0;
     width: 160px;
     height: 160px;
-    border-radius: 20px;
-    border: 1px solid $gray-200;
+    padding: 35px 0 0;
     cursor: pointer;
+    border: 1px solid $gray-200;
+    border-radius: 20px;
 
     &:not(:last-child) {
       margin-right: 15px;

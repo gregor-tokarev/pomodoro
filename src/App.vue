@@ -44,5 +44,3 @@ router.beforeEach((to, from, next) => {
   }
 })
 </script>
-<style lang="scss">
-</style>

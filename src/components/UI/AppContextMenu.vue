@@ -94,8 +94,8 @@ function clickOutside(): void {
   min-width: 150px;
   padding: 10px;
   background-color: $gray-000;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 25%);
 
   :slotted(&__item) {
     display: flex;

@@ -46,6 +46,3 @@ import AppTimer from '@/components/UI/AppTimer.vue'
 const selectOptions = ref<string[]>(['some1', 'some2', 'some3'])
 const selectValue = ref<string>()
 </script>
-
-<style scoped lang="scss">
-</style>

@@ -3,9 +3,9 @@
 @import "uikit/blocks/base-field";
 
 * {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
 }
 
 ul {
@@ -25,17 +25,17 @@ fieldset {
 }
 
 ::selection {
-  background-color: $accent-main;
   color: $gray-000;
+  background-color: $accent-main;
 }
 
 ::-webkit-scrollbar {
-  background-color: transparent;
   width: 5px;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
+  width: 5px;
   background-color: $accent-main;
   border-radius: 5px;
-  width: 5px;
 }

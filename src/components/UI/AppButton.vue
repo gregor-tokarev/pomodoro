@@ -26,18 +26,18 @@ const props = withDefaults(defineProps<Props>(), {
 
 <style scoped lang="scss">
 .button {
-  cursor: pointer;
-  padding: 15px 35px;
   min-width: 150px;
-  border-radius: 10px;
-  transition: all 0.2s;
-  outline: none;
-  border: none;
+  padding: 15px 35px;
   line-height: 1;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.2s;
 
   &--common {
-    background-color: $accent-main;
     color: $gray-000;
+    background-color: $accent-main;
 
     &:hover {
       background-color: $accent-hover;
@@ -45,8 +45,8 @@ const props = withDefaults(defineProps<Props>(), {
   }
 
   &--disabled {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
 
     &:hover {
       background-color: $accent-main;
@@ -58,8 +58,8 @@ const props = withDefaults(defineProps<Props>(), {
     background-color: $accent-light;
 
     &:hover {
-      background-color: $accent-light;
       color: $accent-main;
+      background-color: $accent-light;
     }
   }
 

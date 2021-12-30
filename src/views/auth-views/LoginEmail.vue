@@ -113,8 +113,8 @@ async function submit(): Promise<void> {
   }
 
   &__label {
-    color: $gray-400;
     margin-bottom: 2px;
+    color: $gray-400;
 
     &--error {
       color: $system-error;

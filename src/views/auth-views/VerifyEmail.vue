@@ -24,8 +24,8 @@ const email = route.query.email as string
 <style scoped lang="scss">
 .verify-email {
   &__text {
-    margin-top: 40px;
     max-width: 635px;
+    margin-top: 40px;
     color: $gray-400;
   }
 }

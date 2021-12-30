@@ -117,8 +117,8 @@ function changeOrder(direction: 'up' | 'down'): void {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: $gray-000;
   padding: 20px 15px;
+  background-color: $gray-000;
   border-bottom: 1px solid $gray-300;
 
   &--inprogress {
@@ -135,13 +135,13 @@ function changeOrder(direction: 'up' | 'down'): void {
   }
 
   &.draggable-source--is-dragging {
-    border: 2px dashed $accent-main;
     background-color: $accent-light;
+    border: 2px dashed $accent-main;
   }
 
   &__drag {
-    cursor: pointer;
     margin-right: 10px;
+    cursor: pointer;
   }
 
   &__text {

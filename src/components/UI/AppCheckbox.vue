@@ -28,13 +28,13 @@ const emit = defineEmits<{
 <style scoped lang="scss">
 .checkbox {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: 33px;
   height: 33px;
-  border-radius: 50%;
-  border: 2px solid $gray-300;
   cursor: pointer;
+  border: 2px solid $gray-300;
+  border-radius: 50%;
   transition: all 0.2s;
 
   &:hover {

@@ -1,0 +1,20 @@
+{
+  "customSyntax": "postcss-html",
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recess-order"
+  ],
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "no-descending-specificity": null,
+    "selector-class-pattern": null,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["deep", "slotted"]
+      }
+    ]
+  }
+}

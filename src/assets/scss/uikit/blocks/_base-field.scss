@@ -3,10 +3,10 @@
 .base-field {
   display: flex;
   align-items: center;
+  color: $gray-400;
+  background-color: $gray-100;
   border: 1px solid transparent;
   border-radius: 20px;
-  background-color: $gray-100;
-  color: $gray-400;
   outline: none;
 
   &::placeholder {
@@ -14,7 +14,7 @@
   }
 
   &--error {
-    border-color: $system-error;
     color: $system-error;
+    border-color: $system-error;
   }
 }

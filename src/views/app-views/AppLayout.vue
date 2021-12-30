@@ -21,32 +21,32 @@ import LeftBar from '@/components/layout/LeftBar.vue'
 $page-padding-top: 30px;
 
 .app {
-  background-color: $bg;
+  min-height: 100vh;
   padding: $page-padding-top 0 0 0;
   overflow-y: hidden;
-  min-height: 100vh;
+  background-color: $bg;
 
   &__wrapper {
     display: flex;
-    margin: 0 auto;
     max-width: 1300px;
+    margin: 0 auto;
   }
 
   &__leftbar {
-    height: calc(100vh - #{$page-padding-top});
-    min-width: 310px;
     width: 23.5%;
+    min-width: 310px;
+    height: calc(100vh - #{$page-padding-top});
     margin-right: 1.5%;
   }
 
   &__body {
-    max-height: calc(100vh - #{$page-padding-top});
     width: 75%;
+    max-height: calc(100vh - #{$page-padding-top});
     padding: 30px 40px;
-    border-radius: 30px;
-    background-color: $gray-000;
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: $gray-000;
+    border-radius: 30px;
   }
 }
 

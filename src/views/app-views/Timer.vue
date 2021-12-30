@@ -23,7 +23,3 @@ function addTask(): void {
   store.dispatch('tasksModule/addTask')
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>

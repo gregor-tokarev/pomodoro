@@ -140,8 +140,8 @@ $padding-x: 15px;
     width: 30px;
     height: 30px;
     margin-right: 10px;
-    border-radius: 50%;
     background-color: $accent-main;
+    border-radius: 50%;
   }
 
   &__duration {

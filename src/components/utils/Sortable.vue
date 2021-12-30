@@ -44,7 +44,3 @@ onMounted(() => {
   sortable.on('sortable:start', (event: SortableStartEvent) => emit('dragStart', event))
 })
 </script>
-
-<style scoped lang="scss">
-
-</style>

@@ -32,7 +32,7 @@ const svg = require(`raw-loader!@/assets/icons/${props.iconName}.svg`)
   justify-content: center;
 
   :deep(path) {
-    fill: v-bind('props.color');
+    fill: v-bind("props.color");
   }
 }
 </style>

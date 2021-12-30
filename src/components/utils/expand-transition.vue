@@ -63,7 +63,3 @@ function afterLeave(el: HTMLElement) {
   el.style.display = 'none'
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>

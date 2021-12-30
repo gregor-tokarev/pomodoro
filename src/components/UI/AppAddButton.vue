@@ -35,13 +35,13 @@ import AppIcon from '@/components/UI/AppIcon.vue'
   }
 
   &__plus {
-    width: 32px;
-    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    width: 32px;
+    height: 32px;
     margin-right: 5px;
+    border-radius: 50%;
     transition: background-color 0.2s;
 
     :deep(path) {

@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, Ref, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 interface Props {
   time: string;
@@ -29,7 +29,12 @@ const liftHeight = computed<string>(() => {
   const timerHeight = timer.value.offsetHeight
 
   const availableLiftHeight = timerHeight - waveHeight
+  console.log(availableLiftHeight)
   return availableLiftHeight * (props.coveragePercent / 100) + 'px'
+})
+
+onMounted(() => {
+  console.log(liftHeight.value)
 })
 </script>
 
@@ -44,14 +49,14 @@ $wave-height: 50px;
   width: 400px;
   height: 400px;
   overflow: hidden;
-  border-radius: 50%;
   background-color: $gray-100;
+  border-radius: 50%;
 
   &__numbers {
     position: relative;
     z-index: 20;
-    mix-blend-mode: luminosity;
     color: $gray-400;
+    mix-blend-mode: luminosity;
   }
 
   &__waves {
@@ -59,7 +64,6 @@ $wave-height: 50px;
     right: 0;
     bottom: 0;
     left: 0;
-
   }
 
   &__lift {
@@ -67,25 +71,28 @@ $wave-height: 50px;
     right: 0;
     bottom: 0;
     left: 0;
-    content: '';
-    height: v-bind(liftHeight);
     display: block;
+    height: v-bind('liftHeight');
+    content: "";
     background-color: $accent-main;
   }
 
   &__wave {
     position: absolute;
-    bottom: v-bind(liftHeight);
-    background: url("~@/assets/images/wave1.svg") repeat-x bottom / 300px $wave-height;
     width: 3600px;
     height: $wave-height;
+    background: url("~@/assets/images/wave1.svg") repeat-x bottom / 300px $wave-height;
     animation: wave 14s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
 
     &:nth-child(2) {
       opacity: 0.2;
       //animation: wave 18s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
-      animation: wave 14s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.525s infinite, swell 5s ease -1.25s infinite;
+      animation: wave 14s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.525s infinite, swell 5s ease -1.25s infinite;
     }
+  }
+
+  &__wave {
+    bottom: v-bind('liftHeight');
   }
 }
 
@@ -100,9 +107,11 @@ $wave-height: 50px;
 }
 
 @keyframes swell {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(-10px);
   }
+
   50% {
     transform: translateY(2px);
   }

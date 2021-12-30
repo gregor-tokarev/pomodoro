@@ -53,16 +53,16 @@ const navItems: Nav[] = [
 
 <style scoped lang="scss">
 .leftbar {
+  padding: 35px 20px;
   background-color: $gray-000;
   border-radius: 30px;
-  padding: 35px 20px;
 
   &__logo {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: $gray-400;
     margin-bottom: 40px;
+    color: $gray-400;
   }
 }
 </style>
