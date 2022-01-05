@@ -31,9 +31,9 @@
       @keydown.enter.exact.prevent="saveText($event.currentTarget.value)"
     ></textarea>
 
-    <div v-if="time" class="hint-text todo-item__time">
+    <time v-if="time" class="hint-text todo-item__time">
       {{ time }}
-    </div>
+    </time>
 
     <AppContextMenu v-model="isContextmenu" container-selector=".app__body">
       <li @click="changeOrder('up')"
