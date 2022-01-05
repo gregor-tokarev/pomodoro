@@ -21,4 +21,8 @@ if (process.env.NODE_ENV === 'development') {
   storage.useEmulator('localhost', 9199)
   functions.useEmulator('localhost', 5001)
 }
-export { firestore, auth, storage, functions }
+
+const analytics = firebase.analytics()
+const remoteConfig = firebase.remoteConfig()
+
+export { firestore, auth, storage, functions, analytics, remoteConfig }

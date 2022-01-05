@@ -4,11 +4,17 @@ service cloud.firestore {
     match /users/{userId} {
       allow create: if true;
       allow update, read: if request.auth.uid == resource.id;
+
     }
 
     match /tasks/{taskId} {
-      allow create: if exists(request.auth.id);
+      allow create: if exists(/databases/$(database)/documents/users/$(request.auth.uid));
       allow read, update, delete: if request.auth.uid == resource.data.ownerId;
+    }
+
+    match /{path=**}/settings/{settingId} {
+      allow create: if request.auth.uid != null;
+      allow update, read: if request.auth.uid == resource.data.ownerId;
     }
   }
 }

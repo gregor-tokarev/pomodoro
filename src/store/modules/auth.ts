@@ -3,8 +3,10 @@ import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 import { RootState } from '@/store'
 import { auth, firestore } from '@/lib/firebase'
 import firebase from 'firebase/compat'
+import { nanoid } from 'nanoid'
+import { getUserSettings } from '../../../models/settings/get-user-settings.default'
 
-interface AuthState {
+export interface AuthState {
   user: User | null,
 }
 
@@ -29,7 +31,8 @@ const actions: ActionTree<AuthState, RootState> = {
     const userId = getters.userId
 
     try {
-      const document = await firestore.collection('users').doc(userId).get()
+      const userRef = firestore.collection('users').doc(userId)
+      const document = await userRef.get()
       if (!document.exists) {
         return
       }
@@ -54,7 +57,15 @@ const actions: ActionTree<AuthState, RootState> = {
       }
       localStorage.setItem('userId', userData.uid)
 
-      await firestore.collection('users').doc(userData.uid).set(user)
+      const userRef = firestore.collection('users').doc(userData.uid)
+      await userRef.set(user)
+
+      const settingsId = nanoid()
+      const userSettings = getUserSettings({
+        ownerId: userData.uid
+      })
+      await userRef.collection('settings').doc(settingsId).set(userSettings)
+
       commit('SET_USER', user)
       return user
     } catch (err) {

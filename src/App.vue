@@ -1,6 +1,7 @@
 <template>
   <router-view/>
 </template>
+
 <script setup lang="ts">
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
@@ -12,6 +13,7 @@ const router = useRouter()
 const route = useRoute()
 
 onMounted(async () => {
+  store.dispatch('settingsModule/fetchTimer')
   const isLogged = store.getters['authModule/userId']
 
   if (!isLogged) {
@@ -19,6 +21,7 @@ onMounted(async () => {
     return
   }
   await store.dispatch('authModule/fetchUserProfile')
+  await store.dispatch('settingsModule/fetchUser')
 
   if (isInAppRoute(route)) {
     const isAuthorized = store.getters['authModule/isAuthorized']

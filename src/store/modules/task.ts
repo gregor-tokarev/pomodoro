@@ -5,7 +5,7 @@ import { RootState } from '@/store'
 import { nanoid } from 'nanoid'
 import { firestore } from '@/lib/firebase'
 
-interface TaskState {
+export interface TaskState {
   tasks: Task[]
 }
 
@@ -167,11 +167,14 @@ const actions: ActionTree<TaskState, RootState> = {
   async fetchTasks({
     commit,
     rootGetters
-  }): Promise<Task[]> {
+  }, { limit }: { limit?: number } = {}): Promise<Task[]> {
     const userId = rootGetters['authModule/userId']
 
     try {
-      const query = firestore.collection('tasks').where('ownerId', '==', userId)
+      let query = firestore.collection('tasks').where('ownerId', '==', userId)
+      if (limit) {
+        query = query.limit(limit)
+      }
       const result = await query.get()
 
       const tasks = result.docs.map(task => ({
@@ -191,6 +194,9 @@ const actions: ActionTree<TaskState, RootState> = {
 const getters: GetterTree<TaskState, RootState> = {
   tasks(state): Task[] {
     return state.tasks.sort((prev, next) => prev.order - next.order)
+  },
+  tasksForTimer(state, getters): Task[] {
+    return getters.tasks.slice(0, 4)
   },
   tasksOrderInterval(state): (startOrder: number, stopOrder: number) => Task[] {
     return (startOrder, stopOrder) =>

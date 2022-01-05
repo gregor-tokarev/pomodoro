@@ -44,5 +44,8 @@
       "enabled": true,
       "port": 6060
     }
+  },
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
   }
 }
