@@ -86,6 +86,7 @@ $padding-x: 13px;
 
   &__options {
     position: absolute;
+    z-index: 3;
     top: calc(100% - 15px);
     width: 100%;
     padding: 20px 0;
