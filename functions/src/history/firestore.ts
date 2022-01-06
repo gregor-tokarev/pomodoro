@@ -6,6 +6,7 @@ import { createSecludedTask, removeSecludedTask } from '../secludedTask'
 export const createRecord = functions.firestore
   .document('history/{recordId}')
   .onCreate(async (snapshot) => {
+    // todo: setup seclusion dynamically by uncommented code below
     // const settingsRef = admin.firestore()
     //   .collectionGroup('settings')
     //   .where('ownerId', '==', snapshot.data().ownerId)
