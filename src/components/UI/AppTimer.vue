@@ -12,11 +12,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 interface Props {
   time: string;
-  coveragePercent: number
+  progressPercent: number
 }
 
 const props = defineProps<Props>()
@@ -29,7 +29,7 @@ const liftHeight = computed<string>(() => {
   const timerHeight = timer.value.offsetHeight
 
   const availableLiftHeight = timerHeight - waveHeight
-  return availableLiftHeight * (props.coveragePercent / 100) + 'px'
+  return availableLiftHeight * (props.progressPercent / 100) + 'px'
 })
 </script>
 
@@ -70,6 +70,7 @@ $wave-height: 50px;
     height: v-bind('liftHeight');
     content: "";
     background-color: $accent-main;
+    transition: height 0.2s;
   }
 
   &__wave {
@@ -88,6 +89,7 @@ $wave-height: 50px;
 
   &__wave {
     bottom: v-bind('liftHeight');
+    transition: bottom 0.2s;
   }
 }
 

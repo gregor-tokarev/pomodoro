@@ -15,6 +15,13 @@
 
 <script lang="ts" setup>
 import LeftBar from '@/components/layout/LeftBar.vue'
+import { onMounted } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore()
+onMounted(() => {
+  store.dispatch('timerModule/fetchRecords')
+})
 </script>
 
 <style scoped lang="scss">

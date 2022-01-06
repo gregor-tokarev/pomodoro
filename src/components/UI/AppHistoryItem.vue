@@ -31,7 +31,7 @@
 
 <script lang="ts" setup>
 import { nanoid } from 'nanoid'
-import { History } from '../../../models/history.model'
+import { HistoryRecord } from '../../../models/history-record.model'
 import { computed, ref } from 'vue'
 import dayjs from 'dayjs'
 import { diffDates } from '@/lib/diffDates'
@@ -40,7 +40,7 @@ import { Task } from '../../../models/task.model'
 import ExpandTransition from '@/components/utils/expand-transition.vue'
 
 interface Props {
-  history: History
+  history: HistoryRecord
 }
 
 const props = defineProps<Props>()

@@ -36,13 +36,13 @@ onMounted(async () => {
 router.beforeEach((to, from, next) => {
   if (isInAppRoute(to)) {
     const isAuthorized = store.getters['authModule/isAuthorized']
+    console.log(isAuthorized)
 
     if (!isAuthorized) {
       next({ name: 'auth-login' })
     } else {
       next()
     }
-  } else {
     next()
   }
 })

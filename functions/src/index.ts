@@ -9,3 +9,4 @@ admit.initializeApp()
 // })
 
 export * from './tasks'
+export * from './history'

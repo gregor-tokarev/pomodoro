@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import { authModule } from '@/store/modules/auth'
 import { tasksModule } from '@/store/modules/task'
 import { settingsModule } from '@/store/modules/settings'
+import { timerModule } from '@/store/modules/timer'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface RootState {
@@ -14,6 +15,7 @@ export default createStore({
   modules: {
     authModule,
     tasksModule,
-    settingsModule
+    settingsModule,
+    timerModule
   }
 })

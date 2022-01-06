@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions'
 import { Task } from '../../../models/task.model'
-import * as admit from 'firebase-admin'
+import * as admin from 'firebase-admin'
 
 export const deleteTask = functions.firestore
   .document('tasks/{taskId}')
@@ -11,7 +11,7 @@ export const deleteTask = functions.firestore
       order
     } = deletedTask
 
-    const moreOrderTasks = await admit.firestore()
+    const moreOrderTasks = await admin.firestore()
       .collection('tasks')
       .where('ownerId', '==', ownerId)
       .where('order', '>', order)

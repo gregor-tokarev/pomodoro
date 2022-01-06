@@ -1,20 +1,29 @@
 rules_version = '2';
 service cloud.firestore {
-  match /databases/{database}/documents {
-    match /users/{userId} {
-      allow create: if true;
-      allow update, read: if request.auth.uid == resource.id;
+    match /databases/{database}/documents {
+        match /users/{userId} {
+            allow create: if true;
+            allow update, read: if request.auth.uid == resource.id;
 
-    }
+        }
 
-    match /tasks/{taskId} {
-      allow create: if exists(/databases/$(database)/documents/users/$(request.auth.uid));
-      allow read, update, delete: if request.auth.uid == resource.data.ownerId;
-    }
+        function userExists(request) {
+            return exists(/databases/$(database)/documents/users/$(request.auth.uid));
+        }
 
-    match /{path=**}/settings/{settingId} {
-      allow create: if request.auth.uid != null;
-      allow update, read: if request.auth.uid == resource.data.ownerId;
+        match /tasks/{taskId} {
+            allow create: if userExists(request);
+            allow read, update, delete: if request.auth.uid == resource.data.ownerId;
+        }
+
+        match /history/{recordId} {
+            allow create: if userExists(request);
+            allow read, update, delete: if request.auth.uid == resource.data.ownerId;
+        }
+
+        match /{path=**}/settings/{settingId} {
+            allow create: if request.auth.uid != null;
+            allow update, read: if request.auth.uid == resource.data.ownerId;
+        }
     }
-  }
 }

@@ -1,8 +1,7 @@
-export interface History {
+export interface HistoryRecord {
   id: string
-  tasks: string[]
   timeStart: string
-  timeEnd: string
+  timeEnd?: string
   isBreak: boolean
   ownerId: string
 }
