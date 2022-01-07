@@ -35,7 +35,7 @@
       {{ time }}
     </time>
 
-    <AppContextMenu v-model="isContextmenu" container-selector=".app__body">
+    <AppContextMenu v-if="props.canEdit" v-model="isContextmenu" container-selector=".app__body">
       <li @click="changeOrder('up')"
           class="hint-text context-menu__item">
         <AppIcon :color="Colors.GRAY_300" icon-name="order-up"></AppIcon>
