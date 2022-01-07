@@ -23,6 +23,5 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const analytics = firebase.analytics()
-const remoteConfig = firebase.remoteConfig()
 
-export { firestore, auth, storage, functions, analytics, remoteConfig }
+export { firestore, auth, storage, functions, analytics }

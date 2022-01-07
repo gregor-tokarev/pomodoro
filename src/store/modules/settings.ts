@@ -2,7 +2,7 @@ import { UserSettings } from '../../../models/settings/user-settings.model'
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 import { RootState } from '@/store'
 import { TimerOptions } from '../../../models/settings/timer-options.model'
-import { firestore, remoteConfig } from '@/lib/firebase'
+import { firestore } from '@/lib/firebase'
 
 export interface SettingsState {
   userSettings: UserSettings | null,
@@ -11,31 +11,27 @@ export interface SettingsState {
 
 const state: SettingsState = {
   userSettings: null,
-  timerOptions: null
+  timerOptions: {
+    break: [
+      { time: 5 },
+      { time: 15 },
+      { time: 30 }
+    ],
+    work: [
+      { time: 25 },
+      { time: 45 },
+      { time: 60 }
+    ]
+  }
 }
 
 const mutations: MutationTree<SettingsState> = {
-  SET_TIMER_SETTINGS(state, settings: TimerOptions) {
-    state.timerOptions = settings
-  },
   SET_USER_SETTINGS(state, settings: UserSettings) {
     state.userSettings = settings
   }
 }
 
 const actions: ActionTree<SettingsState, RootState> = {
-  async fetchTimer({ commit }): Promise<TimerOptions> {
-    try {
-      await remoteConfig.fetchAndActivate()
-      const settings: TimerOptions = JSON.parse(remoteConfig.getString('timerOptions'))
-
-      commit('SET_TIMER_SETTINGS', settings)
-      return settings
-    } catch (err) {
-      console.error(err)
-      throw err
-    }
-  },
   async fetchUser({
     commit,
     rootGetters
@@ -54,7 +50,11 @@ const actions: ActionTree<SettingsState, RootState> = {
       throw err
     }
   },
-  async updateUserSettings({ commit, rootGetters, getters }, settings: Partial<UserSettings>): Promise<UserSettings> {
+  async updateUserSettings({
+    commit,
+    rootGetters,
+    getters
+  }, settings: Partial<UserSettings>): Promise<UserSettings> {
     try {
       const userId = rootGetters['authModule/userId']
       const settingsRef = firestore.collectionGroup('settings').where('ownerId', '==', userId)

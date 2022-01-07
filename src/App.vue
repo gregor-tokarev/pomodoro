@@ -13,7 +13,6 @@ const router = useRouter()
 const route = useRoute()
 
 onMounted(async () => {
-  store.dispatch('settingsModule/fetchTimer')
   const isLogged = store.getters['authModule/userId']
 
   if (!isLogged) {

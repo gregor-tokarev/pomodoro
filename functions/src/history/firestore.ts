@@ -23,6 +23,6 @@ export const createRecord = functions.firestore
 
 export const deleteRecord = functions.firestore
   .document('history/{recordId}')
-  .onDelete(async snapshot => {
+  .onDelete(snapshot => {
     return removeSecludedTask(snapshot.id)
   })

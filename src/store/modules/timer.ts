@@ -95,7 +95,7 @@ const actions: ActionTree<TimerState, RootState> = {
         endTime
       })
 
-      return getters.recordById(recordId)!
+      return getters.recordById(recordId)
     } catch (err) {
       console.error(err)
       throw err
@@ -137,6 +137,14 @@ const getters: GetterTree<TimerState, RootState> = {
     const start = getters.runningRecord.timeStart
 
     return now.diff(start, 'second')
+  },
+  timeOffsetFormatted(state, getters): string {
+    if (!getters['timerModule/runningRecord']) {
+      return ''
+    }
+
+    const time = secondsToTime(getters['timerModule/timeOffset'])
+    return getTimeStr(time)
   },
   timeOffsetString(state, getters): string | undefined {
     if (!getters.runningRecord) {

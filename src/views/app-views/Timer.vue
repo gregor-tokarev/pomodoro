@@ -10,11 +10,11 @@
         </div>
 
         <div class="timer__settings">
-          <div v-if="workOptions && workTime" class="timer__setting">
+          <div v-if="workTime" class="timer__setting">
             <h4 class="subtitle-text timer__label">Work duration</h4>
             <AppSelect :options="workOptions" v-model="workTime"></AppSelect>
           </div>
-          <div v-if="breakOptions && breakTime" class="timer__setting">
+          <div v-if="breakTime" class="timer__setting">
             <h4 class="subtitle-text timer__label">Break duration</h4>
             <AppSelect :options="breakOptions" v-model="breakTime"></AppSelect>
           </div>
@@ -42,8 +42,7 @@ import AppButton from '@/components/UI/AppButton.vue'
 import AppSelect from '@/components/UI/AppSelect.vue'
 import { TimerOptions } from '../../../models/settings/timer-options.model'
 import { HistoryRecord } from '../../../models/history-record.model'
-import { secondsToTime } from '@/lib/secondsToTime'
-import { getTimeStr } from '@/lib/getTimeStr'
+import { UserSettings } from '../../../models/settings/user-settings.model'
 
 const store = useStore()
 const tasks = computed<Task[]>(() => store.getters['tasksModule/tasksForTimer'])
@@ -55,15 +54,6 @@ onMounted(async () => {
 // Timer
 const currentTime = ref<string>('')
 const currentPercent = ref<number>(0)
-
-function timeStr() {
-  if (!store.getters['timerModule/runningRecord']) {
-    return ''
-  }
-
-  const time = secondsToTime(store.getters['timerModule/timeOffset'])
-  return getTimeStr(time)
-}
 
 function progressPercent() {
   const runningRecord: HistoryRecord = store.getters['timerModule/runningRecord']
@@ -79,25 +69,25 @@ function progressPercent() {
   return (passedTimeMinutes / totalTimeMinutes) * 100
 }
 
-function setTime() {
-  currentTime.value = timeStr()
+function updateTimer() {
+  currentTime.value = store.getters['timerModule/timeOffsetFormatted']
   currentPercent.value = progressPercent()
 }
 
-setInterval(setTime, 1000)
+setInterval(updateTimer, 1000)
 
 const isRunning = ref<boolean>(false)
 
 async function startTimer(): Promise<void> {
   await store.dispatch('timerModule/startTimer')
   isRunning.value = true
-  setTime()
+  updateTimer()
 }
 
 async function resetTimer(): Promise<void> {
   await store.dispatch('timerModule/resetTimer')
   isRunning.value = false
-  setTime()
+  updateTimer()
 }
 
 // ====
@@ -110,7 +100,8 @@ const breakOptions = computed<string[] | undefined>(
 )
 const workTime = computed<string>({
   get(): string {
-    return store.getters['settingsModule/userSettings'].workTime + ' min'
+    const userSettings = store.getters['settingsModule/userSettings'] as UserSettings
+    return userSettings ? userSettings.workTime + ' min' : ''
   },
   set(value): void {
     store.dispatch('settingsModule/updateUserSettings', {
@@ -120,7 +111,8 @@ const workTime = computed<string>({
 })
 const breakTime = computed<string>({
   get(): string {
-    return store.getters['settingsModule/userSettings'].breakTime + ' min'
+    const userSettings = store.getters['settingsModule/userSettings'] as UserSettings
+    return userSettings ? userSettings.breakTime + ' min' : ''
   },
   set(value): void {
     store.dispatch('settingsModule/updateUserSettings', {
