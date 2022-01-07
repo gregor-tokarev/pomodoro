@@ -47,6 +47,7 @@ import { required, email, minLength } from '@vuelidate/validators'
 import { auth } from '@/lib/firebase'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import firebase from 'firebase/compat'
 
 const store = useStore()
 const router = useRouter()
@@ -82,6 +83,7 @@ async function submit(): Promise<void> {
   }
 
   try {
+    await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     const { user } = await auth.signInWithEmailAndPassword(form.value.email, form.value.password)
 
     wrongEmailError.value = false

@@ -56,6 +56,7 @@ import { sameAsField } from '@/lib/custom-validarots'
 import { useRouter } from 'vue-router'
 import useVuelidate from '@vuelidate/core'
 import { User } from '../../../models/user.model'
+import firebase from 'firebase/compat'
 
 const store = useStore()
 const router = useRouter()
@@ -96,6 +97,7 @@ async function submit(): Promise<void> {
   }
 
   try {
+    await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     await auth.createUserWithEmailAndPassword(form.value.email, form.value.password)
 
     emailExistsError.value = false

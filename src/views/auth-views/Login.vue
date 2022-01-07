@@ -41,6 +41,7 @@ const store = useStore()
 async function signupOAuth(providerName: 'FacebookAuthProvider' | 'GoogleAuthProvider'): Promise<void> {
   const provider = new firebase.auth[providerName]()
   try {
+    await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     await auth.signInWithPopup(provider)
     await store.dispatch('authModule/createUser', auth.currentUser)
 
