@@ -4,7 +4,7 @@ import * as dayjs from 'dayjs'
 
 export const finishRecord = functions.https
   .onRequest(async (req, res) => {
-    const { recordId } = req.body
+    const { recordId } = req.query as {[key: string]: string}
 
     await admin.firestore()
       .collection('history')
