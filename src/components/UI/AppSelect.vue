@@ -1,7 +1,11 @@
 <template>
-  <div class="select" v-click-outside="onClickOutside">
+  <div
+    class="select"
+    :class="{'select--disabled': props.disabled}"
+    v-click-outside="onClickOutside"
+  >
     <div
-      @click.stop="isOpen = !isOpen"
+      @click.stop="toggleOpenState"
       class="base-field button-text select__body"
       :class="{'select__body--placeholder': !props.modelValue}"
     >
@@ -9,6 +13,7 @@
       <AppIcon
         class="select__arrow"
         :class="{'select__arrow--rotated': isOpen}"
+        :color="props.disabled ? Colors.SYSTEM_DISABLED : Colors.GRAY_400"
         icon-name="arrow-down"
       ></AppIcon>
     </div>
@@ -28,25 +33,42 @@
 </template>
 
 <script lang="ts" setup>
+import { Colors } from '@/lib/UI/colors'
 import AppIcon from '@/components/UI/AppIcon.vue'
-import { ref } from 'vue'
+import { ref, toRef, watch } from 'vue'
 
 interface Props {
-  placeholder: string,
-  modelValue: string,
-  options: string[],
+  placeholder: string
+  modelValue: string
+  options: string[]
   error: boolean
+  disabled: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   placeholder: '',
   modelValue: '',
-  error: false
+  error: false,
+  disabled: false
 })
 
 const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>()
 
 const isOpen = ref<boolean>(false)
+
+watch(toRef(props, 'disabled'), value => {
+  if (value) {
+    isOpen.value = false
+  }
+})
+
+function toggleOpenState(value: boolean): void {
+  if (props.disabled) {
+    return
+  }
+
+  isOpen.value = value ?? !isOpen.value
+}
 
 function onClickOutside() {
   isOpen.value = false
@@ -63,6 +85,13 @@ $padding-x: 13px;
 
 .select {
   position: relative;
+
+  &--disabled {
+    .select__body {
+      cursor: not-allowed;
+      color: $system-disabled;
+    }
+  }
 
   &__body {
     display: flex;
