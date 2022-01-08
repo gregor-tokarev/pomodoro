@@ -135,7 +135,14 @@ const actions: ActionTree<TimerState, RootState> = {
 
       const record = { id: recordId, ...historyRecord }
       commit('ADD_RECORD', record)
+
       dispatch('setupRunner')
+
+      await dispatch('tasksModule/editTask', {
+        id: rootGetters['tasksModule/runningTaskId'],
+        changes: { status: 'inprogress' }
+      }, { root: true })
+
       return record
     } catch (err) {
       console.error(err)
@@ -165,7 +172,8 @@ const actions: ActionTree<TimerState, RootState> = {
   async resetTimer({
     commit,
     getters,
-    dispatch
+    dispatch,
+    rootGetters
   }): Promise<void> {
     const runningRecord = getters.runningRecord
     if (!runningRecord) {
@@ -178,6 +186,12 @@ const actions: ActionTree<TimerState, RootState> = {
       await recordRef.delete()
 
       dispatch('clearRunner')
+
+      await dispatch('tasksModule/editTask', {
+        id: rootGetters['tasksModule/runningTaskId'],
+        changes: { status: 'todo' }
+      }, { root: true })
+
       commit('DELETE_RECORD', runningRecord.id)
     } catch (err) {
       console.error(err)

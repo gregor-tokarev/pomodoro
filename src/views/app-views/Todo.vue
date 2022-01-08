@@ -5,8 +5,10 @@
         <div class="todo__item-overlay"></div>
         <AppTodoItem is-draggable @delete="deleteTask"
                      can-edit
+                     :in-progress="store.getters['tasksModule/runningTaskId'] === task.id"
                      @changeText="changeText($event.taskId, $event.text)"
                      @changeOrder="changeOrder($event.taskId, $event.newOrder)"
+                     @changeStatus="changeStatus($event.taskId, $event.status)"
                      :todoitem="task"></AppTodoItem>
       </li>
     </Sortable>
@@ -38,7 +40,7 @@
 <script lang="ts" setup>
 import { computed, nextTick, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
-import { Task } from '../../../models/task.model'
+import { Task, taskStatus } from '../../../models/task.model'
 import AppTodoItem from '@/components/UI/AppTodoItem.vue'
 import AppAddButton from '@/components/UI/AppAddButton.vue'
 import AppTextarea from '@/components/UI/AppTextarea.vue'
@@ -59,6 +61,8 @@ const tasks = computed<Task[]>(() => {
   return store.getters['tasksModule/tasks']
 })
 
+// ====
+// Add task form
 const root = ref<HTMLElement>()
 const isAddForm = ref<boolean>(false)
 
@@ -79,6 +83,8 @@ const v = useVuelidate({
   text: { required }
 }, taskForm)
 
+// ====
+// task CRUD
 function addTask(): void {
   if (v.value.$invalid) {
     return
@@ -97,10 +103,10 @@ async function deleteTask(taskId: string): Promise<void> {
   await store.dispatch('tasksModule/deleteTask', taskId)
 }
 
-function changeOrder(taskId: string, newOrder: number): void {
-  store.dispatch('tasksModule/changeTaskOrder', {
-    newOrder,
-    taskId
+function changeStatus(taskId: string, status: taskStatus): void {
+  store.dispatch('tasksModule/editTask', {
+    id: taskId,
+    changes: { status }
   })
 }
 
@@ -111,9 +117,18 @@ function changeText(taskId: string, newText: string): void {
   })
 }
 
+// ====
+// task change order
 function dragEnd(event: SortableStopEvent): void {
   console.log(event.oldIndex, event.newIndex)
   // store.dispatch('tasksModule/changeTaskOrder', {newOrder: event.newIndex, taskId})
+}
+
+function changeOrder(taskId: string, newOrder: number): void {
+  store.dispatch('tasksModule/changeTaskOrder', {
+    newOrder,
+    taskId
+  })
 }
 </script>
 

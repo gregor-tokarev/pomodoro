@@ -207,7 +207,15 @@ const getters: GetterTree<TaskState, RootState> = {
   },
   getMaxOrderValue(state): number {
     const maxOrder = Math.max(...state.tasks.map(task => task.order))
-    return !state.tasks.length ? -1 : maxOrder
+    return state.tasks.length ? maxOrder : -1
+  },
+  runningTaskId(state, getters, _, rootGetters): string | null {
+    return rootGetters['timerModule/runningRecord']
+      ? getters
+        .tasks
+        .find((task: Task) => task.status !== 'completed')
+        ?.id
+      : null
   }
 }
 

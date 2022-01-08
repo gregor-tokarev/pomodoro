@@ -5,7 +5,7 @@
     v-click-outside="clickOutsideConfig"
     class="todo-item"
     :class="{
-      'todo-item--inprogress': props.todoitem.status === 'inprogress'
+      'todo-item--inprogress': props.inProgress
     }"
   >
     <AppIcon
@@ -18,7 +18,7 @@
 
     <AppCheckbox
       class="todo-item__checkbox"
-      :modelValue="props.todoitem.status === 'completed'"
+      v-model="isCompleted"
     ></AppCheckbox>
 
     <textarea
@@ -57,7 +57,7 @@
 <script lang="ts" setup>
 import { Colors } from '@/lib/UI/colors'
 import AppCheckbox from '@/components/UI/AppCheckbox.vue'
-import { Task } from 'models/task.model'
+import { Task, taskStatus } from 'models/task.model'
 import { computed, ref } from 'vue'
 import { diffDates } from '@/lib/diffDates'
 import { secondsToTime } from '@/lib/secondsToTime'
@@ -71,21 +71,25 @@ interface Props {
   todoitem: Task
   isDraggable: boolean
   canEdit: boolean
+  inProgress: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   todoitem: undefined,
   isDraggable: false,
-  canEdit: false
+  canEdit: false,
+  inProgress: false
 })
 const emit = defineEmits<{
   (e: 'delete', value: string): void
   (e: 'changeOrder', value: { taskId: string, newOrder: number }): void
   (e: 'changeText', value: { taskId: string, text: string }): void
+  (e: 'changeStatus', value: { taskId: string, status: taskStatus }): void
 }>()
 
+// ====
+// time
 const root = ref<HTMLElement>()
-
 dayjs.extend(RelativeTime)
 const currentTime = ref<Dayjs>(dayjs())
 
@@ -94,15 +98,6 @@ if (props.todoitem.timeStart) {
     currentTime.value = dayjs()
   }, 1000)
 }
-
-const isContextmenu = ref<boolean>(false)
-const clickOutsideConfig = {
-  handler() {
-    isContextmenu.value = false
-  },
-  events: ['click', 'contextmenu']
-}
-
 const time = computed<string | undefined>(() => {
   const timeEnd = props.todoitem.timeEnd ?? currentTime.value.format()
   if (!props.todoitem.timeStart) {
@@ -114,6 +109,27 @@ const time = computed<string | undefined>(() => {
   return getTimeStr(res)
 })
 
+// ====
+// context menu
+const isContextmenu = ref<boolean>(false)
+const clickOutsideConfig = {
+  handler() {
+    isContextmenu.value = false
+  },
+  events: ['click', 'contextmenu']
+}
+
+function changeOrder(direction: 'up' | 'down'): void {
+  emit('changeOrder', {
+    taskId: props.todoitem.id,
+    newOrder: direction === 'down' ? props.todoitem.order + 1 : props.todoitem.order - 1
+  })
+
+  isContextmenu.value = false
+}
+
+// ====
+// text
 const textarea = computed<HTMLTextAreaElement | null | undefined>(() => root.value?.querySelector('textarea'))
 const text = computed<string>({
   get(): string {
@@ -134,14 +150,20 @@ function saveText(text: string): void {
   textarea.value?.blur()
 }
 
-function changeOrder(direction: 'up' | 'down'): void {
-  emit('changeOrder', {
-    taskId: props.todoitem.id,
-    newOrder: direction === 'down' ? props.todoitem.order + 1 : props.todoitem.order - 1
-  })
+// ====
+// status
+const isCompleted = computed<boolean>({
+  get(): boolean {
+    return props.todoitem.status === 'completed'
+  },
+  set(value: boolean): void {
+    const status = value ? 'completed' : 'todo'
 
-  isContextmenu.value = false
-}
+    if (props.inProgress || status === 'todo') {
+      emit('changeStatus', { taskId: props.todoitem.id, status })
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -159,6 +181,10 @@ function changeOrder(direction: 'up' | 'down'): void {
 
     .todo-item__time {
       color: $accent-main;
+    }
+
+    .todo-item__text {
+      background-color: $accent-light;
     }
 
     :deep(.checkbox) {
