@@ -19,8 +19,12 @@ import { onMounted } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
-onMounted(() => {
-  store.dispatch('timerModule/fetchRecords')
+onMounted(async () => {
+  await store.dispatch('timerModule/fetchRecords')
+
+  if (store.getters['timerModule/runningRecord']) {
+    store.dispatch('timerModule/setupRunner')
+  }
 })
 </script>
 
