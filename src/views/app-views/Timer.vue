@@ -5,18 +5,18 @@
         <AppTimer :progress-percent="currentPercent" :time="currentTime"></AppTimer>
 
         <div class="timer__actions">
-          <AppButton @click="startTimer" class="timer__start timer__button">Start</AppButton>
+          <AppButton @click="startTimer" :disabled="isRunning" class="timer__start timer__button">Start</AppButton>
           <AppButton @click="resetTimer" style-type="light" class="timer__button">Reset</AppButton>
         </div>
 
         <div class="timer__settings">
           <div v-if="workTime" class="timer__setting">
             <h4 class="subtitle-text timer__label">Work duration</h4>
-            <AppSelect :options="workOptions" v-model="workTime"></AppSelect>
+            <AppSelect :disabled="isRunning" :options="workOptions" v-model="workTime"></AppSelect>
           </div>
           <div v-if="breakTime" class="timer__setting">
             <h4 class="subtitle-text timer__label">Break duration</h4>
-            <AppSelect :options="breakOptions" v-model="breakTime"></AppSelect>
+            <AppSelect :disabled="isRunning" :options="breakOptions" v-model="breakTime"></AppSelect>
           </div>
         </div>
       </div>
