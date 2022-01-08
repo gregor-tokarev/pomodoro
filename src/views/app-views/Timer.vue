@@ -5,18 +5,22 @@
         <AppTimer :progress-percent="currentPercent" :time="currentTime"></AppTimer>
 
         <div class="timer__actions">
-          <AppButton @click="startTimer" :disabled="isRunning" class="timer__start timer__button">Start</AppButton>
+          <AppButton @click="startTimer" :disabled="store.getters['timerModule/isRunning']"
+                     class="timer__start timer__button">Start
+          </AppButton>
           <AppButton @click="resetTimer" style-type="light" class="timer__button">Reset</AppButton>
         </div>
 
         <div class="timer__settings">
           <div v-if="workTime" class="timer__setting">
             <h4 class="subtitle-text timer__label">Work duration</h4>
-            <AppSelect :disabled="isRunning" :options="workOptions" v-model="workTime"></AppSelect>
+            <AppSelect :disabled="store.getters['timerModule/isRunning']" :options="workOptions"
+                       v-model="workTime"></AppSelect>
           </div>
           <div v-if="breakTime" class="timer__setting">
             <h4 class="subtitle-text timer__label">Break duration</h4>
-            <AppSelect :disabled="isRunning" :options="breakOptions" v-model="breakTime"></AppSelect>
+            <AppSelect :disabled="store.getters['timerModule/isRunning']" :options="breakOptions"
+                       v-model="breakTime"></AppSelect>
           </div>
         </div>
       </div>
@@ -25,6 +29,7 @@
         <AppTodoItem
           v-for="task in tasks"
           :key="task.id"
+          :in-progress="store.getters['tasksModule/runningTaskId'] === task.id"
           :todoitem="task"
         ></AppTodoItem>
       </div>
@@ -55,6 +60,10 @@ const currentTime = computed<string>(() => store.getters['timerModule/timeFormat
 const currentPercent = computed<number>(() => store.getters['timerModule/completionPercent'])
 
 const isRunning = ref<boolean>(false)
+if (store.getters['timerModule/runningRecord']) {
+  isRunning.value = true
+}
+
 async function startTimer(): Promise<void> {
   await store.dispatch('timerModule/startTimer')
   isRunning.value = true

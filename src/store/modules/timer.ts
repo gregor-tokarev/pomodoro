@@ -206,6 +206,9 @@ const getters: GetterTree<TimerState, RootState> = {
   runningRecord(state): HistoryRecord | undefined {
     return state.records.find(record => record.timeStart && !record.timeEnd)
   },
+  isRunning(state, getters): boolean {
+    return !!getters.runningRecord
+  },
   timeInSeconds(state, getters): number | undefined {
     if (!getters.runningRecord) {
       return
