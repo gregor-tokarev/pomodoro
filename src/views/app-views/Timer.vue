@@ -41,7 +41,6 @@ import { Task } from '../../../models/task.model'
 import AppButton from '@/components/UI/AppButton.vue'
 import AppSelect from '@/components/UI/AppSelect.vue'
 import { TimerOptions } from '../../../models/settings/timer-options.model'
-import { HistoryRecord } from '../../../models/history-record.model'
 import { UserSettings } from '../../../models/settings/user-settings.model'
 
 const store = useStore()
@@ -52,42 +51,18 @@ onMounted(async () => {
 
 // ====
 // Timer
-const currentTime = ref<string>('')
-const currentPercent = ref<number>(0)
-
-function progressPercent() {
-  const runningRecord: HistoryRecord = store.getters['timerModule/runningRecord']
-  if (!runningRecord) {
-    return 0
-  }
-
-  const totalTimeMinutes: number = runningRecord.isBreak
-    ? store.getters['settingsModule/userSettings'].breakTime
-    : store.getters['settingsModule/userSettings'].workTime
-
-  const passedTimeMinutes: number = Math.floor(store.getters['timerModule/timeOffset'] / 60)
-  return (passedTimeMinutes / totalTimeMinutes) * 100
-}
-
-function updateTimer() {
-  currentTime.value = store.getters['timerModule/timeOffsetFormatted']
-  currentPercent.value = progressPercent()
-}
-
-setInterval(updateTimer, 1000)
+const currentTime = computed<string>(() => store.getters['timerModule/timeFormatted'])
+const currentPercent = computed<number>(() => store.getters['timerModule/completionPercent'])
 
 const isRunning = ref<boolean>(false)
-
 async function startTimer(): Promise<void> {
   await store.dispatch('timerModule/startTimer')
   isRunning.value = true
-  updateTimer()
 }
 
 async function resetTimer(): Promise<void> {
   await store.dispatch('timerModule/resetTimer')
   isRunning.value = false
-  updateTimer()
 }
 
 // ====

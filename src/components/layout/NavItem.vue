@@ -47,6 +47,12 @@ const props = defineProps<Props>()
         fill: $accent-main;
       }
     }
+
+    .nav-item__right {
+      :slotted(*) {
+        color: $accent-main;
+      }
+    }
   }
 
   &__icon {
@@ -59,6 +65,10 @@ const props = defineProps<Props>()
 
   &__right {
     margin-left: auto;
+
+    :slotted(*) {
+      color: $gray-400;
+    }
   }
 }
 </style>

@@ -8,11 +8,17 @@ import { secondsToTime } from '@/lib/secondsToTime'
 import { getTimeStr } from '@/lib/getTimeStr'
 
 export interface TimerState {
-  records: HistoryRecord[]
+  records: HistoryRecord[],
+  timeFormatted: string,
+  completionPercent: number,
+  runner: (ReturnType<typeof setInterval>) | null
 }
 
 const state: TimerState = {
-  records: []
+  records: [],
+  timeFormatted: '',
+  completionPercent: 0,
+  runner: null
 }
 
 const mutations: MutationTree<TimerState> = {
@@ -34,6 +40,21 @@ const mutations: MutationTree<TimerState> = {
   DELETE_RECORD(state, recordId) {
     const recordIndex = state.records.findIndex(record => record.id === recordId)
     state.records.splice(recordIndex, 1)
+  },
+  CREATE_RUNNER(state, runner: ReturnType<typeof setInterval>) {
+    state.runner = runner
+  },
+  CLEAR_RUNNER(state) {
+    if (state.runner) {
+      clearInterval(state.runner)
+      state.runner = null
+    }
+  },
+  UPDATE_COMPLETION_PERCENT(state, percent: number) {
+    state.completionPercent = percent
+  },
+  UPDATE_TIME_FORMATTED(state, time: string) {
+    state.timeFormatted = time
   }
 }
 
@@ -59,9 +80,48 @@ const actions: ActionTree<TimerState, RootState> = {
       throw err
     }
   },
+  setupRunner({
+    commit,
+    getters,
+    rootGetters,
+    state
+  }, { time } = { time: 1000 }) {
+    if (state.runner) {
+      return
+    }
+
+    const runner = setInterval(() => {
+      if (!getters.runningRecord) {
+        return ''
+      }
+
+      const time = secondsToTime(getters.timeInSeconds)
+      commit('UPDATE_TIME_FORMATTED', getTimeStr(time))
+
+      const runningRecord: HistoryRecord = getters.runningRecord
+      if (!runningRecord) {
+        return
+      }
+
+      const totalTimeMinutes: number = runningRecord.isBreak
+        ? rootGetters['settingsModule/userSettings'].breakTime * 60
+        : rootGetters['settingsModule/userSettings'].workTime * 60
+
+      const passedTimeMinutes: number = Math.floor(getters.timeInSeconds)
+      commit('UPDATE_COMPLETION_PERCENT', (passedTimeMinutes / totalTimeMinutes) * 100)
+    }, time)
+
+    commit('CREATE_RUNNER', runner)
+  },
+  clearRunner({ commit }) {
+    commit('CLEAR_RUNNER')
+    commit('UPDATE_TIME_FORMATTED', '')
+    commit('UPDATE_COMPLETION_PERCENT', 0)
+  },
   async startTimer({
     commit,
-    rootGetters
+    rootGetters,
+    dispatch
   }): Promise<HistoryRecord> {
     try {
       const recordId = nanoid()
@@ -75,6 +135,7 @@ const actions: ActionTree<TimerState, RootState> = {
 
       const record = { id: recordId, ...historyRecord }
       commit('ADD_RECORD', record)
+      dispatch('setupRunner')
       return record
     } catch (err) {
       console.error(err)
@@ -87,12 +148,12 @@ const actions: ActionTree<TimerState, RootState> = {
   }, recordId: string): Promise<HistoryRecord> {
     try {
       const recordRef = firestore.collection('history').doc(recordId)
-      const endTime = dayjs().format()
+      const timeEnd = dayjs().format()
 
-      await recordRef.update({ timeEnd: endTime })
+      await recordRef.update({ timeEnd: timeEnd })
       commit('FINISH_RECORD', {
         recordId,
-        endTime
+        timeEnd
       })
 
       return getters.recordById(recordId)
@@ -103,7 +164,8 @@ const actions: ActionTree<TimerState, RootState> = {
   },
   async resetTimer({
     commit,
-    getters
+    getters,
+    dispatch
   }): Promise<void> {
     const runningRecord = getters.runningRecord
     if (!runningRecord) {
@@ -114,6 +176,8 @@ const actions: ActionTree<TimerState, RootState> = {
       const recordRef = firestore.collection('history').doc(runningRecord.id)
 
       await recordRef.delete()
+
+      dispatch('clearRunner')
       commit('DELETE_RECORD', runningRecord.id)
     } catch (err) {
       console.error(err)
@@ -128,7 +192,7 @@ const getters: GetterTree<TimerState, RootState> = {
   runningRecord(state): HistoryRecord | undefined {
     return state.records.find(record => record.timeStart && !record.timeEnd)
   },
-  timeOffset(state, getters): number | undefined {
+  timeInSeconds(state, getters): number | undefined {
     if (!getters.runningRecord) {
       return
     }
@@ -138,21 +202,11 @@ const getters: GetterTree<TimerState, RootState> = {
 
     return now.diff(start, 'second')
   },
-  timeOffsetFormatted(state, getters): string {
-    if (!getters['timerModule/runningRecord']) {
-      return ''
-    }
-
-    const time = secondsToTime(getters['timerModule/timeOffset'])
-    return getTimeStr(time)
+  timeFormatted(state): string {
+    return state.timeFormatted
   },
-  timeOffsetString(state, getters): string | undefined {
-    if (!getters.runningRecord) {
-      return
-    }
-
-    const time = secondsToTime(getters.timeOffset)
-    return getTimeStr(time)
+  completionPercent(state): number {
+    return state.completionPercent
   }
 }
 

@@ -11,7 +11,14 @@
 
     <nav class="leftbar__nav">
       <router-link v-for="(item, index) in navItems" :to="item.path" :key="index">
-        <NavItem :is-active="deepPathCheck(route, item.path)" :nav-item="item"></NavItem>
+        <NavItem :is-active="deepPathCheck(route, item.path)" :nav-item="item">
+          <template #right>
+            <span v-if="index === 0 && currentTime"
+                  class="basic-text leftbar__timer">
+              {{ currentTime }}
+            </span>
+          </template>
+        </NavItem>
       </router-link>
     </nav>
   </div>
@@ -23,8 +30,11 @@ import { deepPathCheck } from '@/lib/routeChecks'
 import { Nav } from '../../../models/nav-item.model'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 
 const { t } = useI18n()
+const store = useStore()
 const route = useRoute()
 
 const navItems: Nav[] = [
@@ -49,6 +59,8 @@ const navItems: Nav[] = [
     path: '/app/settings'
   }
 ]
+
+const currentTime = computed<string>(() => store.getters['timerModule/timeFormatted'])
 </script>
 
 <style scoped lang="scss">
