@@ -50,6 +50,7 @@ import { useI18n } from 'vue-i18n'
 import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import Sortable from '@/components/utils/Sortable.vue'
+import dayjs from 'dayjs'
 
 const { t } = useI18n()
 const store = useStore()
@@ -93,7 +94,11 @@ function addTask(): void {
   store.dispatch('tasksModule/addTask', taskForm.value)
   taskForm.value.text = ''
 
-  const parent = root.value!.parentElement!
+  if (!root.value || !root.value.parentElement) {
+    return
+  }
+
+  const parent = root.value.parentElement
   if (parent.clientHeight < parent.scrollHeight) {
     parent.scrollTo(0, 1000000)
   }
@@ -104,9 +109,16 @@ async function deleteTask(taskId: string): Promise<void> {
 }
 
 function changeStatus(taskId: string, status: taskStatus): void {
+  const changes: Partial<Task> = {
+    status
+  }
+  if (status === 'completed') {
+    changes.timeCompleted = dayjs().utc().format()
+  }
+
   store.dispatch('tasksModule/editTask', {
     id: taskId,
-    changes: { status }
+    changes
   })
 }
 

@@ -11,7 +11,7 @@
     <AppIcon
       v-if="props.isDraggable"
       @mousedown="isContextmenu = false"
-      :color="Colors.GRAY_200"
+      :color="props.inProgress ? Colors.ACCENT_MAIN : Colors.GRAY_200"
       icon-name="drag-dots"
       class="todo-item__drag"
     ></AppIcon>
@@ -31,7 +31,7 @@
       @keydown.enter.exact.prevent="saveText($event.currentTarget.value)"
     ></textarea>
 
-    <time v-if="time" class="hint-text todo-item__time">
+    <time v-if="props.todoitem.status === 'completed'" class="hint-text todo-item__time">
       {{ time }}
     </time>
 
@@ -59,11 +59,7 @@ import { Colors } from '@/lib/UI/colors'
 import AppCheckbox from '@/components/UI/AppCheckbox.vue'
 import { Task, taskStatus } from 'models/task.model'
 import { computed, ref } from 'vue'
-import { diffDates } from '@/lib/diffDates'
-import { secondsToTime } from '@/lib/secondsToTime'
-import { getTimeStr } from '@/lib/getTimeStr'
-import RelativeTime from 'dayjs/plugin/relativeTime'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import AppIcon from '@/components/UI/AppIcon.vue'
 import AppContextMenu from '@/components/UI/AppContextMenu.vue'
 
@@ -87,26 +83,12 @@ const emit = defineEmits<{
   (e: 'changeStatus', value: { taskId: string, status: taskStatus }): void
 }>()
 
+const root = ref<HTMLElement>()
+
 // ====
 // time
-const root = ref<HTMLElement>()
-dayjs.extend(RelativeTime)
-const currentTime = ref<Dayjs>(dayjs())
-
-if (props.todoitem.timeStart) {
-  setInterval(() => {
-    currentTime.value = dayjs()
-  }, 1000)
-}
-const time = computed<string | undefined>(() => {
-  const timeEnd = props.todoitem.timeEnd ?? currentTime.value.format()
-  if (!props.todoitem.timeStart) {
-    return
-  }
-  const diff = diffDates(props.todoitem.timeStart, timeEnd, 'second')
-
-  const res = secondsToTime(diff)
-  return getTimeStr(res)
+const time = computed<string>(() => {
+  return dayjs(props.todoitem.timeCompleted).format('hh:mm')
 })
 
 // ====
@@ -160,7 +142,10 @@ const isCompleted = computed<boolean>({
     const status = value ? 'completed' : 'todo'
 
     if (props.inProgress || status === 'todo') {
-      emit('changeStatus', { taskId: props.todoitem.id, status })
+      emit('changeStatus', {
+        taskId: props.todoitem.id,
+        status
+      })
     }
   }
 })
