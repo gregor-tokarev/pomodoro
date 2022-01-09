@@ -1,26 +1,37 @@
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 import { RootState } from '@/store'
 import { HistoryRecord } from '../../../models/history-record.model'
+import utc from 'dayjs/plugin/utc'
 import { nanoid } from 'nanoid'
 import dayjs from 'dayjs'
 import { firestore } from '@/lib/firebase'
 import { secondsToTime } from '@/lib/secondsToTime'
 import { getTimeStr } from '@/lib/getTimeStr'
+import firebase from 'firebase/compat'
+
+dayjs.extend(utc)
 
 export interface TimerState {
-  records: HistoryRecord[],
-  timeFormatted: string,
-  completionPercent: number,
+  records: HistoryRecord[]
+  timeFormatted: string
+  completionPercent: number
   runner: (ReturnType<typeof setInterval>) | null
+
+  // @ts-ignore
+  recordListener: ReturnType<firebase.firestore.DocumentReference.onSnapshop> | null
 }
 
 const state: TimerState = {
   records: [],
   timeFormatted: '',
   completionPercent: 0,
-  runner: null
+  runner: null,
+
+  recordListener: null
 }
 
+// @ts-ignore
+// @ts-ignore
 const mutations: MutationTree<TimerState> = {
   ADD_RECORD(state, record: HistoryRecord) {
     state.records.push(record)
@@ -30,17 +41,18 @@ const mutations: MutationTree<TimerState> = {
   },
   FINISH_RECORD(state, {
     recordId,
-    endTime
-  }: { recordId: string, endTime: string }) {
+    timeEnd
+  }: { recordId: string, timeEnd: string }) {
     const record = state.records.find(record => record.id === recordId)
     if (record) {
-      record.timeEnd = endTime
+      record.timeEnd = timeEnd
     }
   },
   DELETE_RECORD(state, recordId) {
     const recordIndex = state.records.findIndex(record => record.id === recordId)
     state.records.splice(recordIndex, 1)
   },
+
   CREATE_RUNNER(state, runner: ReturnType<typeof setInterval>) {
     state.runner = runner
   },
@@ -50,11 +62,25 @@ const mutations: MutationTree<TimerState> = {
       state.runner = null
     }
   },
+
   UPDATE_COMPLETION_PERCENT(state, percent: number) {
     state.completionPercent = percent
   },
   UPDATE_TIME_FORMATTED(state, time: string) {
     state.timeFormatted = time
+  },
+
+  // @ts-ignore
+  SET_RECORD_LISTENER(state, listener: ReturnType<firebase.firestore.DocumentReference.onSnapshop>) {
+    state.recordListener = listener
+  },
+  CLEAR_RECORD_LISTENER(state) {
+    if (!state.recordListener) {
+      return
+    }
+
+    state.recordListener()
+    state.recordListener = null
   }
 }
 
@@ -84,6 +110,7 @@ const actions: ActionTree<TimerState, RootState> = {
     commit,
     getters,
     rootGetters,
+    dispatch,
     state
   }, { time } = { time: 1000 }) {
     if (state.runner) {
@@ -110,8 +137,19 @@ const actions: ActionTree<TimerState, RootState> = {
       const passedTimeMinutes: number = Math.floor(getters.timeInSeconds)
       commit('UPDATE_COMPLETION_PERCENT', (passedTimeMinutes / totalTimeMinutes) * 100)
     }, time)
-
     commit('CREATE_RUNNER', runner)
+
+    const listener = firestore
+      .collection('history')
+      .doc(getters.runningRecord.id)
+      .onSnapshot(snapshot => {
+        const record = snapshot.data() as HistoryRecord
+
+        if (record.timeEnd) {
+          dispatch('finishTimer')
+        }
+      })
+    commit('SET_RECORD_LISTENER', listener)
   },
   clearRunner({ commit }) {
     commit('CLEAR_RUNNER')
@@ -128,7 +166,7 @@ const actions: ActionTree<TimerState, RootState> = {
       const historyRecord: Omit<HistoryRecord, 'id' | 'timeEnd'> = {
         isBreak: false,
         ownerId: rootGetters['authModule/userId'],
-        timeStart: dayjs().format()
+        timeStart: dayjs().utc().format()
       }
 
       await firestore.collection('history').doc(recordId).set(historyRecord)
@@ -151,19 +189,19 @@ const actions: ActionTree<TimerState, RootState> = {
   },
   async finishTimer({
     commit,
-    getters
-  }, recordId: string): Promise<HistoryRecord> {
+    getters,
+    dispatch
+  }): Promise<HistoryRecord> {
     try {
-      const recordRef = firestore.collection('history').doc(recordId)
-      const timeEnd = dayjs().format()
+      const timeEnd = dayjs().utc().format()
 
-      await recordRef.update({ timeEnd: timeEnd })
       commit('FINISH_RECORD', {
-        recordId,
+        recordId: getters.runningRecord.id,
         timeEnd
       })
+      dispatch('clearRunner')
 
-      return getters.recordById(recordId)
+      return getters.runningRecord
     } catch (err) {
       console.error(err)
       throw err
@@ -179,10 +217,10 @@ const actions: ActionTree<TimerState, RootState> = {
     if (!runningRecord) {
       throw new Error('Timer is not running')
     }
+    commit('CLEAR_RECORD_LISTENER')
 
     try {
       const recordRef = firestore.collection('history').doc(runningRecord.id)
-
       await recordRef.delete()
 
       dispatch('clearRunner')
@@ -191,7 +229,6 @@ const actions: ActionTree<TimerState, RootState> = {
         id: rootGetters['tasksModule/runningTaskId'],
         changes: { status: 'todo' }
       }, { root: true })
-
       commit('DELETE_RECORD', runningRecord.id)
     } catch (err) {
       console.error(err)

@@ -5,7 +5,6 @@ export interface Task {
   status: taskStatus
   text: string
   order: number
-  timeStart?: string
-  timeEnd?: string
   ownerId: string
+  timeCompleted?: string
 }

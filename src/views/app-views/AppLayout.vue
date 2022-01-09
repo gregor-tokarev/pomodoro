@@ -15,16 +15,22 @@
 
 <script lang="ts" setup>
 import LeftBar from '@/components/layout/LeftBar.vue'
-import { onMounted } from 'vue'
+import { onBeforeUnmount, onMounted } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
 onMounted(async () => {
   await store.dispatch('timerModule/fetchRecords')
 
-  if (store.getters['timerModule/runningRecord']) {
-    store.dispatch('timerModule/setupRunner')
+  if (!store.getters['timerModule/runningRecord']) {
+    return
   }
+
+  store.dispatch('timerModule/setupRunner')
+})
+
+onBeforeUnmount(() => {
+  store.commit('timerModule/CLEAR_RECORD_LISTENER')
 })
 </script>
 

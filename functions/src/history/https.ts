@@ -1,6 +1,9 @@
 import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
-import * as dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import dayjs from 'dayjs'
+
+dayjs.extend(utc)
 
 export const finishRecord = functions.https
   .onRequest(async (req, res) => {
@@ -10,7 +13,7 @@ export const finishRecord = functions.https
       .collection('history')
       .doc(recordId)
       .update({
-        timeEnd: dayjs().format()
+        timeEnd: dayjs().utc().format()
       })
 
     res.end()
