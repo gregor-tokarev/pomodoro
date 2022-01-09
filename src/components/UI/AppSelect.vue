@@ -5,7 +5,7 @@
     v-click-outside="onClickOutside"
   >
     <div
-      @click.stop="toggleOpenState"
+      @click.stop="toggleOpenState()"
       class="base-field button-text select__body"
       :class="{'select__body--placeholder': !props.modelValue}"
     >
