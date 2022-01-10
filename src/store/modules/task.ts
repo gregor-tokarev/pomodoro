@@ -2,8 +2,13 @@ import { Task } from '../../../models/task.model'
 import { ActionTree, GetterTree, Module, MutationTree } from 'vuex'
 import { Update } from '../../../types/update'
 import { RootState } from '@/store'
+import isBetween from 'dayjs/plugin/isBetween'
 import { nanoid } from 'nanoid'
 import { firestore } from '@/lib/firebase'
+import { HistoryRecord } from '../../../models/history-record.model'
+import dayjs from 'dayjs'
+
+dayjs.extend(isBetween)
 
 export interface TaskState {
   tasks: Task[]
@@ -194,6 +199,25 @@ const actions: ActionTree<TaskState, RootState> = {
 const getters: GetterTree<TaskState, RootState> = {
   tasks(state): Task[] {
     return state.tasks.sort((prev, next) => prev.order - next.order)
+  },
+  tasksInHistoryInterval(state, getters, rootState, rootGetters): (recordId: string) => Task[] {
+    return recordId => {
+      const record = rootGetters['timerModule/recordById'](recordId) as HistoryRecord
+      const {
+        timeEnd,
+        timeStart
+      } = record
+
+      return getters.tasks.filter(
+        (task: Task) => dayjs(task.timeCompleted)
+          .isBetween(
+            timeStart,
+            timeEnd,
+            'second',
+            '[]'
+          )
+      )
+    }
   },
   tasksForTimer(state, getters): Task[] {
     return getters.tasks.slice(0, 4)

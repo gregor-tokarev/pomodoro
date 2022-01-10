@@ -1,5 +1,5 @@
 <template>
-  <div class="history-item" :class="{'history-item--break': props.history.isBreak}">
+  <div class="history-item" :class="{'history-item--break': props.record.isBreak}">
     <div class="basic-text history-item__info" @click="isTasksOpen = !isTasksOpen">
       <div class="history-item__circle"></div>
       <div class="history-item__duration">
@@ -10,19 +10,18 @@
       </div>
 
       <!-- right side -->
-      <div v-if="!props.history.isBreak" class="history-item__tasks">
-        completed tasks: <span class="history-item__tasks-count">{{ formattedTasks.length }}</span>
+      <div v-if="!props.record.isBreak" class="history-item__tasks">
+        completed tasks: <span class="history-item__tasks-count">{{ props.tasks.length }}</span>
       </div>
       <div v-else class="history-item__break">break</div>
     </div>
     <expand-transition>
-      <div v-if="isTasksOpen && !props.history.isBreak" class="history-item__elements">
-        <div class="basic-text todo history-item__todo" v-for="task in formattedTasks" :key="task.id">
+      <div v-if="isTasksOpen && !props.record.isBreak" class="history-item__elements">
+        <div class="basic-text todo history-item__todo" v-for="task in props.tasks" :key="task.id">
           <div class="todo__text">{{ task.text }}</div>
           <div class="todo__time">
-            <span class="time-entry">{{ task.timeStart }}</span> - <span class="time-entry">{{ task.timeEnd }}</span>
+            <span class="time-entry">{{ dayjs(task.timeCompleted).format('hh:mm') }}</span>
           </div>
-          <div class="todo__duration">{{ task.duration }} min</div>
         </div>
       </div>
     </expand-transition>
@@ -30,7 +29,6 @@
 </template>
 
 <script lang="ts" setup>
-import { nanoid } from 'nanoid'
 import { HistoryRecord } from '../../../models/history-record.model'
 import { computed, ref } from 'vue'
 import dayjs from 'dayjs'
@@ -40,69 +38,28 @@ import { Task } from '../../../models/task.model'
 import ExpandTransition from '@/components/utils/expand-transition.vue'
 
 interface Props {
-  history: HistoryRecord
+  record: HistoryRecord
+  tasks: Task[]
 }
 
 const props = defineProps<Props>()
 const timeStart = computed<string>(() => {
-  const date = dayjs(props.history.timeStart)
+  const date = dayjs(props.record.timeStart)
   return date.format('HH:mm')
 })
 
 const timeEnd = computed<string>(() => {
-  const date = dayjs(props.history.timeEnd)
+  const date = dayjs(props.record.timeEnd)
   return date.format('HH:mm')
 })
 
 const duration = computed<Time>(() => {
-  const diff = diffDates(props.history.timeStart, props.history.timeEnd, 'second')
+  const diff = diffDates(props.record.timeStart, props.record.timeEnd, 'second')
 
   return secondsToTime(diff)
 })
 
 const isTasksOpen = ref<boolean>(false)
-
-const ownerId = nanoid()
-// todo remove it's hard code
-const tasks = ref<Task[]>([
-  {
-    id: nanoid(),
-    text: 'some',
-    status: 'completed',
-    order: 0,
-    timeStart: '2021-12-07T15:00:55+0300',
-    timeEnd: '2021-12-07T15:15:56+0300',
-    ownerId
-  },
-  {
-    id: nanoid(),
-    text: 'some',
-    status: 'completed',
-    order: 1,
-    timeStart: '2021-12-07T15:15:55+0300',
-    timeEnd: '2021-12-07T15:20:56+0300',
-    ownerId
-  },
-  {
-    id: nanoid(),
-    text: 'some',
-    status: 'completed',
-    order: 2,
-    timeStart: '2021-12-07T15:20:55+0300',
-    timeEnd: '2021-12-07T15:23:56+0300',
-    ownerId
-  }
-])
-type formattedTask = Task & { duration: number }
-const formattedTasks = computed<formattedTask[]>(() =>
-  tasks.value.map(task => {
-    return {
-      ...task,
-      timeStart: dayjs(task.timeStart).format('HH:mm'),
-      timeEnd: dayjs(task.timeEnd).format('HH:mm'),
-      duration: diffDates(task.timeStart, task.timeEnd, 'minutes')
-    }
-  }))
 </script>
 
 <style scoped lang="scss">

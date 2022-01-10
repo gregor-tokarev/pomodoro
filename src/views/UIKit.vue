@@ -11,7 +11,7 @@
       text: 'some',
       status: 'completed',
       timeStart: '2021-12-07T15:00:55+0300',
-      timeEnd: '2021-12-07T15:15:56+0300',
+      timeEnd: '2021-12-07T15:15:56+0300'
     }"
   ></AppTodoItem>
 
@@ -37,7 +37,7 @@ import AppInput from '@/components/UI/AppInput.vue'
 import AppCheckbox from '@/components/UI/AppCheckbox.vue'
 import AppAddButton from '@/components/UI/AppAddButton.vue'
 import AppTodoItem from '@/components/UI/AppTodoItem.vue'
-import AppHistoryItem from '@/components/UI/AppHistoryItem.vue'
+import AppHistoryItem from '@/components/UI/AppHistoryRecord.vue'
 import AppTextarea from '@/components/UI/AppTextarea.vue'
 import AppSelect from '@/components/UI/AppSelect.vue'
 import { ref } from 'vue'

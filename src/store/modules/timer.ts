@@ -30,8 +30,6 @@ const state: TimerState = {
   recordListener: null
 }
 
-// @ts-ignore
-// @ts-ignore
 const mutations: MutationTree<TimerState> = {
   ADD_RECORD(state, record: HistoryRecord) {
     state.records.push(record)
@@ -237,6 +235,9 @@ const actions: ActionTree<TimerState, RootState> = {
 }
 
 const getters: GetterTree<TimerState, RootState> = {
+  allFinishedRecords(state): HistoryRecord[] {
+    return state.records.filter(record => record.timeEnd)
+  },
   recordById(state): (recordId: string) => HistoryRecord | undefined {
     return recordId => state.records.find(record => record.id === recordId)
   },
