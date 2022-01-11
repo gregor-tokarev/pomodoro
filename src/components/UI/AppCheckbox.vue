@@ -37,10 +37,6 @@ const emit = defineEmits<{
   border-radius: 50%;
   transition: all 0.2s;
 
-  &:hover {
-    border-color: $accent-main;
-  }
-
   &--checked {
     background-color: $accent-main;
     border-color: $accent-main;

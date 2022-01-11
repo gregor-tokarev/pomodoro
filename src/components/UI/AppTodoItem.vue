@@ -174,6 +174,10 @@ const isCompleted = computed<boolean>({
 
     :deep(.checkbox) {
       border-color: $accent-main;
+
+      &:hover {
+        border-color: $accent-hover;
+      }
     }
   }
 
