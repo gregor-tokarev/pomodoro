@@ -1,6 +1,11 @@
 <template>
   <div class="todo" ref="root">
-    <Sortable class="todo__list" @dragEnd="dragEnd" handleSelector=".todo-item__drag">
+    <Sortable
+      class="todo__list"
+      @dragEnd="dragEnd"
+      dragged-element=".todo__item"
+      handle-selector=".todo-item__drag"
+    >
       <li class="todo__item" v-for="task in tasks" :key="task.id">
         <div class="todo__item-overlay"></div>
         <AppTodoItem is-draggable @delete="deleteTask"
@@ -132,8 +137,17 @@ function changeText(taskId: string, newText: string): void {
 // ====
 // task change order
 function dragEnd(event: SortableStopEvent): void {
-  console.log(event.oldIndex, event.newIndex)
-  // store.dispatch('tasksModule/changeTaskOrder', {newOrder: event.newIndex, taskId})
+  if (event.newIndex === event.oldIndex) {
+    return undefined
+  }
+
+  const task = tasks.value.find(task => task.order === event.oldIndex)
+  if (!task) {
+    return
+  }
+
+  const taskId = task.id
+  store.dispatch('tasksModule/changeTaskOrder', { newOrder: event.newIndex, taskId })
 }
 
 function changeOrder(taskId: string, newOrder: number): void {
