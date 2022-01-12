@@ -12,11 +12,11 @@ const routes: RouteRecordRaw[] = [
   //   which is lazy-loaded when the route is visited.
   // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   // }
-  {
-    path: '/uikit',
-    name: 'uikit',
-    component: () => import('@/views/UIKit.vue')
-  },
+  // {
+  //   path: '/uikit',
+  //   name: 'uikit',
+  //   component: () => import('@/views/UIKit.vue')
+  // },
   {
     path: '/app',
     name: 'app',
