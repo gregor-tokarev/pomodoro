@@ -82,11 +82,5 @@ const historyBucketsArr = computed<historyBuckets>(
     margin: 0 0 10px;
     align-self: center;
   }
-
-  &__record {
-    &:last-child {
-      border-bottom-color: transparent;
-    }
-  }
 }
 </style>
