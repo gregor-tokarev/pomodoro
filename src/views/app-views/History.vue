@@ -25,11 +25,15 @@ import AppHistoryRecord from '@/components/UI/AppHistoryRecord.vue'
 import { useStore } from 'vuex'
 import { computed, onMounted } from 'vue'
 import { HistoryRecord } from '../../../models/history-record.model'
+import dayjs from 'dayjs'
 
 const store = useStore()
 
 onMounted(async () => {
-  await store.dispatch('tasksModule/fetchTasks')
+  await Promise.all([
+    store.dispatch('tasksModule/fetchTasks'),
+    store.dispatch('timerModule/fetchRecords')
+  ])
 })
 
 type historyBuckets = { [key: string]: HistoryRecord[] }
@@ -37,16 +41,28 @@ const historyBucketsArr = computed<historyBuckets>(
   () => {
     const history = store.getters['timerModule/allFinishedRecords'] as HistoryRecord[]
 
-    return history.reduce((acc: historyBuckets, record) => {
-      const date = record.timeStart.split('T')[0]
+    const buckets = history
+      .reduce((acc: historyBuckets, record) => {
+        const date = record.timeStart.split('T')[0]
 
-      if (!acc[date]) {
-        acc[date] = []
-      }
-      acc[date].push(record)
+        if (!acc[date]) {
+          acc[date] = []
+        }
+        acc[date].push(record)
 
-      return acc
-    }, {})
+        return acc
+      }, {})
+
+    for (const date in buckets) {
+      buckets[date] = buckets[date].sort((prev, next) => {
+        const prevDate = dayjs(prev.timeStart)
+        const nextDate = dayjs(next.timeStart)
+
+        return prevDate.unix() - nextDate.unix()
+      })
+    }
+
+    return buckets
   }
 )
 </script>
