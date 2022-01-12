@@ -8,7 +8,9 @@
           <AppButton @click="startTimer" :disabled="store.getters['timerModule/isRunning']"
                      class="timer__start timer__button">Start
           </AppButton>
-          <AppButton @click="resetTimer" style-type="light" class="timer__button">Reset</AppButton>
+          <AppButton @click="resetTimer" :disabled="!store.getters['timerModule/isRunning']" style-type="light"
+                     class="timer__button">Reset
+          </AppButton>
         </div>
 
         <div class="timer__settings">
