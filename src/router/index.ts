@@ -18,6 +18,10 @@ const routes: RouteRecordRaw[] = [
   //   component: () => import('@/views/UIKit.vue')
   // },
   {
+    path: '',
+    redirect: '/app'
+  },
+  {
     path: '/app',
     name: 'app',
     component: App,
