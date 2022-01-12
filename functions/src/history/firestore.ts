@@ -1,17 +1,11 @@
 import * as functions from 'firebase-functions'
-import * as admin from 'firebase-admin'
 import { createSecludedTask, removeSecludedTask } from '../secludedTask'
-import { UserSettings } from '../../../models/settings/user-settings.model'
+import { settingsByUserId } from '../settingsByUserId'
 
 export const createRecord = functions.firestore
   .document('history/{recordId}')
   .onCreate(async (snapshot) => {
-    const settingsRef = admin.firestore()
-      .collectionGroup('settings')
-      .where('ownerId', '==', snapshot.data().ownerId)
-    const settingsDoc = await settingsRef.get()
-    const settings = settingsDoc.docs[0].data() as UserSettings
-
+    const settings = await settingsByUserId(snapshot.data().ownerId)
     const time = snapshot.data().isBreak ? settings.breakTime * 60 : settings.workTime * 60
 
     return createSecludedTask(

@@ -17,8 +17,12 @@ export interface TimerState {
   completionPercent: number
   runner: (ReturnType<typeof setInterval>) | null
 
-  // @ts-ignore
-  recordListener: ReturnType<firebase.firestore.DocumentReference.onSnapshop> | null
+  listeners: {
+    // @ts-ignore
+    work: ReturnType<firebase.firestore.DocumentReference.onSnapshop> | null,
+    // @ts-ignore
+    break: ReturnType<firebase.firestore.DocumentReference.onSnapshop> | null
+  }
 }
 
 const state: TimerState = {
@@ -27,7 +31,10 @@ const state: TimerState = {
   completionPercent: 0,
   runner: null,
 
-  recordListener: null
+  listeners: {
+    work: null,
+    break: null
+  }
 }
 
 const mutations: MutationTree<TimerState> = {
@@ -54,7 +61,7 @@ const mutations: MutationTree<TimerState> = {
   CREATE_RUNNER(state, runner: ReturnType<typeof setInterval>) {
     state.runner = runner
   },
-  CLEAR_RUNNER(state) {
+  CLEAR_LISTENERS(state) {
     if (state.runner) {
       clearInterval(state.runner)
       state.runner = null
@@ -68,17 +75,32 @@ const mutations: MutationTree<TimerState> = {
     state.timeFormatted = time
   },
 
-  // @ts-ignore
-  SET_RECORD_LISTENER(state, listener: ReturnType<firebase.firestore.DocumentReference.onSnapshop>) {
-    state.recordListener = listener
+  SET_HISTORY_LISTENERS(
+    state,
+    listeners: {
+      // @ts-ignore
+      work?: ReturnType<firebase.firestore.DocumentReference.onSnapshop>,
+      // @ts-ignore
+      break?: ReturnType<firebase.firestore.DocumentReference.onSnapshop>
+    }
+  ) {
+    if (listeners.work) {
+      state.listeners.work = listeners.work
+    }
+    if (listeners.break) {
+      state.listeners.break = listeners.break
+    }
   },
-  CLEAR_RECORD_LISTENER(state) {
-    if (!state.recordListener) {
-      return
+  CLEAR_HISTORY_LISTENERS(state) {
+    if (state.listeners.work) {
+      state.listeners.work()
+      state.listeners.work = null
     }
 
-    state.recordListener()
-    state.recordListener = null
+    if (state.listeners.break) {
+      state.listeners.break()
+      state.listeners.break = null
+    }
   }
 }
 
@@ -89,7 +111,9 @@ const actions: ActionTree<TimerState, RootState> = {
   }): Promise<HistoryRecord[]> {
     try {
       const userId = rootGetters['authModule/userId']
-      const query = firestore.collection('history').where('ownerId', '==', userId)
+      const query = firestore
+        .collection('history')
+        .where('ownerId', '==', userId)
 
       const { docs } = await query.get()
       const history: HistoryRecord[] = docs.map(doc => ({
@@ -104,11 +128,37 @@ const actions: ActionTree<TimerState, RootState> = {
       throw err
     }
   },
+  async fetchActiveRecord({
+    commit,
+    rootGetters
+  }): Promise<HistoryRecord | undefined> {
+    try {
+      const userId = rootGetters['authModule/userId']
+
+      const query = firestore
+        .collection('history')
+        .where('ownerId', '==', userId)
+        .where('timeEnd', '==', null)
+
+      const { docs } = await query.get()
+      if (docs.length > 0) {
+        const record: HistoryRecord = {
+          ...docs[0].data() as Omit<HistoryRecord, 'id'>,
+          id: docs[0].id
+        }
+        commit('ADD_RECORD', record)
+
+        return record
+      }
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  },
   setupRunner({
     commit,
     getters,
     rootGetters,
-    dispatch,
     state
   }, { time } = { time: 1000 }) {
     if (state.runner) {
@@ -136,8 +186,13 @@ const actions: ActionTree<TimerState, RootState> = {
       commit('UPDATE_COMPLETION_PERCENT', (passedTimeMinutes / totalTimeMinutes) * 100)
     }, time)
     commit('CREATE_RUNNER', runner)
-
-    const listener = firestore
+  },
+  setupWorkListener({
+    getters,
+    dispatch,
+    commit
+  }) {
+    const workListener = firestore
       .collection('history')
       .doc(getters.runningRecord.id)
       .onSnapshot(snapshot => {
@@ -147,10 +202,37 @@ const actions: ActionTree<TimerState, RootState> = {
           dispatch('finishTimer')
         }
       })
-    commit('SET_RECORD_LISTENER', listener)
+    commit('SET_HISTORY_LISTENERS', { work: workListener })
   },
-  clearRunner({ commit }) {
-    commit('CLEAR_RUNNER')
+  setupBreakListener({
+    rootGetters,
+    dispatch,
+    commit
+  }) {
+    const breakListener = firestore
+      .collection('history')
+      .where('ownerId', '==', rootGetters['authModule/userId'])
+      .where('isBreak', '==', true)
+      .onSnapshot(snapshot => {
+        if (!snapshot.docChanges().length) {
+          return
+        }
+
+        const breakDoc = snapshot.docChanges()[0].doc
+        const record: HistoryRecord = {
+          ...breakDoc.data() as Omit<HistoryRecord, 'id'>,
+          id: breakDoc.id
+        }
+        commit('ADD_RECORD', record)
+
+        dispatch('setupWorkListener')
+        dispatch('setupRunner')
+      })
+
+    commit('SET_HISTORY_LISTENERS', { break: breakListener })
+  },
+  clearTimer({ commit }) {
+    commit('CLEAR_LISTENERS')
     commit('UPDATE_TIME_FORMATTED', '')
     commit('UPDATE_COMPLETION_PERCENT', 0)
   },
@@ -161,23 +243,24 @@ const actions: ActionTree<TimerState, RootState> = {
   }): Promise<HistoryRecord> {
     try {
       const recordId = nanoid()
-      const historyRecord: Omit<HistoryRecord, 'id' | 'timeEnd'> = {
+      const historyRecord: Omit<HistoryRecord, 'id'> = {
         isBreak: false,
         ownerId: rootGetters['authModule/userId'],
-        timeStart: dayjs().utc().format()
+        timeStart: dayjs().utc().format(),
+        timeEnd: null
       }
 
-      await firestore.collection('history').doc(recordId).set(historyRecord)
+      await firestore
+        .collection('history')
+        .doc(recordId)
+        .set(historyRecord)
 
       const record = { id: recordId, ...historyRecord }
       commit('ADD_RECORD', record)
 
       dispatch('setupRunner')
-
-      await dispatch('tasksModule/editTask', {
-        id: rootGetters['tasksModule/runningTaskId'],
-        changes: { status: 'inprogress' }
-      }, { root: true })
+      dispatch('setupWorkListener')
+      dispatch('setupBreakListener')
 
       return record
     } catch (err) {
@@ -197,7 +280,7 @@ const actions: ActionTree<TimerState, RootState> = {
         recordId: getters.runningRecord.id,
         timeEnd
       })
-      dispatch('clearRunner')
+      dispatch('clearTimer')
 
       return getters.runningRecord
     } catch (err) {
@@ -215,13 +298,13 @@ const actions: ActionTree<TimerState, RootState> = {
     if (!runningRecord) {
       throw new Error('Timer is not running')
     }
-    commit('CLEAR_RECORD_LISTENER')
+    commit('CLEAR_HISTORY_LISTENERS')
 
     try {
       const recordRef = firestore.collection('history').doc(runningRecord.id)
       await recordRef.delete()
 
-      dispatch('clearRunner')
+      dispatch('clearTimer')
 
       await dispatch('tasksModule/editTask', {
         id: rootGetters['tasksModule/runningTaskId'],

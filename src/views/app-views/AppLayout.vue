@@ -17,16 +17,20 @@
 import LeftBar from '@/components/layout/LeftBar.vue'
 import { onBeforeUnmount, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { auth } from '@/lib/firebase'
 
 const store = useStore()
 onMounted(async () => {
-  await store.dispatch('timerModule/fetchRecords')
+  console.log(auth.currentUser)
+  await store.dispatch('timerModule/fetchActiveRecord')
 
   if (!store.getters['timerModule/runningRecord']) {
     return
   }
 
   store.dispatch('timerModule/setupRunner')
+  store.dispatch('timerModule/setupWorkListener')
+  store.dispatch('timerModule/setupBreakListener')
 })
 
 onBeforeUnmount(() => {
