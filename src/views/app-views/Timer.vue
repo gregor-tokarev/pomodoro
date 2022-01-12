@@ -51,6 +51,9 @@ import { TimerOptions } from '../../../models/settings/timer-options.model'
 import { UserSettings } from '../../../models/settings/user-settings.model'
 
 const store = useStore()
+
+// ====
+// Tasks
 const tasks = computed<Task[]>(() => store.getters['tasksModule/tasksForTimer'])
 onMounted(async () => {
   await store.dispatch('tasksModule/fetchTasks')

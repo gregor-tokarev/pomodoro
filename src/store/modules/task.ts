@@ -234,6 +234,10 @@ const getters: GetterTree<TaskState, RootState> = {
     return state.tasks.length ? maxOrder : -1
   },
   runningTaskId(state, getters, _, rootGetters): string | null {
+    if (rootGetters['timerModule/runningRecord']?.isBreak) {
+      return null
+    }
+
     return rootGetters['timerModule/runningRecord']
       ? getters
         .tasks
