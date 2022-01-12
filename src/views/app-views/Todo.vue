@@ -8,13 +8,16 @@
     >
       <li class="todo__item" v-for="task in tasks" :key="task.id">
         <div class="todo__item-overlay"></div>
-        <AppTodoItem is-draggable @delete="deleteTask"
-                     can-edit
-                     :in-progress="store.getters['tasksModule/runningTaskId'] === task.id"
-                     @changeText="changeText($event.taskId, $event.text)"
-                     @changeOrder="changeOrder($event.taskId, $event.newOrder)"
-                     @changeStatus="changeStatus($event.taskId, $event.status)"
-                     :todoitem="task"></AppTodoItem>
+        <AppTodoItem
+          is-draggable
+          @delete="deleteTask"
+          can-edit
+          :in-progress="store.getters['tasksModule/runningTaskId'] === task.id"
+          @changeText="changeText($event.taskId, $event.text)"
+          @changeOrder="changeOrder($event.taskId, $event.newOrder)"
+          @changeStatus="changeStatus($event.taskId, $event.status)"
+          :todoitem="task"
+        ></AppTodoItem>
       </li>
     </Sortable>
 
@@ -147,7 +150,10 @@ function dragEnd(event: SortableStopEvent): void {
   }
 
   const taskId = task.id
-  store.dispatch('tasksModule/changeTaskOrder', { newOrder: event.newIndex, taskId })
+  store.dispatch('tasksModule/changeTaskOrder', {
+    newOrder: event.newIndex,
+    taskId
+  })
 }
 
 function changeOrder(taskId: string, newOrder: number): void {
