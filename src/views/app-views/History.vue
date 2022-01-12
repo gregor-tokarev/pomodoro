@@ -4,7 +4,7 @@
       <ul class="history__list">
         <li v-for="(records, date, index) in historyBucketsArr" class="history__block" :key="index">
           <div class="tag subtitle-text history__date">
-            {{ date }}
+            {{ dayjs(date).format('DD MMMM') }}
           </div>
           <AppHistoryRecord
             class="history__record"
