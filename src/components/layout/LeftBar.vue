@@ -52,11 +52,6 @@ const navItems: Nav[] = [
     name: t('history'),
     iconName: 'history',
     path: '/app/history'
-  },
-  {
-    name: t('settings'),
-    iconName: 'settings',
-    path: '/app/settings'
   }
 ]
 
