@@ -58,7 +58,7 @@
     padding: 20px 30px;
     background-color: $gray-000;
     border-radius: 20px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 25%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
     transform: translate(-50%, -50%);
   }
 
