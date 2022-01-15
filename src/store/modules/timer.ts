@@ -268,11 +268,11 @@ const actions: ActionTree<TimerState, RootState> = {
       throw err
     }
   },
-  async finishTimer({
+  finishTimer({
     commit,
     getters,
     dispatch
-  }): Promise<HistoryRecord> {
+  }): HistoryRecord {
     try {
       const timeEnd = dayjs().utc().format()
 

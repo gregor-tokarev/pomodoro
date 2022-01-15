@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { useStore } from 'vuex'
 import { Task, taskStatus } from '../../../models/task.model'
 import AppTodoItem from '@/components/UI/AppTodoItem.vue'
@@ -63,9 +63,9 @@ import dayjs from 'dayjs'
 const { t } = useI18n()
 const store = useStore()
 
-onMounted(async () => {
-  await store.dispatch('tasksModule/fetchTasks')
-})
+// ====
+// tasks
+await store.dispatch('tasksModule/fetchTasks')
 const tasks = computed<Task[]>(() => {
   return store.getters['tasksModule/tasks']
 })

@@ -23,18 +23,16 @@
 <script lang="ts" setup>
 import AppHistoryRecord from '@/components/UI/AppHistoryRecord.vue'
 import { useStore } from 'vuex'
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { HistoryRecord } from '../../../models/history-record.model'
 import dayjs from 'dayjs'
 
 const store = useStore()
 
-onMounted(async () => {
-  await Promise.all([
-    store.dispatch('tasksModule/fetchTasks'),
-    store.dispatch('timerModule/fetchRecords')
-  ])
-})
+await Promise.all([
+  store.dispatch('tasksModule/fetchTasks'),
+  store.dispatch('timerModule/fetchRecords')
+])
 
 type historyBuckets = { [key: string]: HistoryRecord[] }
 const historyBucketsArr = computed<historyBuckets>(

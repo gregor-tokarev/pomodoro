@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 import { useStore } from 'vuex'
 import AppTimer from '@/components/UI/AppTimer.vue'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import AppTodoItem from '@/components/UI/AppTodoItem.vue'
 import { Task } from '../../../models/task.model'
 import AppButton from '@/components/UI/AppButton.vue'
@@ -55,9 +55,7 @@ const store = useStore()
 // ====
 // Tasks
 const tasks = computed<Task[]>(() => store.getters['tasksModule/tasksForTimer'])
-onMounted(async () => {
-  await store.dispatch('tasksModule/fetchTasks')
-})
+await store.dispatch('tasksModule/fetchTasks')
 
 // ====
 // Timer

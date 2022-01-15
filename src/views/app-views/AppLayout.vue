@@ -4,9 +4,15 @@
       <LeftBar class="app__leftbar"></LeftBar>
       <div class="app__body">
         <router-view #default="{Component}">
-          <transition name="fade" mode="out-in">
-            <component :is="Component"></component>
-          </transition>
+          <suspense>
+            <div>
+              <component :is="Component"></component>
+            </div>
+
+            <template #fallback>
+              <AppIcon class="app__loader" icon-name="loader" :color="Colors.ACCENT_MAIN"></AppIcon>
+            </template>
+          </suspense>
         </router-view>
       </div>
     </div>
@@ -15,14 +21,16 @@
 
 <script lang="ts" setup>
 import LeftBar from '@/components/layout/LeftBar.vue'
-import { onBeforeUnmount, onMounted } from 'vue'
+import { Colors } from '@/lib/UI/colors'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
-import { auth } from '@/lib/firebase'
+import AppIcon from '@/components/UI/AppIcon.vue'
 
 const store = useStore()
+const loaded = ref<boolean>(false)
 onMounted(async () => {
-  console.log(auth.currentUser)
   await store.dispatch('timerModule/fetchActiveRecord')
+  loaded.value = true
 
   if (!store.getters['timerModule/runningRecord']) {
     return
@@ -61,6 +69,7 @@ $page-padding-top: 30px;
   }
 
   &__body {
+    position: relative;
     width: 75%;
     max-height: calc(100vh - #{$page-padding-top});
     padding: 30px 40px;
@@ -69,26 +78,22 @@ $page-padding-top: 30px;
     background-color: $gray-000;
     border-radius: 30px;
   }
-}
 
-.fade-enter-from {
-  opacity: 0;
-  transform: translateX(-50px);
-}
+  &__loader {
+    position: absolute;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+    animation: spin 2s infinite linear;
+  }
 
-.fade-enter-to,
-.fade-leave-from {
-  opacity: 1;
-  transform: translateX(0);
-}
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.2s;
-}
-
-.fade-leave-to {
-  opacity: 0;
-  transform: translateX(50px);
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 </style>
