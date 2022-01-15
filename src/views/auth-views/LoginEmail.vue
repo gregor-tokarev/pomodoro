@@ -24,6 +24,7 @@
         <div class="basic-text signup-email__errors">
           <p v-if="wrongEmailError">Email is not exist</p>
           <p v-if="wrongPasswordError">Password is incorrect</p>
+          <p v-if="emailUnverified">Email isn't verified</p>
         </div>
 
         <AppButton>Login</AppButton>
@@ -75,6 +76,7 @@ const $v = useVuelidate({
 
 const wrongEmailError = ref<boolean>(false)
 const wrongPasswordError = ref<boolean>(false)
+const emailUnverified = ref<boolean>(false)
 
 async function submit(): Promise<void> {
   $v.value.$touch()
@@ -86,8 +88,14 @@ async function submit(): Promise<void> {
     await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     const { user } = await auth.signInWithEmailAndPassword(form.value.email, form.value.password)
 
+    if (!user?.emailVerified) {
+      emailUnverified.value = true
+      return
+    }
+
     wrongEmailError.value = false
     wrongPasswordError.value = false
+    emailUnverified.value = false
 
     localStorage.setItem('userId', user!.uid)
     await store.dispatch('authModule/fetchUserProfile')

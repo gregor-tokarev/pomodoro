@@ -141,7 +141,7 @@ function changeText(taskId: string, newText: string): void {
 // task change order
 function dragEnd(event: SortableStopEvent): void {
   if (event.newIndex === event.oldIndex) {
-    return undefined
+    return
   }
 
   const task = tasks.value.find(task => task.order === event.oldIndex)

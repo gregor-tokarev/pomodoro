@@ -103,6 +103,7 @@ async function submit(): Promise<void> {
     emailExistsError.value = false
 
     const user: User = await store.dispatch('authModule/createUser', auth.currentUser)
+    await store.dispatch('authModule/verifyEmail')
 
     router.push({
       name: 'auth-verify-email',

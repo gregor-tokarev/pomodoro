@@ -51,7 +51,6 @@ const actions: ActionTree<AuthState, RootState> = {
       const user: Omit<User, 'id'> = {
         email: userData.email!,
         username: userData.displayName ?? '',
-        emailVerified: process.env.NODE_ENV === 'production' ? userData.emailVerified : true,
         avatar: userData.photoURL ?? '',
         provider: userData.providerData[0]!.providerId as provider
       }
@@ -80,6 +79,15 @@ const actions: ActionTree<AuthState, RootState> = {
     } catch (err) {
       console.error(err)
     }
+  },
+  async verifyEmail() {
+    if (!auth.currentUser) {
+      return
+    }
+
+    return auth.currentUser.sendEmailVerification({
+      url: `${process.env.VUE_APP_BASE_URL}/auth/login/email`
+    })
   }
 }
 
@@ -90,8 +98,8 @@ const getters: GetterTree<AuthState, RootState> = {
   userId(state): string | null {
     return state.user?.id ?? localStorage.getItem('userId')
   },
-  isAuthorized(state): boolean {
-    return !!state.user?.emailVerified
+  isAuthorized(): boolean {
+    return !!auth.currentUser?.emailVerified
   }
 }
 
