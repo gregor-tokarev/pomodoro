@@ -33,6 +33,7 @@
           :key="task.id"
           :in-progress="store.getters['tasksModule/runningTaskId'] === task.id"
           :todoitem="task"
+          @changeStatus="changeStatus($event.taskId, $event.status)"
         ></AppTodoItem>
       </div>
     </div>
@@ -44,18 +45,33 @@ import { useStore } from 'vuex'
 import AppTimer from '@/components/UI/AppTimer.vue'
 import { computed, ref } from 'vue'
 import AppTodoItem from '@/components/UI/AppTodoItem.vue'
-import { Task } from '../../../models/task.model'
+import { Task, taskStatus } from '../../../models/task.model'
 import AppButton from '@/components/UI/AppButton.vue'
 import AppSelect from '@/components/UI/AppSelect.vue'
 import { TimerOptions } from '../../../models/settings/timer-options.model'
 import { UserSettings } from '../../../models/settings/user-settings.model'
+import dayjs from 'dayjs'
 
 const store = useStore()
 
 // ====
 // Tasks
 const tasks = computed<Task[]>(() => store.getters['tasksModule/tasksForTimer'])
-await store.dispatch('tasksModule/fetchTasks')
+await store.dispatch('tasksModule/fetchTasks', { limit: 5 })
+
+function changeStatus(taskId: string, status: taskStatus): void {
+  const changes: Partial<Task> = {
+    status
+  }
+  if (status === 'completed') {
+    changes.timeCompleted = dayjs().utc().format()
+  }
+
+  store.dispatch('tasksModule/editTask', {
+    id: taskId,
+    changes
+  })
+}
 
 // ====
 // Timer
