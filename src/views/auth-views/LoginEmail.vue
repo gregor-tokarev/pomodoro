@@ -23,7 +23,7 @@
 
         <div class="basic-text signup-email__errors">
           <p v-if="wrongEmailError">Email is not exist</p>
-          <p v-if="wrongPasswordError || $v.email.$error">Password is incorrect</p>
+          <p v-if="wrongPasswordError">Password is incorrect</p>
         </div>
 
         <AppButton>Login</AppButton>

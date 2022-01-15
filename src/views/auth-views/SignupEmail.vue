@@ -19,7 +19,7 @@
           </div>
           <AppInput type="password" :error="$v.password.$error" v-model="form.password"
                     placeholder="st%ro3ng password"></AppInput>
-          <span class="basic-text signup-email__password-rules">8+ letters, a list one number</span>
+          <span class="basic-text signup-email__password-rules">8+ letters, at least one number</span>
         </fieldset>
         <fieldset class="signup-email__field">
           <div class="subtitle-text signup-email__label"
