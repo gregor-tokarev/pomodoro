@@ -7,6 +7,7 @@ import { nanoid } from 'nanoid'
 import { firestore } from '@/lib/firebase'
 import { HistoryRecord } from '../../../models/history-record.model'
 import dayjs from 'dayjs'
+import firebase from 'firebase/compat'
 
 dayjs.extend(isBetween)
 
@@ -57,7 +58,10 @@ const actions: ActionTree<TaskState, RootState> = {
       ownerId: userId,
       order: getters.getMaxOrderValue + 1,
       status: 'todo',
-      text: taskValues.text ?? ''
+      text: taskValues.text ?? '',
+      createdAt: firebase.firestore.Timestamp.now(),
+      updatedAt: firebase.firestore.Timestamp.now(),
+      timeCompleted: null
     }
 
     try {
@@ -84,7 +88,10 @@ const actions: ActionTree<TaskState, RootState> = {
       await firestore
         .collection('tasks')
         .doc(update.id)
-        .update(update.changes)
+        .update({
+          ...update.changes,
+          updatedAt: firebase.firestore.Timestamp.now()
+        })
 
       return getters.taskById(update.id)
     } catch (err) {
@@ -176,13 +183,20 @@ const actions: ActionTree<TaskState, RootState> = {
     const userId = rootGetters['authModule/userId']
 
     try {
-      let query = firestore.collection('tasks').where('ownerId', '==', userId)
-      if (limit) {
-        query = query.limit(limit)
-      }
-      const result = await query.get()
+      const query = firestore
+        .collection('tasks')
+        .where('ownerId', '==', userId)
+        .where(
+          'updatedAt',
+          '>',
+          firebase.firestore.Timestamp.fromDate(dayjs().subtract(2, 'days').toDate())
+        )
 
-      const tasks = result.docs.map(task => ({
+      limit && query.limit(limit)
+
+      let tasks: any[] = (await query.get()).docs
+
+      tasks = tasks.map(task => ({
         ...task.data() as Omit<Task, 'id'>,
         id: task.id
       }))
@@ -209,10 +223,10 @@ const getters: GetterTree<TaskState, RootState> = {
       } = record
 
       return getters.tasks.filter(
-        (task: Task) => dayjs(task.timeCompleted)
+        (task: Task) => dayjs(task.timeCompleted?.toDate())
           .isBetween(
-            timeStart,
-            timeEnd,
+            dayjs(timeStart.toDate()),
+            dayjs(timeEnd?.toDate()),
             'second',
             '[]'
           )

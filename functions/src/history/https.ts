@@ -15,7 +15,7 @@ export const finishRecord = functions.https
     const historyCollection = admin.firestore()
       .collection('history')
 
-    const time = dayjs().utc().format()
+    const time = admin.firestore.Timestamp.now()
 
     const record = await historyCollection.doc(recordId).get()
     if (!record.exists) {

@@ -47,7 +47,7 @@ const mutations: MutationTree<TimerState> = {
   FINISH_RECORD(state, {
     recordId,
     timeEnd
-  }: { recordId: string, timeEnd: string }) {
+  }: { recordId: string, timeEnd: firebase.firestore.Timestamp }) {
     const record = state.records.find(record => record.id === recordId)
     if (record) {
       record.timeEnd = timeEnd
@@ -246,7 +246,7 @@ const actions: ActionTree<TimerState, RootState> = {
       const historyRecord: Omit<HistoryRecord, 'id'> = {
         isBreak: false,
         ownerId: rootGetters['authModule/userId'],
-        timeStart: dayjs().utc().format(),
+        timeStart: firebase.firestore.Timestamp.now(),
         timeEnd: null
       }
 
@@ -274,7 +274,7 @@ const actions: ActionTree<TimerState, RootState> = {
     dispatch
   }): HistoryRecord {
     try {
-      const timeEnd = dayjs().utc().format()
+      const timeEnd = firebase.firestore.Timestamp.now()
 
       commit('FINISH_RECORD', {
         recordId: getters.runningRecord.id,
@@ -298,8 +298,8 @@ const actions: ActionTree<TimerState, RootState> = {
     if (!runningRecord) {
       throw new Error('Timer is not running')
     }
-    commit('CLEAR_HISTORY_LISTENERS')
 
+    commit('CLEAR_HISTORY_LISTENERS')
     try {
       const recordRef = firestore.collection('history').doc(runningRecord.id)
       await recordRef.delete()
@@ -336,7 +336,7 @@ const getters: GetterTree<TimerState, RootState> = {
     }
 
     const now = dayjs()
-    const start = getters.runningRecord.timeStart
+    const start = dayjs(getters.runningRecord.timeStart.toDate())
 
     return now.diff(start, 'second')
   },

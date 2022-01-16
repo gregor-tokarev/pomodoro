@@ -50,7 +50,7 @@ import AppButton from '@/components/UI/AppButton.vue'
 import AppSelect from '@/components/UI/AppSelect.vue'
 import { TimerOptions } from '../../../models/settings/timer-options.model'
 import { UserSettings } from '../../../models/settings/user-settings.model'
-import dayjs from 'dayjs'
+import firebase from 'firebase/compat'
 
 const store = useStore()
 
@@ -64,7 +64,7 @@ function changeStatus(taskId: string, status: taskStatus): void {
     status
   }
   if (status === 'completed') {
-    changes.timeCompleted = dayjs().utc().format()
+    changes.timeCompleted = firebase.firestore.Timestamp.now()
   }
 
   store.dispatch('tasksModule/editTask', {

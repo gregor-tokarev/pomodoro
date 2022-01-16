@@ -34,14 +34,16 @@ await Promise.all([
   store.dispatch('timerModule/fetchRecords')
 ])
 
-type historyBuckets = { [key: string]: HistoryRecord[] }
+type historyBuckets = {
+  [key: string]: HistoryRecord[]
+}
 const historyBucketsArr = computed<historyBuckets>(
   () => {
     const history = store.getters['timerModule/allFinishedRecords'] as HistoryRecord[]
 
     const buckets = history
       .reduce((acc: historyBuckets, record) => {
-        const date = record.timeStart.split('T')[0]
+        const date = dayjs(record.timeStart.toDate()).format().split('T')[0]
 
         if (!acc[date]) {
           acc[date] = []
@@ -53,8 +55,8 @@ const historyBucketsArr = computed<historyBuckets>(
 
     for (const date in buckets) {
       buckets[date] = buckets[date].sort((prev, next) => {
-        const prevDate = dayjs(prev.timeStart)
-        const nextDate = dayjs(next.timeStart)
+        const prevDate = dayjs(prev.timeStart.toDate())
+        const nextDate = dayjs(next.timeStart.toDate())
 
         return prevDate.unix() - nextDate.unix()
       })

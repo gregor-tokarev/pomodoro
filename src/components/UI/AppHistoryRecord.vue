@@ -20,7 +20,7 @@
         <div class="basic-text todo history-item__todo" v-for="task in props.tasks" :key="task.id">
           <div class="todo__text">{{ task.text }}</div>
           <div class="todo__time">
-            <span class="time-entry">{{ dayjs(task.timeCompleted).format('hh:mm') }}</span>
+            <span class="time-entry">{{ dayjs(task.timeCompleted.toDate()).format('hh:mm') }}</span>
           </div>
         </div>
       </div>
@@ -44,17 +44,21 @@ interface Props {
 
 const props = defineProps<Props>()
 const timeStart = computed<string>(() => {
-  const date = dayjs(props.record.timeStart)
+  const date = dayjs(props.record.timeStart.toDate())
   return date.format('HH:mm')
 })
 
 const timeEnd = computed<string>(() => {
-  const date = dayjs(props.record.timeEnd)
+  const date = dayjs(props.record.timeEnd?.toDate())
   return date.format('HH:mm')
 })
 
 const duration = computed<Time>(() => {
-  const diff = diffDates(props.record.timeStart, props.record.timeEnd, 'second')
+  const diff = diffDates(
+    dayjs(props.record.timeStart.toDate()).format(),
+    dayjs(props.record.timeEnd?.toDate()).format(),
+    'second'
+  )
 
   return secondsToTime(diff)
 })

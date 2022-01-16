@@ -87,8 +87,12 @@ const root = ref<HTMLElement>()
 
 // ====
 // time
-const time = computed<string>(() => {
-  return dayjs(props.todoitem.timeCompleted).format('hh:mm')
+const time = computed<string | undefined>(() => {
+  if (!props.todoitem.timeCompleted) {
+    return
+  }
+
+  return dayjs(props.todoitem.timeCompleted.toDate()).format('hh:mm')
 })
 
 // ====

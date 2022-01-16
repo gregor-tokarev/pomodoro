@@ -1,7 +1,9 @@
+import firebase from 'firebase/compat'
+
 export interface HistoryRecord {
   id: string
-  timeStart: string
-  timeEnd: string | null
+  timeStart: firebase.firestore.Timestamp
+  timeEnd: firebase.firestore.Timestamp | null
   isBreak: boolean
   ownerId: string
 }

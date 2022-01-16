@@ -1,3 +1,5 @@
+import firebase from 'firebase/compat'
+
 export type taskStatus = 'todo' | 'completed'
 
 export interface Task {
@@ -6,5 +8,7 @@ export interface Task {
   text: string
   order: number
   ownerId: string
-  timeCompleted?: string
+  createdAt: firebase.firestore.Timestamp
+  updatedAt: firebase.firestore.Timestamp
+  timeCompleted: firebase.firestore.Timestamp | null
 }

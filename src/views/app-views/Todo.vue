@@ -58,7 +58,7 @@ import { useI18n } from 'vue-i18n'
 import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import Sortable from '@/components/utils/Sortable.vue'
-import dayjs from 'dayjs'
+import firebase from 'firebase/compat'
 
 const { t } = useI18n()
 const store = useStore()
@@ -121,7 +121,7 @@ function changeStatus(taskId: string, status: taskStatus): void {
     status
   }
   if (status === 'completed') {
-    changes.timeCompleted = dayjs().utc().format()
+    changes.timeCompleted = firebase.firestore.Timestamp.now()
   }
 
   store.dispatch('tasksModule/editTask', {
