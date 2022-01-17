@@ -197,6 +197,9 @@ const actions: ActionTree<TimerState, RootState> = {
       .doc(getters.runningRecord.id)
       .onSnapshot(snapshot => {
         const record = snapshot.data() as HistoryRecord
+        if (!record) {
+          return
+        }
 
         if (record.timeEnd) {
           dispatch('finishTimer')
@@ -291,8 +294,7 @@ const actions: ActionTree<TimerState, RootState> = {
   async resetTimer({
     commit,
     getters,
-    dispatch,
-    rootGetters
+    dispatch
   }): Promise<void> {
     const runningRecord = getters.runningRecord
     if (!runningRecord) {
@@ -306,10 +308,7 @@ const actions: ActionTree<TimerState, RootState> = {
 
       dispatch('clearTimer')
 
-      await dispatch('tasksModule/editTask', {
-        id: rootGetters['tasksModule/runningTaskId'],
-        changes: { status: 'todo' }
-      }, { root: true })
+      commit('tasksModule/UNCOMPLETE_TASKS', runningRecord.timeStart, { root: true })
       commit('DELETE_RECORD', runningRecord.id)
     } catch (err) {
       console.error(err)

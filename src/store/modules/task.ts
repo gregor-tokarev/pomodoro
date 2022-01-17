@@ -20,13 +20,13 @@ const state: TaskState = {
 }
 
 const mutations: MutationTree<TaskState> = {
-  SET_TASKS(state, tasks: Task[]): void {
+  SET_TASKS(state, tasks: Task[]) {
     state.tasks = tasks
   },
-  ADD_TASK(state, task: Task): void {
+  ADD_TASK(state, task: Task) {
     state.tasks.push(task)
   },
-  DELETE_TASK(state, taskId: string): void {
+  DELETE_TASK(state, taskId: string) {
     const taskIndex = state.tasks.findIndex(task => task.id === taskId)
     const deletedTask = state.tasks[taskIndex]
     const greaterOrderTasks = state.tasks.filter(task => task.order > deletedTask.order)
@@ -35,13 +35,35 @@ const mutations: MutationTree<TaskState> = {
 
     greaterOrderTasks.forEach(task => task.order++)
   },
-  EDIT_TASK(state, update: Update<Task>): void {
+  EDIT_TASK(state, update: Update<Task>) {
     const taskIndex = state.tasks.findIndex(task => task.id === update.id)
 
     state.tasks[taskIndex] = {
       ...state.tasks[taskIndex],
       ...update.changes
     }
+  },
+  UNCOMPLETE_TASKS(state, timeStart: firebase.firestore.Timestamp) {
+    const tasks = state
+      .tasks
+      .filter(task => task.timeCompleted)
+      .filter(task => dayjs(task.timeCompleted?.toDate()).isAfter(dayjs(timeStart.toDate())))
+      .map<Task>(task => ({
+        ...task,
+        status: 'todo',
+        timeCompleted: null
+      }))
+    const tasksIds = tasks.map(task => task.id)
+
+    state.tasks = state.tasks
+      .reduce((acc, task) => {
+        if (tasksIds.includes(task.id)) {
+          acc.push(tasks.find(t => t.id === task.id)!)
+          return acc
+        }
+        acc.push(task)
+        return acc
+      }, [] as Task[])
   }
 }
 
