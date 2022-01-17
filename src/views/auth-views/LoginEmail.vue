@@ -1,5 +1,9 @@
 <template>
   <div class="auth login-email">
+    <router-link class="auth__back" to="/auth/login">
+      <AppBack></AppBack>
+    </router-link>
+
     <h1 class="bold-title-text auth__title">
       Login
       <router-link to="/auth/signup/email" class="subtitle-text link link--underlined">Signup</router-link>
@@ -49,6 +53,7 @@ import { auth } from '@/lib/firebase'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import firebase from 'firebase/compat'
+import AppBack from '@/components/UI/AppBack.vue'
 
 const store = useStore()
 const router = useRouter()

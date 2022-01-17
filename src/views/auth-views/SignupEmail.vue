@@ -1,5 +1,9 @@
 <template>
   <div class="auth signup-email">
+    <router-link class="auth__back" to="/auth/login">
+      <AppBack></AppBack>
+    </router-link>
+
     <h1 class="bold-title-text auth__title">
       Signup
       <router-link to="/auth/login/email" class="subtitle-text link link--underlined">Login</router-link>
@@ -47,6 +51,7 @@
 
 <script lang="ts" setup>
 import AppInput from '@/components/UI/AppInput.vue'
+import AppBack from '@/components/UI/AppBack.vue'
 import AppButton from '@/components/UI/AppButton.vue'
 import { ref } from 'vue'
 import { email, minLength, required } from '@vuelidate/validators'

@@ -1,5 +1,6 @@
 <template>
   <div class="auth terms">
+    <AppBack class="auth__back" @click="router.back"></AppBack>
     <div class="terms__body">
       <h1 class="title-text terms__title">Terms and conditions</h1>
 
@@ -42,7 +43,10 @@
 </template>
 
 <script lang="ts" setup>
+import AppBack from '@/components/UI/AppBack.vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 </script>
 
 <style scoped lang="scss">
