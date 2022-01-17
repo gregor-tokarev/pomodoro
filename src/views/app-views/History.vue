@@ -15,8 +15,8 @@
           ></AppHistoryRecord>
         </li>
       </ul>
-
     </template>
+    <h1 class="subtitle-text history__empty">No records are found, start timer to create them</h1>
   </div>
 </template>
 
@@ -81,6 +81,10 @@ const historyBucketsArr = computed<historyBuckets>(
   &__date {
     margin: 0 0 10px;
     align-self: center;
+  }
+
+  &__empty {
+    color: $gray-400;
   }
 }
 </style>
