@@ -8,5 +8,6 @@ admit.initializeApp()
 //   functions.logger.info('Hello logs!', { structuredData: true })
 // })
 
+export * from './auth'
 export * from './tasks'
 export * from './history'

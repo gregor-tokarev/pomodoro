@@ -1,6 +1,8 @@
+import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
 import { createSecludedTask, removeSecludedTask } from '../secludedTask'
 import { settingsByUserId } from '../settingsByUserId'
+import { firestore } from 'firebase-admin'
 
 export const createRecord = functions.firestore
   .document('history/{recordId}')
@@ -17,6 +19,23 @@ export const createRecord = functions.firestore
 
 export const deleteRecord = functions.firestore
   .document('history/{recordId}')
-  .onDelete(snapshot => {
-    return removeSecludedTask(snapshot.id)
+  .onDelete(async snapshot => {
+    if (!snapshot.data().timeEnd) {
+      await removeSecludedTask(snapshot.id)
+    }
+
+    // uncomplete tasks
+    const query = admin
+      .firestore()
+      .collection('tasks')
+      .where('timeCompleted', '>', snapshot.data().timeStart)
+
+    const tasksDocs = await query.get()
+    const taskDeleteOperations = tasksDocs.docs.map(doc => doc.ref.update({
+      status: 'todo',
+      timeCompleted: null
+    }))
+
+    return Promise.all<firestore.WriteResult>(taskDeleteOperations
+    )
   })
