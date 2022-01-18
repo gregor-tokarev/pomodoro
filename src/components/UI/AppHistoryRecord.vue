@@ -106,12 +106,12 @@ $padding-x: 15px;
   }
 
   &__duration {
+    width: 53%;
     color: $accent-main;
   }
 
   &__time {
     width: 160px;
-    margin-left: auto;
     color: $gray-400;
   }
 
@@ -153,13 +153,12 @@ $padding-x: 15px;
   padding: 0 $padding-x 0 $padding-x + 40px;
   color: $gray-400;
 
-  &__time {
-    width: 160px;
-    margin-left: auto;
+  &__text {
+    width: 55%;
   }
 
-  &__duration {
-    width: 175px;
+  &__time {
+    width: 160px;
   }
 }
 </style>
