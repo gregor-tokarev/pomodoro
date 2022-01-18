@@ -149,12 +149,14 @@ $padding-x: 15px;
 
 .todo {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 $padding-x 0 $padding-x + 40px;
   color: $gray-400;
 
   &__text {
-    width: 55%;
+    width: 56%;
+    padding-right: 15px;
+    word-break: break-all;
   }
 
   &__time {
