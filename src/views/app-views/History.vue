@@ -16,7 +16,7 @@
         </li>
       </ul>
     </template>
-    <h1 class="subtitle-text history__empty">No records are found, start timer to create them</h1>
+    <h1 v-else class="subtitle-text history__empty">No records are found, start timer to create them</h1>
   </div>
 </template>
 
