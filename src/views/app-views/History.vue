@@ -1,6 +1,6 @@
 <template>
   <div class="history">
-    <template v-if="store.getters['tasksModule/tasks'].length">
+    <template v-if="store.getters['timerModule/allFinishedRecords'].length">
       <ul class="history__list">
         <li v-for="(records, date, index) in historyBucketsArr" class="history__block" :key="index">
           <div class="tag subtitle-text history__date">
