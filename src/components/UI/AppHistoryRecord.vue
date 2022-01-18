@@ -155,6 +155,7 @@ $padding-x: 15px;
 
   &__text {
     width: 55.6%;
+    max-width: 55.6%;
     padding-right: 15px;
     word-break: break-all;
   }
