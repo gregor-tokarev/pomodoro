@@ -26,7 +26,9 @@
     </AppAddButton>
 
     <form v-else class="todo__add-form" @submit.prevent="addTask">
-      <AppTextarea :placeholder="t('taskPlaceholder')" v-model="taskForm.text"
+      <AppTextarea :placeholder="t('taskPlaceholder')"
+                   data-task-input
+                   v-model="taskForm.text"
                    @keydown.esc="isAddForm = false"
                    @keydown.enter.exact.prevent="addTask"></AppTextarea>
 
@@ -71,7 +73,7 @@ const tasks = computed<Task[]>(() => {
 })
 
 // ====
-// Add task form
+// Add-task form
 const root = ref<HTMLElement>()
 const isAddForm = ref<boolean>(false)
 
@@ -80,8 +82,9 @@ async function toggleForm(value: boolean): Promise<void> {
   await nextTick()
 
   if (value) {
+    const textarea = root.value?.querySelector('[data-task-input] textarea') as HTMLTextAreaElement
     // eslint-disable-next-line no-unused-expressions
-    root.value?.querySelector('textarea')?.focus()
+    textarea?.focus()
   }
 }
 
