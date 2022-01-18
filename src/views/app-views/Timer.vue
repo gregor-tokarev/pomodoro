@@ -65,6 +65,8 @@ function changeStatus(taskId: string, status: taskStatus): void {
   }
   if (status === 'completed') {
     changes.timeCompleted = firebase.firestore.Timestamp.now()
+  } else {
+    changes.timeCompleted = null
   }
 
   store.dispatch('tasksModule/editTask', {
