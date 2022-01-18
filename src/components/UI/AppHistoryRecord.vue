@@ -20,7 +20,7 @@
         <div class="basic-text todo history-item__todo" v-for="task in props.tasks" :key="task.id">
           <div class="todo__text">{{ task.text }}</div>
           <div class="todo__time">
-            <span class="time-entry">{{ dayjs(task.timeCompleted.toDate()).format('hh:mm') }}</span>
+            {{ dayjs(task.timeCompleted.toDate()).format('hh:mm') }}
           </div>
         </div>
       </div>
