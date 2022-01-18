@@ -28,13 +28,16 @@
       </div>
 
       <div class="timer__col">
-        <AppTodoItem
-          v-for="task in tasks"
-          :key="task.id"
-          :in-progress="store.getters['tasksModule/runningTaskId'] === task.id"
-          :todoitem="task"
-          @changeStatus="changeStatus($event.taskId, $event.status)"
-        ></AppTodoItem>
+        <template v-if="tasks.length">
+          <AppTodoItem
+            v-for="task in tasks"
+            :key="task.id"
+            :in-progress="store.getters['tasksModule/runningTaskId'] === task.id"
+            :todoitem="task"
+            @changeStatus="changeStatus($event.taskId, $event.status)"
+          ></AppTodoItem>
+        </template>
+        <p v-else class="subtitle-text timer__empty">No tasks todo, create new</p>
       </div>
     </div>
   </div>
@@ -164,6 +167,10 @@ const breakTime = computed<string>({
   }
 
   &__label {
+    color: $gray-400;
+  }
+
+  &__empty {
     color: $gray-400;
   }
 }
