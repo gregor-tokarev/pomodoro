@@ -1,5 +1,9 @@
 <template>
   <div class="todo" ref="root">
+    <div class="subtitle-text todo__toggle-completed">
+      <AppToggle class="todo__toggle-button" v-model="showCompleted"></AppToggle>
+      Show completed tasks
+    </div>
     <Sortable
       class="todo__list"
       @dragEnd="dragEnd"
@@ -48,7 +52,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref } from 'vue'
+import { computed, nextTick, ref, watchEffect } from 'vue'
 import { useStore } from 'vuex'
 import { Task, taskStatus } from '../../../models/task.model'
 import AppTodoItem from '@/components/UI/AppTodoItem.vue'
@@ -61,6 +65,7 @@ import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import Sortable from '@/components/utils/Sortable.vue'
 import firebase from 'firebase/compat'
+import AppToggle from '@/components/UI/AppToggle.vue'
 
 const { t } = useI18n()
 const store = useStore()
@@ -68,8 +73,17 @@ const store = useStore()
 // ====
 // tasks
 await store.dispatch('tasksModule/fetchTasks')
+
+const cacheValue = localStorage.getItem('showCompletedTask') === 'true' ?? false
+const showCompleted = ref<boolean>(cacheValue)
+watchEffect(() => {
+  localStorage.setItem('showCompletedTask', String(showCompleted.value))
+})
+
 const tasks = computed<Task[]>(() => {
-  return store.getters['tasksModule/tasks']
+  return showCompleted.value
+    ? store.getters['tasksModule/tasks']
+    : store.getters['tasksModule/tasks'].filter((task: Task) => task.status !== 'completed')
 })
 
 // ====
@@ -171,6 +185,17 @@ function changeOrder(taskId: string, newOrder: number): void {
 
 <style scoped lang="scss">
 .todo {
+  &__toggle-completed {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: $gray-400;
+  }
+
+  &__toggle-button {
+    margin-right: 10px;
+  }
+
   &__item {
     position: relative;
 
