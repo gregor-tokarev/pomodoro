@@ -15,10 +15,6 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const email = route.query.email as string
-
-// await auth.sendSignInLinkToEmail(email, {
-//   url: 'google.com'
-// })
 </script>
 
 <style scoped lang="scss">
