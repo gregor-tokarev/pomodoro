@@ -154,7 +154,7 @@ $padding-x: 15px;
   color: $gray-400;
 
   &__text {
-    width: 56%;
+    width: 55.6%;
     padding-right: 15px;
     word-break: break-all;
   }
