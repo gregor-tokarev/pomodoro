@@ -256,7 +256,9 @@ const getters: GetterTree<TaskState, RootState> = {
     }
   },
   tasksForTimer(state, getters): Task[] {
-    return getters.tasks.slice(0, 4)
+    return getters.tasks
+      .filter((task: Task) => task.status !== 'completed')
+      .slice(0, 5)
   },
   tasksOrderInterval(state): (startOrder: number, stopOrder: number) => Task[] {
     return (startOrder, stopOrder) =>
