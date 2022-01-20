@@ -2,7 +2,7 @@
   <div class="history">
     <template v-if="store.getters['timerModule/allFinishedRecords'].length">
       <ul class="history__list">
-        <li v-for="(records, date, index) in historyBucketsArr" class="history__block" :key="index">
+        <li v-for="({date, records}, index) in historyBucketsArr" class="history__block" :key="index">
           <div class="tag subtitle-text history__date">
             {{ dayjs(date).format('DD MMMM') }}
           </div>
@@ -34,15 +34,16 @@ await Promise.all([
   store.dispatch('timerModule/fetchRecords')
 ])
 
-type historyBuckets = {
+type bucket = {
   [key: string]: HistoryRecord[]
 }
+type historyBuckets = { records: HistoryRecord[], date: string }[]
 const historyBucketsArr = computed<historyBuckets>(
   () => {
     const history = store.getters['timerModule/allFinishedRecords'] as HistoryRecord[]
 
     const buckets = history
-      .reduce((acc: historyBuckets, record) => {
+      .reduce((acc: bucket, record) => {
         const date = dayjs(record.timeStart.toDate()).format().split('T')[0]
 
         if (!acc[date]) {
@@ -53,16 +54,20 @@ const historyBucketsArr = computed<historyBuckets>(
         return acc
       }, {})
 
-    for (const date in buckets) {
-      buckets[date] = buckets[date].sort((prev, next) => {
-        const prevDate = dayjs(prev.timeStart.toDate())
-        const nextDate = dayjs(next.timeStart.toDate())
-
-        return prevDate.unix() - nextDate.unix()
+    const bucketsArr: historyBuckets = []
+    for (const bucket in buckets) {
+      bucketsArr.push({
+        date: bucket,
+        records: buckets[bucket]
       })
     }
+    bucketsArr.sort((prev, next) => {
+      const prevDate = dayjs(prev.date)
+      const nextDate = dayjs(next.date)
+      return nextDate.diff(prevDate, 'day')
+    })
 
-    return buckets
+    return bucketsArr
   }
 )
 </script>
