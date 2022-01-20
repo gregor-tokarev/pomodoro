@@ -8,6 +8,7 @@ import { firestore } from '@/lib/firebase'
 import { secondsToTime } from '@/lib/secondsToTime'
 import { getTimeStr } from '@/lib/getTimeStr'
 import firebase from 'firebase/compat'
+import { timerObservable } from '@/lib/TimerObservable'
 
 dayjs.extend(utc)
 
@@ -203,6 +204,7 @@ const actions: ActionTree<TimerState, RootState> = {
 
         if (record.timeEnd) {
           dispatch('finishTimer')
+          timerObservable.stop()
         }
       })
     commit('SET_HISTORY_LISTENERS', { work: workListener })
@@ -230,6 +232,8 @@ const actions: ActionTree<TimerState, RootState> = {
 
         dispatch('setupWorkListener')
         dispatch('setupRunner')
+
+        timerObservable.stop()
       })
 
     commit('SET_HISTORY_LISTENERS', { break: breakListener })

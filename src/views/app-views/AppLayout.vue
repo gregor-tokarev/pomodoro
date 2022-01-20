@@ -25,6 +25,7 @@ import { Colors } from '@/lib/UI/colors'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import AppIcon from '@/components/UI/AppIcon.vue'
+import { timerObservable } from '@/lib/TimerObservable'
 
 const store = useStore()
 const loaded = ref<boolean>(false)
@@ -41,8 +42,17 @@ onMounted(async () => {
   store.dispatch('timerModule/setupBreakListener')
 })
 
+async function timerStopHandler() {
+  const audio = new Audio('/audio/door-bell.mp3')
+  audio.volume = 0.3
+  audio.play()
+}
+
+timerObservable.subscribeStop(timerStopHandler)
+
 onBeforeUnmount(() => {
-  store.commit('timerModule/CLEAR_RECORD_LISTENER')
+  store.commit('timerModule/CLEAR_HISTORY_LISTENERS')
+  timerObservable.removeEventListener('stopTimer', timerStopHandler)
 })
 </script>
 
