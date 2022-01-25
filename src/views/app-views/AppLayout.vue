@@ -10,7 +10,7 @@
             </div>
 
             <template #fallback>
-              <AppIcon class="app__loader" icon-name="loader" :color="Colors.ACCENT_MAIN"></AppIcon>
+              <AppLoader class="app__loader"></AppLoader>
             </template>
           </suspense>
         </router-view>
@@ -21,11 +21,10 @@
 
 <script lang="ts" setup>
 import LeftBar from '@/components/layout/LeftBar.vue'
-import { Colors } from '@/lib/UI/colors'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
-import AppIcon from '@/components/UI/AppIcon.vue'
 import { timerObservable } from '@/lib/TimerObservable'
+import AppLoader from '@/components/UI/AppLoader.vue'
 
 const store = useStore()
 const loaded = ref<boolean>(false)
@@ -93,17 +92,6 @@ $page-padding-top: 30px;
     position: absolute;
     top: calc(50% - 50px);
     left: calc(50% - 50px);
-    animation: spin 2s infinite linear;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
-    }
   }
 }
 </style>

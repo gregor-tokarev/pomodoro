@@ -8,7 +8,7 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
 
     <style>
-        .loader {
+        .base-loader {
             position: absolute;
             top: 0;
             right: 0;
@@ -20,7 +20,7 @@
             justify-content: center;
         }
 
-        .loader__overlay {
+        .base-loader__overlay {
             position: absolute;
             top: 0;
             right: 0;
@@ -29,7 +29,7 @@
             background-color: #fff;
         }
 
-        .loader__spinner {
+        .base-loader__spinner {
             animation: spin 2s infinite linear;
         }
 
@@ -49,9 +49,9 @@
     <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
         Please enable it to continue.</strong>
 </noscript>
-<div class="loader">
-    <div class="loader__overlay"></div>
-    <div class="loader__spinner">
+<div class="base-loader">
+    <div class="base-loader__overlay"></div>
+    <div class="base-loader__spinner">
         <svg width="100" height="100" viewBox="0 0 523 523" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M482.119 400.918C508.819 358.624 523 309.533 523 259.402H491.242C491.243 259.569 491.243 259.735 491.243 259.902C491.243 387.527 388.606 490.988 261.996 490.988C135.387 490.988 32.7495 387.527 32.7495 259.902C32.7495 146.434 113.879 52.0671 220.855 32.5273L215.027 0C166.087 8.90902 120.682 31.7009 84.1374 65.7022C47.5929 99.7035 21.4246 143.504 8.70191 191.967C-4.02075 240.43 -2.7702 291.545 12.3069 339.316C27.384 387.088 55.6624 429.535 93.8252 461.679C131.988 493.823 178.453 514.331 227.769 520.798C277.086 527.264 327.209 519.421 372.259 498.188C417.31 476.954 455.42 443.212 482.119 400.918Z"
@@ -65,7 +65,7 @@
 <!-- built files will be auto injected -->
 
 <script>
-  const loader = document.querySelector('.loader')
+  const loader = document.querySelector('.base-loader')
   document.addEventListener('DOMContentLoaded', () => {
     loader.style.display = 'none'
   })

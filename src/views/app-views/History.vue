@@ -15,6 +15,8 @@
           ></AppHistoryRecord>
         </li>
       </ul>
+
+      <AppLoader v-if="loading" class="history__loader"></AppLoader>
     </template>
     <h1 v-else class="subtitle-text history__empty">No records are found, start timer to create them</h1>
   </div>
@@ -23,17 +25,57 @@
 <script lang="ts" setup>
 import AppHistoryRecord from '@/components/UI/AppHistoryRecord.vue'
 import { useStore } from 'vuex'
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { HistoryRecord } from '../../../models/history-record.model'
 import dayjs from 'dayjs'
+import AppLoader from '@/components/UI/AppLoader.vue'
 
 const store = useStore()
 
-await Promise.all([
-  store.dispatch('tasksModule/fetchTasks'),
-  store.dispatch('timerModule/fetchRecords')
-])
+// ====
+// pagination
+const pageSize = 15
+const page = ref<number>(1)
+const loading = ref<boolean>(false)
 
+async function loadHistory(): Promise<void> {
+  loading.value = true
+  const records = store.getters['timerModule/allFinishedRecords']
+
+  const recordIndex = (page.value - 1) * pageSize - 1
+  await store.dispatch('timerModule/fetchRecords', {
+    limit: pageSize,
+    timeStartPoint: page.value === 1 ? null : records[recordIndex]?.timeStart
+  })
+
+  page.value++
+  loading.value = false
+}
+
+await loadHistory()
+
+const bodyEl = computed<HTMLElement | null>(() => document.querySelector('.app__body'))
+
+function scrollHandler() {
+  if (!bodyEl.value) {
+    return
+  }
+  const scrollBottom = bodyEl.value.scrollHeight - (bodyEl.value.scrollTop + bodyEl.value.clientHeight)
+
+  if (scrollBottom < 20 && !loading.value) {
+    loadHistory()
+  }
+}
+
+onMounted(() => {
+  bodyEl.value?.addEventListener('scroll', scrollHandler)
+})
+
+onUnmounted(() => {
+  bodyEl.value?.removeEventListener('scroll', scrollHandler)
+})
+// ====
+// bucketing
 type bucket = {
   [key: string]: HistoryRecord[]
 }
@@ -90,6 +132,10 @@ const historyBucketsArr = computed<historyBuckets>(
 
   &__empty {
     color: $gray-400;
+  }
+
+  &__loader {
+    margin-top: 20px;
   }
 }
 </style>

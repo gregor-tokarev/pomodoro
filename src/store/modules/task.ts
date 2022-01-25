@@ -201,7 +201,7 @@ const actions: ActionTree<TaskState, RootState> = {
   async fetchTasks({
     commit,
     rootGetters
-  }, { limit }: { limit?: number } = {}): Promise<Task[]> {
+  }, { limit, daysFromNow }: { limit?: number, daysFromNow?: number } = {}): Promise<Task[]> {
     const userId = rootGetters['authModule/userId']
 
     try {
@@ -211,7 +211,7 @@ const actions: ActionTree<TaskState, RootState> = {
         .where(
           'updatedAt',
           '>',
-          firebase.firestore.Timestamp.fromDate(dayjs().subtract(2, 'days').toDate())
+          firebase.firestore.Timestamp.fromDate(dayjs().subtract(daysFromNow ?? 2, 'days').toDate())
         )
 
       limit && query.limit(limit)
@@ -234,7 +234,12 @@ const actions: ActionTree<TaskState, RootState> = {
 
 const getters: GetterTree<TaskState, RootState> = {
   tasks(state): Task[] {
-    return state.tasks.sort((prev, next) => prev.order - next.order)
+    return state.tasks
+      .filter((task: Task) => {
+        const timeUpdated = dayjs(task.updatedAt.toDate())
+        return timeUpdated.isAfter(dayjs().subtract(1, 'd'))
+      })
+      .sort((prev, next) => prev.order - next.order)
   },
   tasksInHistoryInterval(state, getters, rootState, rootGetters): (recordId: string) => Task[] {
     return recordId => {
@@ -244,7 +249,7 @@ const getters: GetterTree<TaskState, RootState> = {
         timeStart
       } = record
 
-      return getters.tasks.filter(
+      return state.tasks.filter(
         (task: Task) => dayjs(task.timeCompleted?.toDate())
           .isBetween(
             dayjs(timeStart.toDate()),

@@ -9,11 +9,15 @@ import { secondsToTime } from '@/lib/secondsToTime'
 import { getTimeStr } from '@/lib/getTimeStr'
 import firebase from 'firebase/compat'
 import { timerObservable } from '@/lib/TimerObservable'
+import unionBy from 'lodash/unionBy'
+import { getOldestRecord } from '@/lib/get-oldest-record'
 
 dayjs.extend(utc)
 
 export interface TimerState {
   records: HistoryRecord[]
+  noMoreRecords: boolean
+
   timeFormatted: string
   completionPercent: number
   runner: (ReturnType<typeof setInterval>) | null
@@ -28,6 +32,8 @@ export interface TimerState {
 
 const state: TimerState = {
   records: [],
+  noMoreRecords: false,
+
   timeFormatted: '',
   completionPercent: 0,
   runner: null,
@@ -43,7 +49,10 @@ const mutations: MutationTree<TimerState> = {
     state.records.push(record)
   },
   SET_HISTORY(state, records: HistoryRecord[]) {
-    state.records = records
+    state.records = unionBy<HistoryRecord>(state.records, records, 'id')
+  },
+  SET_HISTORY_FULLNESS(state, value: boolean) {
+    state.noMoreRecords = value
   },
   FINISH_RECORD(state, {
     recordId,
@@ -106,21 +115,62 @@ const mutations: MutationTree<TimerState> = {
 }
 
 const actions: ActionTree<TimerState, RootState> = {
-  async fetchRecords({
-    commit,
-    rootGetters
-  }): Promise<HistoryRecord[]> {
+  async fetchRecords(
+    {
+      commit,
+      dispatch,
+      rootGetters,
+      getters
+    },
+    settings: { daysFromNow?: number, limit?: number, timeStartPoint?: number } = {}
+  ): Promise<HistoryRecord[]> {
+    console.log(getters.historyFullness)
+    if (getters.historyFullness) {
+      return []
+    }
+
     try {
       const userId = rootGetters['authModule/userId']
-      const query = firestore
+      let query = firestore
         .collection('history')
         .where('ownerId', '==', userId)
+        .orderBy('timeEnd', 'desc')
+
+      if (settings.daysFromNow) {
+        query = query
+          .where(
+            'timeStart',
+            '>',
+            firebase
+              .firestore
+              .Timestamp
+              .fromDate(dayjs().subtract(settings.daysFromNow, 'days').toDate())
+          )
+      }
+
+      if (settings.timeStartPoint) {
+        query = query.startAfter(settings.timeStartPoint)
+      }
+
+      if (settings.limit) {
+        query = query.limit(settings.limit)
+      }
 
       const { docs } = await query.get()
+
       const history: HistoryRecord[] = docs.map(doc => ({
         ...doc.data() as Omit<HistoryRecord, 'id'>,
         id: doc.id
       }))
+
+      const allHistory = unionBy(history, getters.allFinishedRecords, 'id')
+      if (allHistory.length === getters.allFinishedRecords.length) {
+        commit('SET_HISTORY_FULLNESS', true)
+        return []
+      }
+
+      const daysFromNow = dayjs().diff(dayjs(getOldestRecord(allHistory)?.timeStart.toDate()), 'd')
+      await dispatch('tasksModule/fetchTasks', { daysFromNow: daysFromNow + 1 }, { root: true })
 
       commit('SET_HISTORY', history)
       return history
@@ -321,6 +371,9 @@ const actions: ActionTree<TimerState, RootState> = {
 }
 
 const getters: GetterTree<TimerState, RootState> = {
+  historyFullness(state): boolean {
+    return state.noMoreRecords
+  },
   allFinishedRecords(state): HistoryRecord[] {
     return state.records.filter(record => record.timeEnd)
   },
