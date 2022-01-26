@@ -282,8 +282,6 @@ const actions: ActionTree<TimerState, RootState> = {
 
         dispatch('setupWorkListener')
         dispatch('setupRunner')
-
-        timerObservable.stop()
       })
 
     commit('SET_HISTORY_LISTENERS', { break: breakListener })
