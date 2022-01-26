@@ -222,7 +222,8 @@ const actions: ActionTree<TimerState, RootState> = {
       }
 
       const time = secondsToTime(getters.timeInSeconds)
-      commit('UPDATE_TIME_FORMATTED', getTimeStr(time))
+      const timeStr = getTimeStr(time)
+      commit('UPDATE_TIME_FORMATTED', timeStr)
 
       const runningRecord: HistoryRecord = getters.runningRecord
       if (!runningRecord) {
@@ -234,7 +235,13 @@ const actions: ActionTree<TimerState, RootState> = {
         : rootGetters['settingsModule/userSettings'].workTime * 60
 
       const passedTimeMinutes: number = Math.floor(getters.timeInSeconds)
-      commit('UPDATE_COMPLETION_PERCENT', (passedTimeMinutes / totalTimeMinutes) * 100)
+      const percent = (passedTimeMinutes / totalTimeMinutes) * 100
+
+      timerObservable.update({
+        timeStr,
+        percent
+      })
+      commit('UPDATE_COMPLETION_PERCENT', percent)
     }, time)
     commit('CREATE_RUNNER', runner)
   },
@@ -247,11 +254,11 @@ const actions: ActionTree<TimerState, RootState> = {
       .collection('history')
       .doc(getters.runningRecord.id)
       .onSnapshot(snapshot => {
-        const record = snapshot.data() as HistoryRecord
-        if (!record) {
+        if (!snapshot.exists) {
           return
         }
 
+        const record = snapshot.data() as HistoryRecord
         if (record.timeEnd) {
           dispatch('finishTimer')
           timerObservable.stop()
@@ -362,6 +369,8 @@ const actions: ActionTree<TimerState, RootState> = {
 
       commit('tasksModule/UNCOMPLETE_TASKS', runningRecord.timeStart, { root: true })
       commit('DELETE_RECORD', runningRecord.id)
+
+      timerObservable.stop()
     } catch (err) {
       console.error(err)
     }

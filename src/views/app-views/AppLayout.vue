@@ -23,11 +23,14 @@
 import LeftBar from '@/components/layout/LeftBar.vue'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
-import { timerObservable } from '@/lib/TimerObservable'
+import { timerObservable, UpdateDetail } from '@/lib/TimerObservable'
 import AppLoader from '@/components/UI/AppLoader.vue'
+import { useI18n } from 'vue-i18n'
 
 const store = useStore()
 const loaded = ref<boolean>(false)
+const { t } = useI18n()
+
 onMounted(async () => {
   await store.dispatch('timerModule/fetchActiveRecord')
   loaded.value = true
@@ -47,11 +50,26 @@ async function timerStopHandler() {
   audio.play()
 }
 
+// eslint-disable-next-line no-undef
+function timerUpdateHandler(event: CustomEventInit<UpdateDetail>) {
+  document.title = event.detail?.timeStr ?? t('title')
+}
+
+function timerResetHandler() {
+  console.log('reset')
+  document.title = t('title')
+}
+
 timerObservable.subscribeStop(timerStopHandler)
+timerObservable.subscribeUpdate(timerUpdateHandler)
+timerObservable.subscribeReset(timerResetHandler)
 
 onBeforeUnmount(() => {
   store.commit('timerModule/CLEAR_HISTORY_LISTENERS')
-  timerObservable.removeEventListener('stopTimer', timerStopHandler)
+
+  timerObservable.unsubscribe('timerStop', timerStopHandler)
+  timerObservable.unsubscribe('timerReset', timerResetHandler)
+  timerObservable.unsubscribe('timerUpdate', timerUpdateHandler)
 })
 </script>
 
@@ -95,3 +113,4 @@ $page-padding-top: 30px;
   }
 }
 </style>
+<i18n src="@/lang/base.json"></i18n>
