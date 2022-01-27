@@ -45,6 +45,8 @@ onMounted(async () => {
 })
 
 async function timerStopHandler() {
+  document.title = t('title')
+
   const audio = new Audio('/audio/door-bell.mp3')
   audio.volume = 0.3
   audio.play()
@@ -56,7 +58,6 @@ function timerUpdateHandler(event: CustomEventInit<UpdateDetail>) {
 }
 
 function timerResetHandler() {
-  console.log('reset')
   document.title = t('title')
 }
 

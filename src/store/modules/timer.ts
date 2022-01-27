@@ -370,7 +370,7 @@ const actions: ActionTree<TimerState, RootState> = {
       commit('tasksModule/UNCOMPLETE_TASKS', runningRecord.timeStart, { root: true })
       commit('DELETE_RECORD', runningRecord.id)
 
-      timerObservable.stop()
+      timerObservable.reset()
     } catch (err) {
       console.error(err)
     }
