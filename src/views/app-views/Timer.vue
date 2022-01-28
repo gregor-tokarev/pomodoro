@@ -2,7 +2,7 @@
   <div class="timer">
     <div class="timer__inner">
       <div class="timer__col">
-        <AppTimer :progress-percent="currentPercent" :time="currentTime"></AppTimer>
+        <AppTimer :progress-percent="currentPercent" :is-break="isBreak" :time="currentTime"></AppTimer>
 
         <div class="timer__actions">
           <AppButton @click="startTimer" :disabled="store.getters['timerModule/isRunning']"
@@ -82,6 +82,8 @@ function changeStatus(taskId: string, status: taskStatus): void {
 // Timer
 const currentTime = computed<string>(() => store.getters['timerModule/timeFormatted'])
 const currentPercent = computed<number>(() => store.getters['timerModule/completionPercent'])
+
+const isBreak = computed<boolean>(() => !!store.getters['timerModule/runningRecord']?.isBreak)
 
 const isRunning = ref<boolean>(false)
 if (store.getters['timerModule/runningRecord']) {

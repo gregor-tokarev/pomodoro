@@ -1,5 +1,5 @@
 <template>
-  <div ref="timer" class="timer">
+  <div ref="timer" class="timer" :class="{'timer--break': props.isBreak}">
     <div class="timer-number-text timer__numbers">{{ props.time }}</div>
 
     <div class="timer__waves">
@@ -17,14 +17,19 @@ import { computed, ref } from 'vue'
 interface Props {
   time: string;
   progressPercent: number
+  isBreak: boolean
 }
 
 const props = defineProps<Props>()
 
-const wave = ref<HTMLElement>(null)
-const timer = ref<HTMLElement>(null)
+const wave = ref<HTMLElement>()
+const timer = ref<HTMLElement>()
 
 const liftHeight = computed<string>(() => {
+  if (!wave.value || !timer.value) {
+    return '0px'
+  }
+
   const waveHeight = wave.value.offsetHeight
   const timerHeight = timer.value.offsetHeight
 
@@ -47,6 +52,20 @@ $wave-height: 50px;
   background-color: $gray-100;
   border-radius: 50%;
 
+  &--break {
+    .timer__lift {
+      background-color: $gray-300;
+    }
+
+    .timer__wave {
+      background-image: url("~@/assets/images/wave1-break.svg");
+
+      &:nth-child(2) {
+        background-image: url("~@/assets/images/wave2-break.svg");
+      }
+    }
+  }
+
   &__numbers {
     position: relative;
     z-index: 20;
@@ -66,6 +85,7 @@ $wave-height: 50px;
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 2;
     display: block;
     height: v-bind('liftHeight');
     content: "";
@@ -75,14 +95,16 @@ $wave-height: 50px;
 
   &__wave {
     position: absolute;
+    z-index: 2;
     width: 3600px;
     height: $wave-height;
     background: url("~@/assets/images/wave1.svg") repeat-x bottom / 300px $wave-height;
     animation: wave 14s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
 
     &:nth-child(2) {
-      opacity: 0.2;
-      //animation: wave 18s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+      z-index: 1;
+      //opacity: 0.2;
+      background-image: url("~@/assets/images/wave2.svg");
       animation: wave 14s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.525s infinite, swell 5s ease -1.25s infinite;
     }
   }
