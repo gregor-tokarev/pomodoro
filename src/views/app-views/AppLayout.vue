@@ -61,9 +61,9 @@ function timerResetHandler() {
   document.title = t('title')
 }
 
-timerObservable.subscribeStop(timerStopHandler)
-timerObservable.subscribeUpdate(timerUpdateHandler)
-timerObservable.subscribeReset(timerResetHandler)
+timerObservable.subscribe('timerStop', timerStopHandler)
+timerObservable.subscribe('timerUpdate', timerUpdateHandler)
+timerObservable.subscribe('timerReset', timerResetHandler)
 
 onBeforeUnmount(() => {
   store.commit('timerModule/CLEAR_HISTORY_LISTENERS')

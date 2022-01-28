@@ -10,33 +10,13 @@ class TimerObservable extends EventTarget {
     this.removeEventListener(event, fn)
   }
 
-  public stop(): void {
-    const event = new CustomEvent('timerStop')
+  public dispatch<T = any>(eventName: timerEvents, payload?: T): void {
+    const event = new CustomEvent<T>(eventName, { detail: payload })
     this.dispatchEvent(event)
   }
 
-  public subscribeStop(fn: () => void): void {
-    this.addEventListener('timerStop', fn)
-  }
-
-  public reset(): void {
-    const event = new CustomEvent('timerReset')
-    this.dispatchEvent(event)
-  }
-
-  public subscribeReset(fn: () => void): void {
-    this.addEventListener('timerReset', fn)
-  }
-
-  public update(detail: UpdateDetail): void {
-    const event = new CustomEvent<UpdateDetail>('timerUpdate', {
-      detail
-    })
-    this.dispatchEvent(event)
-  }
-
-  public subscribeUpdate(fn: (event: CustomEventInit<UpdateDetail>) => void): void {
-    this.addEventListener('timerUpdate', fn)
+  public subscribe(eventName: timerEvents, fn: EventListener): void {
+    this.addEventListener(eventName, fn)
   }
 }
 

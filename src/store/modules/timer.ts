@@ -8,7 +8,7 @@ import { firestore } from '@/lib/firebase'
 import { secondsToTime } from '@/lib/secondsToTime'
 import { getTimeStr } from '@/lib/getTimeStr'
 import firebase from 'firebase/compat'
-import { timerObservable } from '@/lib/TimerObservable'
+import { timerObservable, UpdateDetail } from '@/lib/TimerObservable'
 import unionBy from 'lodash/unionBy'
 import { getOldestRecord } from '@/lib/get-oldest-record'
 
@@ -124,7 +124,6 @@ const actions: ActionTree<TimerState, RootState> = {
     },
     settings: { daysFromNow?: number, limit?: number, timeStartPoint?: number } = {}
   ): Promise<HistoryRecord[]> {
-    console.log(getters.historyFullness)
     if (getters.historyFullness) {
       return []
     }
@@ -237,7 +236,7 @@ const actions: ActionTree<TimerState, RootState> = {
       const passedTimeMinutes: number = Math.floor(getters.timeInSeconds)
       const percent = (passedTimeMinutes / totalTimeMinutes) * 100
 
-      timerObservable.update({
+      timerObservable.dispatch<UpdateDetail>('timerUpdate', {
         timeStr,
         percent
       })
@@ -261,7 +260,7 @@ const actions: ActionTree<TimerState, RootState> = {
         const record = snapshot.data() as HistoryRecord
         if (record.timeEnd) {
           dispatch('finishTimer')
-          timerObservable.stop()
+          timerObservable.dispatch('timerStop')
         }
       })
     commit('SET_HISTORY_LISTENERS', { work: workListener })
@@ -370,7 +369,7 @@ const actions: ActionTree<TimerState, RootState> = {
       commit('tasksModule/UNCOMPLETE_TASKS', runningRecord.timeStart, { root: true })
       commit('DELETE_RECORD', runningRecord.id)
 
-      timerObservable.reset()
+      timerObservable.dispatch('timerReset')
     } catch (err) {
       console.error(err)
     }
