@@ -26,6 +26,7 @@ import { useStore } from 'vuex'
 import { timerObservable, UpdateDetail } from '@/lib/TimerObservable'
 import AppLoader from '@/components/UI/AppLoader.vue'
 import { useI18n } from 'vue-i18n'
+import { changeFavicon } from '@/lib/change-favicon'
 
 const store = useStore()
 const loaded = ref<boolean>(false)
@@ -59,11 +60,28 @@ function timerUpdateHandler(event: CustomEventInit<UpdateDetail>) {
 
 function timerResetHandler() {
   document.title = t('title')
+  changeFavicon('/favicon.ico')
+}
+
+function timerSwitchHandler() {
+  const path = store.getters['timerModule/runningRecord']?.isBreak
+    ? '/break-timer.ico'
+    : '/work-timer.ico'
+  changeFavicon(path)
+}
+
+function timerStartHandler() {
+  const path = store.getters['timerModule/runningRecord']?.isBreak
+    ? '/break-timer.ico'
+    : '/work-timer.ico'
+  changeFavicon(path)
 }
 
 timerObservable.subscribe('timerStop', timerStopHandler)
 timerObservable.subscribe('timerUpdate', timerUpdateHandler)
 timerObservable.subscribe('timerReset', timerResetHandler)
+timerObservable.subscribe('timerStart', timerStartHandler)
+timerObservable.subscribe('timerSwitch', timerSwitchHandler)
 
 onBeforeUnmount(() => {
   store.commit('timerModule/CLEAR_HISTORY_LISTENERS')
@@ -71,6 +89,8 @@ onBeforeUnmount(() => {
   timerObservable.unsubscribe('timerStop', timerStopHandler)
   timerObservable.unsubscribe('timerReset', timerResetHandler)
   timerObservable.unsubscribe('timerUpdate', timerUpdateHandler)
+  timerObservable.unsubscribe('timerStart', timerStartHandler)
+  timerObservable.unsubscribe('timerSwitch', timerSwitchHandler)
 })
 </script>
 

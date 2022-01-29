@@ -257,10 +257,10 @@ const actions: ActionTree<TimerState, RootState> = {
           return
         }
 
+        timerObservable.dispatch('timerStart')
         const record = snapshot.data() as HistoryRecord
         if (record.timeEnd) {
           dispatch('finishTimer')
-          timerObservable.dispatch('timerStop')
         }
       })
     commit('SET_HISTORY_LISTENERS', { work: workListener })
@@ -275,19 +275,21 @@ const actions: ActionTree<TimerState, RootState> = {
       .where('ownerId', '==', rootGetters['authModule/userId'])
       .where('isBreak', '==', true)
       .onSnapshot(snapshot => {
-        if (!snapshot.docChanges().length) {
-          return
-        }
+        if (!snapshot.docChanges().length) return
 
         const breakDoc = snapshot.docChanges()[0].doc
         const record: HistoryRecord = {
           ...breakDoc.data() as Omit<HistoryRecord, 'id'>,
           id: breakDoc.id
         }
+        if (record.timeEnd) return
+
         commit('ADD_RECORD', record)
 
         dispatch('setupWorkListener')
         dispatch('setupRunner')
+
+        timerObservable.dispatch('timerSwitch')
       })
 
     commit('SET_HISTORY_LISTENERS', { break: breakListener })
@@ -323,6 +325,8 @@ const actions: ActionTree<TimerState, RootState> = {
       dispatch('setupWorkListener')
       dispatch('setupBreakListener')
 
+      timerObservable.dispatch('timerStart')
+
       return record
     } catch (err) {
       console.error(err)
@@ -342,6 +346,7 @@ const actions: ActionTree<TimerState, RootState> = {
         timeEnd
       })
       dispatch('clearTimer')
+      timerObservable.dispatch('timerStop')
 
       return getters.runningRecord
     } catch (err) {

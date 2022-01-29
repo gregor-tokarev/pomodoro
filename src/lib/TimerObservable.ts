@@ -1,4 +1,9 @@
-export type timerEvents = 'timerStop' | 'timerReset' | 'timerStart' | 'timerUpdate'
+export type timerEvents =
+  'timerStop'
+  | 'timerReset'
+  | 'timerStart'
+  | 'timerUpdate'
+  | 'timerSwitch'
 
 export interface UpdateDetail {
   timeStr: string
