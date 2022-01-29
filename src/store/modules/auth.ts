@@ -20,6 +20,11 @@ const mutations: MutationTree<AuthState> = {
   },
   REMOVE_USER(state): void {
     state.user = null
+  },
+  COUNT_RECORDS(state, value: 1 | -1): void {
+    if (state.user) {
+      state.user.counters.records += value
+    }
   }
 }
 
@@ -52,7 +57,10 @@ const actions: ActionTree<AuthState, RootState> = {
         email: userData.email!,
         username: userData.displayName ?? '',
         avatar: userData.photoURL ?? '',
-        provider: userData.providerData[0]!.providerId as provider
+        provider: userData.providerData[0]!.providerId as provider,
+        counters: {
+          records: 0
+        }
       }
       localStorage.setItem('userId', userData.uid)
 

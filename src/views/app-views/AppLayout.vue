@@ -2,7 +2,10 @@
   <div class="app">
     <div class="app__wrapper">
       <LeftBar class="app__leftbar"></LeftBar>
-      <div class="app__body">
+      <div
+        v-if="loaded && store.getters['authModule/getUser']"
+        class="app__body"
+      >
         <router-view #default="{Component}">
           <suspense>
             <div>

@@ -6,4 +6,8 @@ export interface User {
   email: string
   avatar: string
   provider: provider
+
+  counters: {
+    records: number
+  }
 }

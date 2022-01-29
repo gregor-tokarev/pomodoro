@@ -16,7 +16,6 @@ dayjs.extend(utc)
 
 export interface TimerState {
   records: HistoryRecord[]
-  noMoreRecords: boolean
 
   timeFormatted: string
   completionPercent: number
@@ -32,7 +31,6 @@ export interface TimerState {
 
 const state: TimerState = {
   records: [],
-  noMoreRecords: false,
 
   timeFormatted: '',
   completionPercent: 0,
@@ -49,10 +47,7 @@ const mutations: MutationTree<TimerState> = {
     state.records.push(record)
   },
   SET_HISTORY(state, records: HistoryRecord[]) {
-    state.records = unionBy<HistoryRecord>(state.records, records, 'id')
-  },
-  SET_HISTORY_FULLNESS(state, value: boolean) {
-    state.noMoreRecords = value
+    state.records = records
   },
   FINISH_RECORD(state, {
     recordId,
@@ -124,10 +119,6 @@ const actions: ActionTree<TimerState, RootState> = {
     },
     settings: { daysFromNow?: number, limit?: number, timeStartPoint?: number } = {}
   ): Promise<HistoryRecord[]> {
-    if (getters.historyFullness) {
-      return []
-    }
-
     try {
       const userId = rootGetters['authModule/userId']
       let query = firestore
@@ -163,15 +154,10 @@ const actions: ActionTree<TimerState, RootState> = {
       }))
 
       const allHistory = unionBy(history, getters.allFinishedRecords, 'id')
-      if (allHistory.length === getters.allFinishedRecords.length) {
-        commit('SET_HISTORY_FULLNESS', true)
-        return []
-      }
-
       const daysFromNow = dayjs().diff(dayjs(getOldestRecord(allHistory)?.timeStart.toDate()), 'd')
       await dispatch('tasksModule/fetchTasks', { daysFromNow: daysFromNow + 1 }, { root: true })
 
-      commit('SET_HISTORY', history)
+      commit('SET_HISTORY', allHistory)
       return history
     } catch (err) {
       console.error(err)
@@ -286,6 +272,8 @@ const actions: ActionTree<TimerState, RootState> = {
 
         commit('ADD_RECORD', record)
 
+        commit('authModule/COUNT_RECORDS', 1, { root: true })
+
         dispatch('setupWorkListener')
         dispatch('setupRunner')
 
@@ -320,6 +308,8 @@ const actions: ActionTree<TimerState, RootState> = {
 
       const record = { id: recordId, ...historyRecord }
       commit('ADD_RECORD', record)
+
+      commit('authModule/COUNT_RECORDS', 1, { root: true })
 
       dispatch('setupRunner')
       dispatch('setupWorkListener')
@@ -374,6 +364,8 @@ const actions: ActionTree<TimerState, RootState> = {
       commit('tasksModule/UNCOMPLETE_TASKS', runningRecord.timeStart, { root: true })
       commit('DELETE_RECORD', runningRecord.id)
 
+      commit('authModule/COUNT_RECORDS', -1, { root: true })
+
       timerObservable.dispatch('timerReset')
     } catch (err) {
       console.error(err)
@@ -382,9 +374,6 @@ const actions: ActionTree<TimerState, RootState> = {
 }
 
 const getters: GetterTree<TimerState, RootState> = {
-  historyFullness(state): boolean {
-    return state.noMoreRecords
-  },
   allFinishedRecords(state): HistoryRecord[] {
     return state.records.filter(record => record.timeEnd)
   },

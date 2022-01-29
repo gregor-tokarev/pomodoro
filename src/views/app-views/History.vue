@@ -39,8 +39,13 @@ const page = ref<number>(1)
 const loading = ref<boolean>(false)
 
 async function loadHistory(): Promise<void> {
-  loading.value = true
+  const user = store.getters['authModule/getUser']
   const records = store.getters['timerModule/allFinishedRecords']
+  if (user.counters.records <= records.length || records.length === pageSize) {
+    return
+  }
+
+  loading.value = true
 
   const recordIndex = (page.value - 1) * pageSize - 1
   await store.dispatch('timerModule/fetchRecords', {

@@ -9,8 +9,7 @@ export const deleteAccount = functions
       .firestore()
       .collection('users')
       .doc(user.uid)
-    const userDoc = await userQuery.get()
-    const userOperation = userDoc.ref.delete()
+    const userOperation = userQuery.delete()
 
     const historyQuery = admin
       .firestore()
