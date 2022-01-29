@@ -2,11 +2,15 @@
 import AppButton from '@/components/UI/AppButton'
 import { shallowMount, VueWrapper } from '@vue/test-utils'
 
-describe('Test ui button component', () => {
+describe('AppButton component', () => {
   let wrapper: VueWrapper<AppButton>
 
-  it('should contain button tag as root', () => {
+  beforeEach(() => {
     wrapper = shallowMount(AppButton)
+  })
+
+  it('should has button tag as root', () => {
+    expect(wrapper.element).toBeDefined()
     expect(wrapper.element.tagName).toBe('BUTTON')
   })
 
@@ -20,8 +24,7 @@ describe('Test ui button component', () => {
     expect(wrapper.html()).toContain('hello')
   })
 
-  it('should use class modifier on prop styleType passed', async () => {
-    wrapper = shallowMount(AppButton)
+  it('should use class modifier sync with prop styleType', async () => {
     expect(wrapper.classes()).toContain('button')
 
     await wrapper.setProps({ styleType: 'common' })
