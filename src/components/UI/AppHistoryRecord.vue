@@ -3,7 +3,8 @@
     <div class="basic-text history-item__info" @click="isTasksOpen = !isTasksOpen">
       <div class="history-item__circle"></div>
       <div class="history-item__duration">
-        {{ duration.minutes }} min
+        <template v-if="duration.hours">{{ duration.hours }} hours</template>
+        <template v-if="duration.minutes">{{ duration.minutes }} min</template>
       </div>
       <div class="basic-text history-item__time">
         <span class="time-entry">{{ timeStart }}</span> - <span class="time-entry">{{ timeEnd }}</span>
