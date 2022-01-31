@@ -147,7 +147,6 @@ const actions: ActionTree<TimerState, RootState> = {
       }
 
       const { docs } = await query.get()
-
       const history: HistoryRecord[] = docs.map(doc => ({
         ...doc.data() as Omit<HistoryRecord, 'id'>,
         id: doc.id

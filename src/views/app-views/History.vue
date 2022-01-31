@@ -29,6 +29,7 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { HistoryRecord } from '../../../models/history-record.model'
 import dayjs from 'dayjs'
 import AppLoader from '@/components/UI/AppLoader.vue'
+import { User } from '../../../models/user.model'
 
 const store = useStore()
 
@@ -39,9 +40,9 @@ const page = ref<number>(1)
 const loading = ref<boolean>(false)
 
 async function loadHistory(): Promise<void> {
-  const user = store.getters['authModule/getUser']
+  const user: User = store.getters['authModule/getUser']
   const records = store.getters['timerModule/allFinishedRecords']
-  if (user.counters.records <= records.length || records.length === pageSize) {
+  if (user.counters.records <= records.length) {
     return
   }
 
