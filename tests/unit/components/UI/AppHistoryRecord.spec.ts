@@ -111,4 +111,27 @@ describe('AppHistoryRecord component', () => {
     const timeEndFormatted = dayjs(record.timeEnd?.toDate()).format('HH:mm')
     expect(interval.text()).toBe(`${timeStartFormatted} - ${timeEndFormatted}`)
   })
+
+  it('should represent tasks length', async () => {
+    expect(wrapper.find('.history-item__tasks').text()).toBe('completed tasks: 3')
+
+    await wrapper.setProps({ tasks: [] })
+    expect(wrapper.find('.history-item__tasks').text()).toBe('completed tasks: 0')
+  })
+
+  it('should render tasks', async () => {
+    await wrapper.find('.history-item__info').trigger('click') // to open tasks
+    const tasksEls = wrapper.findAll('.todo')
+
+    expect(wrapper.vm.isTasksOpen).toBeTruthy()
+    expect(tasksEls).toHaveLength(3)
+
+    tasksEls.forEach((el, i) => {
+      expect(el.find('.todo__text').text()).toBe(tasks[i].text)
+      expect(el.find('.todo__time').text())
+        .toBe(
+          dayjs(tasks[i].timeCompleted?.toDate()).format('hh:mm')
+        )
+    })
+  })
 })
