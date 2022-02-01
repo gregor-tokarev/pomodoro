@@ -35,9 +35,8 @@ export const decrementTasksCount = functions.firestore
 
 export const incrementTasksCount = functions.firestore
   .document('tasks/{taskId}')
-  .onWrite((snapshot, context) => {
-    const ownerId: string | undefined = context.auth?.uid
-    if (!ownerId) return
+  .onCreate(snapshot => {
+    const ownerId: string = snapshot.data().ownerId
 
     const user = new UserDb(ownerId)
     return user.incrementCounter('tasks', 1)

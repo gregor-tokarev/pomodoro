@@ -8,6 +8,8 @@ import { firestore } from '@/lib/firebase'
 import { HistoryRecord } from '../../../models/history-record.model'
 import dayjs from 'dayjs'
 import firebase from 'firebase/compat'
+import { User } from '../../../models/user.model'
+import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 
 dayjs.extend(isBetween)
 
@@ -58,7 +60,8 @@ const mutations: MutationTree<TaskState> = {
     state.tasks = state.tasks
       .reduce((acc, task) => {
         if (tasksIds.includes(task.id)) {
-          acc.push(tasks.find(t => t.id === task.id)!)
+          const finedTask = tasks.find(t => t.id === task.id)
+          finedTask && acc.push(finedTask)
           return acc
         }
         acc.push(task)
@@ -92,6 +95,10 @@ const actions: ActionTree<TaskState, RootState> = {
         id: taskId
       })
       await firestore.collection('tasks').doc(taskId).set(task)
+      commit('authModule/CHANGE_COUNTER', {
+        value: 1,
+        counter: 'tasks'
+      }, { root: true })
 
       return {
         ...task,
@@ -125,6 +132,11 @@ const actions: ActionTree<TaskState, RootState> = {
     try {
       commit('DELETE_TASK', taskId)
       await firestore.collection('tasks').doc(taskId).delete()
+
+      commit('authModule/CHANGE_COUNTER', {
+        value: -1,
+        counter: 'tasks'
+      }, { root: true })
 
       return taskId
     } catch (err) {
@@ -201,7 +213,10 @@ const actions: ActionTree<TaskState, RootState> = {
   async fetchTasks({
     commit,
     rootGetters
-  }, { limit, daysFromNow }: { limit?: number, daysFromNow?: number } = {}): Promise<Task[]> {
+  }, {
+    limit,
+    daysFromNow
+  }: { limit?: number, daysFromNow?: number } = {}): Promise<Task[]> {
     const userId = rootGetters['authModule/userId']
 
     try {
@@ -216,7 +231,7 @@ const actions: ActionTree<TaskState, RootState> = {
 
       limit && query.limit(limit)
 
-      let tasks: any[] = (await query.get()).docs
+      let tasks: DocumentSnapshot<Task>[] = (await query.get()).docs
 
       tasks = tasks.map(task => ({
         ...task.data() as Omit<Task, 'id'>,
@@ -272,9 +287,9 @@ const getters: GetterTree<TaskState, RootState> = {
   taskById(state): (taskId: string) => Task | undefined {
     return taskId => state.tasks.find(task => task.id === taskId)
   },
-  getMaxOrderValue(state): number {
-    const maxOrder = Math.max(...state.tasks.map(task => task.order))
-    return state.tasks.length ? maxOrder : -1
+  getMaxOrderValue(state, getters, rootState, rootGetters): number {
+    const user = rootGetters['authModule/getUser'] as User
+    return user.counters.tasks
   },
   runningTaskId(state, getters, _, rootGetters): string | null {
     if (rootGetters['timerModule/runningRecord']?.isBreak) {

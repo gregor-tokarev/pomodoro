@@ -271,7 +271,7 @@ const actions: ActionTree<TimerState, RootState> = {
 
         commit('ADD_RECORD', record)
 
-        commit('authModule/COUNT_RECORDS', 1, { root: true })
+        commit('authModule/CHANGE_COUNTER', { value: 1, counter: 'records' }, { root: true })
 
         dispatch('setupWorkListener')
         dispatch('setupRunner')
@@ -308,7 +308,7 @@ const actions: ActionTree<TimerState, RootState> = {
       const record = { id: recordId, ...historyRecord }
       commit('ADD_RECORD', record)
 
-      commit('authModule/COUNT_RECORDS', 1, { root: true })
+      commit('authModule/CHANGE_COUNTER', { value: 1, counter: 'records' }, { root: true })
 
       dispatch('setupRunner')
       dispatch('setupWorkListener')
@@ -363,7 +363,7 @@ const actions: ActionTree<TimerState, RootState> = {
       commit('tasksModule/UNCOMPLETE_TASKS', runningRecord.timeStart, { root: true })
       commit('DELETE_RECORD', runningRecord.id)
 
-      commit('authModule/COUNT_RECORDS', -1, { root: true })
+      commit('authModule/CHANGE_COUNTER', { value: -1, counter: 'records' }, { root: true })
 
       timerObservable.dispatch('timerReset')
     } catch (err) {
