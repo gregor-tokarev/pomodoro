@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid'
 import utc from 'dayjs/plugin/utc'
 import dayjs from 'dayjs'
 import { createSecludedTask } from '../secludedTask'
-import { settingsByUserId } from '../settingsByUserId'
+import { UserDb } from '../auth/lib/user-db'
 
 dayjs.extend(utc)
 
@@ -22,15 +22,17 @@ export const finishRecord = functions.https
       return res.end()
     }
 
-    await record
-      .ref
-      .update({
+    const user = new UserDb(record.data()?.ownerId)
+    await Promise.all([
+      user.incrementCounter('records', 1),
+      record.ref.update({
         timeEnd: time
       })
+    ])
 
-    const recordData = record.data()!
-    if (!recordData.isBreak) {
-      const settings = await settingsByUserId(recordData.ownerId)
+    const recordData = record.data()
+    if (recordData && !recordData.isBreak) {
+      const settings = await user.fetchUserSettings()
 
       const breakId = nanoid()
       await historyCollection

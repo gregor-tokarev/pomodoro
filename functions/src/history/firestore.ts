@@ -1,31 +1,21 @@
 import * as admin from 'firebase-admin'
 import * as functions from 'firebase-functions'
 import { createSecludedTask, removeSecludedTask } from '../secludedTask'
-import { settingsByUserId } from '../settingsByUserId'
+import { UserDb } from '../auth/lib/user-db'
 
 export const createRecord = functions.firestore
   .document('history/{recordId}')
   .onCreate(async (snapshot) => {
-    const settings = await settingsByUserId(snapshot.data().ownerId)
+    const user = new UserDb(snapshot.data().ownerId)
+    const settings = await user.fetchUserSettings()
     const time = snapshot.data().isBreak ? settings.breakTime * 60 : settings.workTime * 60
-
-    const changeCount = admin
-      .firestore()
-      .collection('users')
-      .doc(snapshot.data().ownerId)
-      .set({
-        counters: {
-          records: admin.firestore.FieldValue.increment(1)
-        }
-      }, { merge: true })
 
     return Promise.all([
       createSecludedTask(
         snapshot.id,
         `https://us-central1-pomodoro-3b7d3.cloudfunctions.net/finishRecord?recordId=${snapshot.id}`,
         time
-      ),
-      changeCount
+      )
     ])
   })
 
@@ -42,21 +32,21 @@ export const deleteRecord = functions.firestore
       .collection('tasks')
       .where('timeCompleted', '>', snapshot.data().timeStart)
 
-    const changeCount = admin
-      .firestore()
-      .collection('users')
-      .doc(snapshot.data().ownerId)
-      .set({
-        counters: {
-          records: admin.firestore.FieldValue.increment(-1)
-        }
-      }, { merge: true })
-
     const tasksDocs = await query.get()
     const taskDeleteOperations = tasksDocs.docs.map(doc => doc.ref.update({
       status: 'todo',
       timeCompleted: null
     }))
 
-    return Promise.all([...taskDeleteOperations, changeCount])
+    return Promise.all(taskDeleteOperations)
+  })
+
+export const decrementRecordsCount = functions.firestore
+  .document('tasks/{taskId}')
+  .onDelete(snapshot => {
+    if (!snapshot.data().timeEnd) return
+    const ownerId: string = snapshot.data().ownerId
+
+    const user = new UserDb(ownerId)
+    return user.incrementCounter('tasks', -1)
   })

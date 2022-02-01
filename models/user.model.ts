@@ -9,5 +9,6 @@ export interface User {
 
   counters: {
     records: number
+    tasks: number
   }
 }
