@@ -9,7 +9,6 @@ import { HistoryRecord } from '../../../models/history-record.model'
 import dayjs from 'dayjs'
 import firebase from 'firebase/compat'
 import { User } from '../../../models/user.model'
-import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore'
 
 dayjs.extend(isBetween)
 
@@ -231,7 +230,7 @@ const actions: ActionTree<TaskState, RootState> = {
 
       limit && query.limit(limit)
 
-      let tasks: DocumentSnapshot<Task>[] = (await query.get()).docs
+      let tasks: any[] = (await query.get()).docs
 
       tasks = tasks.map(task => ({
         ...task.data() as Omit<Task, 'id'>,
