@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires,import/no-webpack-loader-syntax
-const svg = require(`raw-loader!@/assets/icons/${props.iconName}.svg`)
+const svg = require(`@/assets/icons/${props.iconName}.svg`)
   .default
   .replace('export default ', '')
   .replaceAll('\\n', '')
