@@ -28,7 +28,7 @@ describe('AppContextMenu component', () => {
     expect(wrapper.isVisible()).toBeFalsy()
   })
 
-  it('should emits update:modelValue on clickOutside method call', () => {
+  it('should emits update:modelValue on clickOutside', () => {
     wrapper.vm.clickOutside()
     expect(wrapper.emitted()['update:modelValue'][0]).toEqual([false])
   })
