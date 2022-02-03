@@ -28,12 +28,6 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>()
-
-function addBreak(event: KeyboardEvent): void {
-  const target = event.currentTarget as HTMLTextAreaElement
-
-  target.value += '\n'
-}
 </script>
 
 <style scoped lang="scss">
