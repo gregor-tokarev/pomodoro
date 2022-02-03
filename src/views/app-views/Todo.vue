@@ -163,15 +163,14 @@ function dragEnd(event: SortableStopEvent): void {
     return
   }
 
-  const task = tasks.value.find(task => task.order === event.oldIndex)
+  const task = tasks.value[event.oldIndex]
   if (!task) {
     return
   }
 
-  const taskId = task.id
   store.dispatch('tasksModule/changeTaskOrder', {
     newOrder: event.newIndex,
-    taskId
+    taskId: task.id
   })
 }
 
