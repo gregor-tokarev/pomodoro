@@ -6,7 +6,7 @@
   >
     <div class="toggle__bar"></div>
     <div class="toggle__point">
-      <AppIcon v-if="props.modelValue" icon-name="check" :color="Colors.GRAY_000"></AppIcon>
+      <AppIcon class="toggle__icon" v-if="props.modelValue" icon-name="check" :color="Colors.GRAY_000"></AppIcon>
     </div>
   </div>
 </template>
