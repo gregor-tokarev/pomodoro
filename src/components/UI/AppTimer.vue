@@ -34,7 +34,7 @@ const liftHeight = computed<string>(() => {
   const timerHeight = timer.value.offsetHeight
 
   const availableLiftHeight = timerHeight - waveHeight
-  return availableLiftHeight * (props.progressPercent / 100) + 'px'
+  return (availableLiftHeight * (props.progressPercent / 100)).toFixed(1) + 'px'
 })
 </script>
 
