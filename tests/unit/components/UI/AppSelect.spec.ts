@@ -23,12 +23,12 @@ describe('AppSelect component', () => {
   })
 
   it('should keep structure', () => {
-    expect(wrapper.exists()).toBeTruthy()
+    expect(wrapper.exists()).toBe(true)
     expect(wrapper.element.tagName).toBe('DIV')
     expect(wrapper.classes()).toContain('select')
 
     const body = wrapper.find('.select__body')
-    expect(body.exists()).toBeTruthy()
+    expect(body.exists()).toBe(true)
     expect(body.find('.select__arrow').attributes().iconname).toBe('arrow-down')
   })
 
@@ -49,7 +49,7 @@ describe('AppSelect component', () => {
 
   it('should close on click outside', async () => {
     wrapper.vm.onClickOutside()
-    expect(wrapper.vm.isOpen).toBeFalsy()
+    expect(wrapper.vm.isOpen).toBe(false)
   })
 
   it('should add disable class on disabled prop', async () => {
@@ -67,10 +67,10 @@ describe('AppSelect component', () => {
 
   it('should close after disabled is set to true', async () => {
     await wrapper.find('.select__body').trigger('click')
-    expect(wrapper.vm.isOpen).toBeTruthy()
+    expect(wrapper.vm.isOpen).toBe(true)
 
     await wrapper.setProps({ disabled: true })
-    expect(wrapper.vm.isOpen).toBeFalsy()
+    expect(wrapper.vm.isOpen).toBe(false)
   })
 
   it('should prevent isOpen changing when disabled is true', async () => {
@@ -112,6 +112,6 @@ describe('AppSelect component', () => {
     await option.trigger('click')
 
     expect(wrapper.emitted()['update:modelValue'][0]).toEqual([option.text()])
-    expect(wrapper.vm.isOpen).toBeFalsy()
+    expect(wrapper.vm.isOpen).toBe(false)
   })
 })

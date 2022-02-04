@@ -10,7 +10,7 @@ describe('AppCheckbox component', () => {
   })
 
   it('should keep structure', () => {
-    expect(wrapper.exists()).toBeTruthy()
+    expect(wrapper.exists()).toBe(true)
     expect(wrapper.element.tagName).toBe('DIV')
     expect(wrapper.classes()).toContain('checkbox')
   })
@@ -29,9 +29,9 @@ describe('AppCheckbox component', () => {
 
   it('should appear icon when modelValue is true', async () => {
     await wrapper.setProps({ modelValue: true })
-    expect(wrapper.find('app-icon-stub').exists()).toBeTruthy()
+    expect(wrapper.find('app-icon-stub').exists()).toBe(true)
 
     await wrapper.setProps({ modelValue: false })
-    expect(wrapper.find('app-icon-stub').exists()).toBeFalsy()
+    expect(wrapper.find('app-icon-stub').exists()).toBe(false)
   })
 })

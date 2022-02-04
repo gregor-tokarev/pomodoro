@@ -15,17 +15,17 @@ describe('AppContextMenu component', () => {
   })
 
   it('should keep structure', () => {
-    expect(wrapper.exists()).toBeTruthy()
+    expect(wrapper.exists()).toBe(true)
     expect(wrapper.element.tagName).toBe('DIV')
     expect(wrapper.classes()).toContain('context-menu')
   })
 
   it('should show/hide based on modelValue', async () => {
     await wrapper.setProps({ modelValue: true })
-    expect(wrapper.isVisible()).toBeTruthy()
+    expect(wrapper.isVisible()).toBe(true)
 
     await wrapper.setProps({ modelValue: false })
-    expect(wrapper.isVisible()).toBeFalsy()
+    expect(wrapper.isVisible()).toBe(false)
   })
 
   it('should emits update:modelValue on clickOutside', () => {

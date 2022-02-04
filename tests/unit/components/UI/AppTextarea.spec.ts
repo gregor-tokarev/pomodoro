@@ -17,11 +17,11 @@ describe('AppTextarea component', () => {
   })
 
   it('should keep structure', () => {
-    expect(wrapper.exists()).toBeTruthy()
+    expect(wrapper.exists()).toBe(true)
     expect(wrapper.element.tagName).toBe('DIV')
     expect(wrapper.classes()).toContain('textarea')
 
-    expect(textarea.exists()).toBeTruthy()
+    expect(textarea.exists()).toBe(true)
   })
 
   it('should pass placeholder to template', async () => {

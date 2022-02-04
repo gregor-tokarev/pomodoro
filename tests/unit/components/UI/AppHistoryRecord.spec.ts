@@ -61,14 +61,14 @@ describe('AppHistoryRecord component', () => {
   })
 
   it('should keep structure', () => {
-    expect(wrapper.exists()).toBeTruthy()
+    expect(wrapper.exists()).toBe(true)
     expect(wrapper.element.tagName).toBe('DIV')
     expect(wrapper.classes()).toContain('history-item')
   })
 
   it('should change template when isBreak is true', async () => {
-    expect(!('history-item--break' in wrapper.classes())).toBeTruthy()
-    expect(wrapper.find('.history-item__tasks').exists()).toBeTruthy()
+    expect(!('history-item--break' in wrapper.classes())).toBe(true)
+    expect(wrapper.find('.history-item__tasks').exists()).toBe(true)
 
     await wrapper.setProps({
       record: {
@@ -78,12 +78,12 @@ describe('AppHistoryRecord component', () => {
     })
 
     expect(wrapper.classes()).toContain('history-item--break')
-    expect(wrapper.find('.history-item__tasks').exists()).toBeFalsy()
+    expect(wrapper.find('.history-item__tasks').exists()).toBe(false)
   })
 
   it('should have duration', async () => {
     const duration = wrapper.find('.history-item__duration')
-    expect(duration.exists()).toBeTruthy()
+    expect(duration.exists()).toBe(true)
 
     expect(duration.text()).toBe('35 min')
     await wrapper.setProps({
@@ -105,7 +105,7 @@ describe('AppHistoryRecord component', () => {
 
   it('should have time interval', async () => {
     const interval = wrapper.find('.history-item__time')
-    expect(interval.exists()).toBeTruthy()
+    expect(interval.exists()).toBe(true)
 
     const timeStartFormatted = dayjs(record.timeStart.toDate()).format('HH:mm')
     const timeEndFormatted = dayjs(record.timeEnd?.toDate()).format('HH:mm')
@@ -123,7 +123,7 @@ describe('AppHistoryRecord component', () => {
     await wrapper.find('.history-item__info').trigger('click') // to open tasks
     const tasksEls = wrapper.findAll('.todo')
 
-    expect(wrapper.vm.isTasksOpen).toBeTruthy()
+    expect(wrapper.vm.isTasksOpen).toBe(true)
     expect(tasksEls).toHaveLength(3)
 
     tasksEls.forEach((el, i) => {

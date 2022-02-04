@@ -10,7 +10,7 @@ describe('AppLoader component', () => {
   })
 
   it('should keep structure', () => {
-    expect(wrapper.exists()).toBeTruthy()
-    expect(wrapper.find('.loader__icon').exists()).toBeTruthy()
+    expect(wrapper.exists()).toBe(true)
+    expect(wrapper.find('.loader__icon').exists()).toBe(true)
   })
 })

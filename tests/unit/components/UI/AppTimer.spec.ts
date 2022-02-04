@@ -10,7 +10,7 @@ describe('AppTimer component', () => {
   })
 
   it('should keep structure', () => {
-    expect(wrapper.exists()).toBeTruthy()
+    expect(wrapper.exists()).toBe(true)
     expect(wrapper.element.tagName).toBe('DIV')
     expect(wrapper.classes()).toContain('timer')
 
@@ -18,7 +18,7 @@ describe('AppTimer component', () => {
     expect(waves).toHaveLength(2)
 
     const lift = wrapper.find('.timer__lift')
-    expect(lift.exists()).toBeTruthy()
+    expect(lift.exists()).toBe(true)
   })
 
   it('should add break class based on prop', async () => {

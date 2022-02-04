@@ -36,30 +36,30 @@ describe('AppTodoItem component', () => {
   })
 
   it('should keep structure', () => {
-    expect(wrapper.exists()).toBeTruthy()
+    expect(wrapper.exists()).toBe(true)
     expect(wrapper.element.tagName).toBe('DIV')
     expect(wrapper.classes()).toContain('todo-item')
   })
 
   it('should add drag icon on isDraggable prop', async () => {
-    expect(wrapper.find('.todo-item__drag').exists()).toBeFalsy()
+    expect(wrapper.find('.todo-item__drag').exists()).toBe(false)
 
     await wrapper.setProps({ isDraggable: true })
-    expect(wrapper.find('.todo-item__drag').exists()).toBeTruthy()
+    expect(wrapper.find('.todo-item__drag').exists()).toBe(true)
     expect(wrapper.find('.todo-item__drag').attributes().color).toBe(Colors.GRAY_200)
     expect(wrapper.find('.todo-item__drag').attributes().iconname).toBe('drag-dots')
   })
 
   // it('should allow editing on canEdit prop', async () => {
   //   const textarea = wrapper.find('.todo-item__text')
-  //   expect(textarea.attributes().readonly).toBeFalsy()
-  //   expect(wrapper.find('.todo-item__context-menu').exists()).toBeFalsy()
+  //   expect(textarea.attributes().readonly).toBe(false)
+  //   expect(wrapper.find('.todo-item__context-menu').exists()).toBe(false)
   //
   //   await wrapper.setProps({ canEdit: true })
   //   // @ts-ignore
   //   console.log(textarea.element.readOnly)
-  //   expect(textarea.attributes().readonly).toBeTruthy()
-  //   expect(wrapper.find('.todo-item__context-menu').exists()).toBeTruthy()
+  //   expect(textarea.attributes().readonly).toBe(true)
+  //   expect(wrapper.find('.todo-item__context-menu').exists()).toBe(true)
   // })
 
   it('should render textarea value', () => {
@@ -71,7 +71,7 @@ describe('AppTodoItem component', () => {
 
   it('should display time when completed', async () => {
     let time = wrapper.find('.todo-item__time')
-    expect(time.exists()).toBeFalsy()
+    expect(time.exists()).toBe(false)
 
     await wrapper.setProps({
       todoitem: {
@@ -81,7 +81,7 @@ describe('AppTodoItem component', () => {
     })
 
     time = wrapper.find('.todo-item__time')
-    expect(time.exists()).toBeTruthy()
+    expect(time.exists()).toBe(true)
     expect(time.text()).toBe(dayjs(task.timeCompleted?.toDate()).format('hh:mm'))
   })
 
