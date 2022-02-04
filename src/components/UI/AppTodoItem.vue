@@ -35,7 +35,8 @@
       {{ time }}
     </time>
 
-    <AppContextMenu v-if="props.canEdit" v-model="isContextmenu" container-selector=".app__body">
+    <AppContextMenu class="todo-item__context-menu" v-if="props.canEdit" v-model="isContextmenu"
+                    container-selector=".app__body">
       <li @click="changeOrder('up')"
           class="hint-text context-menu__item">
         <AppIcon :color="Colors.GRAY_300" icon-name="order-up"></AppIcon>
@@ -132,7 +133,6 @@ function saveText(text: string): void {
     taskId: props.todoitem.id
   })
 
-  // eslint-disable-next-line no-unused-expressions
   textarea.value?.blur()
 }
 
@@ -145,7 +145,10 @@ const isCompleted = computed<boolean>({
   set(value: boolean): void {
     const status = value ? 'completed' : 'todo'
 
-    if (props.inProgress || status === 'todo') {
+    if (
+      props.inProgress ||
+      status === 'todo' // if it's moving to todo state allow
+    ) {
       emit('changeStatus', {
         taskId: props.todoitem.id,
         status
