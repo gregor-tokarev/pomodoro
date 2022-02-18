@@ -11,7 +11,7 @@ describe('AppToggle component', () => {
   })
 
   it('should keep structure', () => {
-    expect(wrapper.emitted()).toBe(true)
+    expect(wrapper.exists()).toBe(true)
     expect(wrapper.element.tagName).toBe('DIV')
     expect(wrapper.classes()).toContain('toggle')
   })

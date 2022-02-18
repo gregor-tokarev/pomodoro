@@ -290,6 +290,9 @@ const getters: GetterTree<TaskState, RootState> = {
     const user = rootGetters['authModule/getUser'] as User
     return user.counters.tasks
   },
+  getMinOrderValue(state, getters): number {
+    return Math.min(...getters.tasks.map((task: Task) => task.order))
+  },
   runningTaskId(state, getters, _, rootGetters): string | null {
     if (rootGetters['timerModule/runningRecord']?.isBreak) {
       return null

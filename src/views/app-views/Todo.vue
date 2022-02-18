@@ -159,6 +159,7 @@ function changeText(taskId: string, newText: string): void {
 // ====
 // task change order
 function dragEnd(event: SortableStopEvent): void {
+  const startIndex = store.getters['tasksModule/getMinOrderValue']
   if (event.newIndex === event.oldIndex) {
     return
   }
@@ -169,7 +170,7 @@ function dragEnd(event: SortableStopEvent): void {
   }
 
   store.dispatch('tasksModule/changeTaskOrder', {
-    newOrder: event.newIndex,
+    newOrder: startIndex + event.newIndex,
     taskId: task.id
   })
 }
