@@ -22,24 +22,24 @@ jobs:
       - run:
           name: lint styles
           command: "npm run lint:style"
-    test:
-      resource_class: medium
-      docker:
-        - image: circleci/node
-      steps:
-        - checkout
-        - restore_cache:
-            key: all-npm-{{ checksum "package.json" }}
-        - run:
-            name: "Install dependencies"
-            command: "npm i"
-        - save_cache:
-            key: all-npm-{{ checksum "package.json" }}
-            paths:
-              - ./node_modules
-        - run:
-            name: Run tests
-            command: "npm run test:unit"
+  test:
+    resource_class: medium
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - restore_cache:
+          key: all-npm-{{ checksum "package.json" }}
+      - run:
+          name: "Install dependencies"
+          command: "npm i"
+      - save_cache:
+          key: all-npm-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Run tests
+          command: "npm run test:unit"
 workflows:
   deploy:
     jobs:
