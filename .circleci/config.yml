@@ -4,14 +4,14 @@ jobs:
   lint:
     resource_class: small
     docker:
-      - image: circleci/node
+      - image: circleci/node:latest
     steps:
       - checkout
       - restore_cache:
           key: all-npm-{{ checksum "package.json" }}
       - run:
           name: "Install dependencies"
-          command: "npm i"
+          command: "npm i -D"
       - save_cache:
           key: all-npm-{{ checksum "package.json" }}
           paths:
@@ -25,7 +25,7 @@ jobs:
   test:
     resource_class: medium
     docker:
-      - image: circleci/node
+      - image: circleci/node:latest
     steps:
       - checkout
       - restore_cache:
