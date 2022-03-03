@@ -8,20 +8,20 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dev-npm-{{ checksum "package.json" }}
+          key: all-npm-{{ checksum "package.json" }}
       - run:
           name: "Install dependencies"
-          command: "npm i -D"
+          command: "yarn install"
       - save_cache:
-          key: dev-npm-{{ checksum "package.json" }}
+          key: all-npm-{{ checksum "package.json" }}
           paths:
             - ./node_modules
       - run:
           name: lint scripts
-          command: "npm run lint"
+          command: "yarn lint"
       - run:
           name: lint styles
-          command: "npm run lint:style"
+          command: "yarn lint:style"
   test:
     resource_class: medium
     docker:
@@ -32,14 +32,14 @@ jobs:
           key: all-npm-{{ checksum "package.json" }}
       - run:
           name: "Install dependencies"
-          command: "npm i"
+          command: "yarn"
       - save_cache:
           key: all-npm-{{ checksum "package.json" }}
           paths:
             - ./node_modules
       - run:
           name: Run tests
-          command: "npm run test:unit"
+          command: "yarn test:unit"
 workflows:
   deploy:
     jobs:
