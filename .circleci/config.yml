@@ -11,7 +11,7 @@ jobs:
           key: all-npm-{{ checksum "package.json" }}
       - run:
           name: "Install dependencies"
-          command: "yarn install"
+          command: "npm i"
       - save_cache:
           key: all-npm-{{ checksum "package.json" }}
           paths:
@@ -32,7 +32,7 @@ jobs:
           key: all-npm-{{ checksum "package.json" }}
       - run:
           name: "Install dependencies"
-          command: "yarn"
+          command: "npm i"
       - save_cache:
           key: all-npm-{{ checksum "package.json" }}
           paths:
