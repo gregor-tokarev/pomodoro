@@ -62,7 +62,7 @@ jobs:
           name: checkout functions
           command: cd functions
       - restore_cache:
-          - key: functions-npm-{{ checksum "package.json" }}
+          key: functions-npm-{{ checksum "package.json" }}
       - run:
           name: Install function dependencies
           command: npm i
