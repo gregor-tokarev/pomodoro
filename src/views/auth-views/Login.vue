@@ -10,10 +10,6 @@
           <img src="@/assets/images/logos/google.svg" alt="google">
           google
         </div>
-        <div class="basic-text login__provider" @click="signupOAuth('FacebookAuthProvider')">
-          <img src="@/assets/images/logos/facebook.svg" alt="facebook">
-          facebook
-        </div>
         <div class="basic-text login__provider" @click="signupEmail">
           <img src="@/assets/images/logos/email.svg" alt="email">
           email
@@ -38,7 +34,7 @@ import { useStore } from 'vuex'
 const router = useRouter()
 const store = useStore()
 
-async function signupOAuth(providerName: 'FacebookAuthProvider' | 'GoogleAuthProvider'): Promise<void> {
+async function signupOAuth(providerName: 'GoogleAuthProvider'): Promise<void> {
   const provider = new firebase.auth[providerName]()
   try {
     await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
