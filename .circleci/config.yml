@@ -24,6 +24,7 @@ jobs:
           command: "yarn lint:style"
   test:
     resource_class: medium
+    parallelism: 3
     docker:
       - image: circleci/node:14.18.2
     steps:
