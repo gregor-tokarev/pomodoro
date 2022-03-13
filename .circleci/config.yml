@@ -40,6 +40,36 @@ jobs:
       - run:
           name: Run tests
           command: "yarn test:unit"
+  deploy_hosting:
+    resource_class: medium
+    docker:
+      - image: circleci/node:14.18.2
+    steps:
+      - checkout
+      - restore_cache:
+          key: all-npm-{{ checksum "package.json" }}
+      - run:
+          name: "Install dependencies"
+          command: "npm i"
+      - save_cache:
+          key: all-npm-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: build web app
+          command: npm run build
+      - run:
+          name: build functions
+          command: |
+            cd functions &&
+            npm run build
+      - run:
+          name: install firebase cli
+          command: npm i -g firebase-tools
+      - run:
+          name: deploy to firebase
+          command: firebase deploy --token=$FIREBASE_DEPLOY_TOKEN --non-interactive
+
 workflows:
   deploy:
     jobs:
@@ -47,3 +77,10 @@ workflows:
       - test:
           requires:
             - lint
+      - deploy_hosting:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
