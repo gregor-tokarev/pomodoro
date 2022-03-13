@@ -18,13 +18,12 @@ jobs:
             - ./node_modules
       - run:
           name: lint scripts
-          command: "yarn lint"
+          command: "npm run lint"
       - run:
           name: lint styles
-          command: "yarn lint:style"
+          command: "npm run lint:style"
   test:
     resource_class: medium
-    parallelism: 3
     docker:
       - image: circleci/node:14.18.2
     steps:
@@ -40,7 +39,7 @@ jobs:
             - ./node_modules
       - run:
           name: Run tests
-          command: "yarn test:unit"
+          command: "npm run test:unit"
   deploy_hosting:
     resource_class: medium
     docker:
@@ -60,10 +59,20 @@ jobs:
           name: build web app
           command: npm run build
       - run:
+          name: checkout functions
+          command: cd functions
+      - restore_cache:
+          - key: functions-npm-{{ checksum "package.json" }}
+      - run:
+          name: Install function dependencies
+          command: npm i
+      - save_cache:
+          key: functions-npm-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
           name: build functions
-          command: |
-            cd functions &&
-            npm run build
+          command: npm run build
       - run:
           name: install firebase cli
           command: npm i -g firebase-tools
