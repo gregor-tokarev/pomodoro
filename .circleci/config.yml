@@ -78,7 +78,7 @@ jobs:
           command: npm i firebase-tools
       - run:
           name: deploy to firebase
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN --non-interactive
+          command: ./node_modules/.bin/firebase deploy --token $FIREBASE_DEPLOY_TOKEN --non-interactive
 
 workflows:
   deploy:
