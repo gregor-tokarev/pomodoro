@@ -4,7 +4,7 @@ import { shallowMount, VueWrapper } from '@vue/test-utils'
 import { Task } from '../../../../models/task.model'
 import { nanoid } from 'nanoid'
 import { Colors } from '@/lib/UI/colors'
-import firebase from 'firebase/compat'
+import { Timestamp } from 'firebase/firestore'
 import dayjs from 'dayjs'
 
 describe('AppTodoItem component', () => {
@@ -15,9 +15,9 @@ describe('AppTodoItem component', () => {
     id: nanoid(),
     ownerId: nanoid(),
     order: 2,
-    createdAt: firebase.firestore.Timestamp.fromDate(dayjs().toDate()),
-    updatedAt: firebase.firestore.Timestamp.fromDate(dayjs().toDate()),
-    timeCompleted: firebase.firestore.Timestamp.fromDate(dayjs().toDate()),
+    createdAt: Timestamp.fromDate(dayjs().toDate()),
+    updatedAt: Timestamp.fromDate(dayjs().toDate()),
+    timeCompleted: Timestamp.fromDate(dayjs().toDate()),
     status: 'todo'
   }
 
@@ -124,6 +124,9 @@ describe('AppTodoItem component', () => {
     const text = 'some text'
     await textarea.setValue(text)
 
-    expect(wrapper.emitted().changeText[0]).toEqual([{ taskId: task.id, text }])
+    expect(wrapper.emitted().changeText[0]).toEqual([{
+      taskId: task.id,
+      text
+    }])
   })
 })

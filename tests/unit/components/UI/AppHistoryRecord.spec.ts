@@ -4,7 +4,7 @@ import { mount, VueWrapper } from '@vue/test-utils'
 import { HistoryRecord } from '../../../../models/history-record.model'
 import { nanoid } from 'nanoid'
 import dayjs from 'dayjs'
-import firebase from 'firebase/compat'
+import { Timestamp } from 'firebase/firestore'
 import { Task } from '../../../../models/task.model'
 
 describe('AppHistoryRecord component', () => {
@@ -16,9 +16,9 @@ describe('AppHistoryRecord component', () => {
       id: nanoid(),
       ownerId,
       status: 'completed',
-      updatedAt: firebase.firestore.Timestamp.fromDate(dayjs().toDate()),
-      createdAt: firebase.firestore.Timestamp.fromDate(dayjs().toDate()),
-      timeCompleted: firebase.firestore.Timestamp.fromDate(dayjs().subtract(13, 'm').toDate()),
+      updatedAt: Timestamp.fromDate(dayjs().toDate()),
+      createdAt: Timestamp.fromDate(dayjs().toDate()),
+      timeCompleted: Timestamp.fromDate(dayjs().subtract(13, 'm').toDate()),
       order: 0,
       text: 'some time'
     },
@@ -26,9 +26,9 @@ describe('AppHistoryRecord component', () => {
       id: nanoid(),
       ownerId,
       status: 'completed',
-      updatedAt: firebase.firestore.Timestamp.fromDate(dayjs().toDate()),
-      createdAt: firebase.firestore.Timestamp.fromDate(dayjs().toDate()),
-      timeCompleted: firebase.firestore.Timestamp.fromDate(dayjs().subtract(25, 'm').toDate()),
+      updatedAt: Timestamp.fromDate(dayjs().toDate()),
+      createdAt: Timestamp.fromDate(dayjs().toDate()),
+      timeCompleted: Timestamp.fromDate(dayjs().subtract(25, 'm').toDate()),
       order: 1,
       text: 'some time'
     },
@@ -36,9 +36,9 @@ describe('AppHistoryRecord component', () => {
       id: nanoid(),
       ownerId,
       status: 'completed',
-      updatedAt: firebase.firestore.Timestamp.fromDate(dayjs().toDate()),
-      createdAt: firebase.firestore.Timestamp.fromDate(dayjs().toDate()),
-      timeCompleted: firebase.firestore.Timestamp.fromDate(dayjs().subtract(22, 'm').toDate()),
+      updatedAt: Timestamp.fromDate(dayjs().toDate()),
+      createdAt: Timestamp.fromDate(dayjs().toDate()),
+      timeCompleted: Timestamp.fromDate(dayjs().subtract(22, 'm').toDate()),
       order: 2,
       text: 'some time'
     }
@@ -47,8 +47,8 @@ describe('AppHistoryRecord component', () => {
     id: nanoid(),
     ownerId,
     isBreak: false,
-    timeStart: firebase.firestore.Timestamp.fromDate(dayjs().subtract(35, 'm').toDate()),
-    timeEnd: firebase.firestore.Timestamp.fromDate(dayjs().toDate())
+    timeStart: Timestamp.fromDate(dayjs().subtract(35, 'm').toDate()),
+    timeEnd: Timestamp.fromDate(dayjs().toDate())
   }
 
   beforeEach(() => {
@@ -89,7 +89,7 @@ describe('AppHistoryRecord component', () => {
     await wrapper.setProps({
       record: {
         ...record,
-        timeStart: firebase.firestore.Timestamp.fromDate(dayjs().subtract(3, 'h').toDate())
+        timeStart: Timestamp.fromDate(dayjs().subtract(3, 'h').toDate())
       }
     })
     expect(duration.text()).toBe('3 hours')
@@ -97,7 +97,7 @@ describe('AppHistoryRecord component', () => {
     await wrapper.setProps({
       record: {
         ...record,
-        timeStart: firebase.firestore.Timestamp.fromDate(dayjs().subtract(3, 's').toDate())
+        timeStart: Timestamp.fromDate(dayjs().subtract(3, 's').toDate())
       }
     })
     expect(duration.text()).toBe('')

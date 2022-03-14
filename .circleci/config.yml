@@ -23,7 +23,7 @@ jobs:
           name: lint styles
           command: "npm run lint:style"
   test:
-    resource_class: medium
+    resource_class: large
     docker:
       - image: circleci/node:14.18.2
     steps:
@@ -39,9 +39,13 @@ jobs:
             - ./node_modules
       - run:
           name: Run tests
-          command: "npm run test:unit"
+          command: "npm run test:unit:ci"
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+      - store_test_results:
+          path: ./reports/junit/
   deploy_hosting:
-    resource_class: medium
+    resource_class: large
     docker:
       - image: circleci/node:14.18.2
     steps:
