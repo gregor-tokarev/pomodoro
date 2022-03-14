@@ -59,23 +59,20 @@ jobs:
           key: all-npm-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-#      - run:
-#          name: build web app
-#          command: npm run build
+      - run:
+          name: build web app
+          command: npm run build
       - restore_cache:
-          key: functions-npm-{{ checksum "package.json" }}
+          key: functions-npm-{{ checksum "functions/package.json" }}
       - run:
           name: Install function dependencies
           command: |
-                cd functitons &&
+                cd functions &&
                 npm i
       - save_cache:
-          key: functions-npm-{{ checksum "package.json" }}
+          key: functions-npm-{{ checksum "functions/package.json" }}
           paths:
             - ./functions/node_modules
-#      - run:
-#          name: build functions
-#          command: npm run build
       - run:
           name: Back to root
           command: cd ..
