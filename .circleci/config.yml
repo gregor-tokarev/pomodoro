@@ -62,17 +62,13 @@ jobs:
 #      - run:
 #          name: build web app
 #          command: npm run build
-      - run:
-          name: checkout functions
-          command: cd functions
-      - run:
-          name: check location
-          command: ls
       - restore_cache:
           key: functions-npm-{{ checksum "package.json" }}
       - run:
           name: Install function dependencies
-          command: npm i
+          command: |
+                cd functitons &&
+                npm i
       - save_cache:
           key: functions-npm-{{ checksum "package.json" }}
           paths:
