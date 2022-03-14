@@ -65,6 +65,7 @@ jobs:
       - run:
           name: checkout functions
           command: cd functions
+      - run: ls
       - restore_cache:
           key: functions-npm-{{ checksum "package.json" }}
       - run:
