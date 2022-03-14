@@ -59,9 +59,9 @@ jobs:
           key: all-npm-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-      - run:
-          name: build web app
-          command: npm run build
+#      - run:
+#          name: build web app
+#          command: npm run build
       - run:
           name: checkout functions
           command: cd functions
@@ -74,9 +74,9 @@ jobs:
           key: functions-npm-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-      - run:
-          name: build functions
-          command: npm run build
+#      - run:
+#          name: build functions
+#          command: npm run build
       - run:
           name: Back to root
           command: cd ..
@@ -87,12 +87,12 @@ jobs:
 workflows:
   deploy:
     jobs:
-      - lint
-      - test
+      #      - lint
+      #      - test
       - deploy_hosting:
-          requires:
-            - test
-            - lint
+          #          requires:
+          #            - test
+          #            - lint
           filters:
             branches:
               only:
