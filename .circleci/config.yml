@@ -82,18 +82,17 @@ jobs:
           command: cd ..
       - run:
           name: deploy to firebase
-          command: ./node_modules/.bin/firebase deploy --non-interactive --token "$FIREBASE_DEPLOY_TOKEN"
+          command: "./node_modules/.bin/firebase deploy --token \"$FIREBASE_DEPLOY_TOKEN\" --non-interactive"
 
 workflows:
   deploy:
     jobs:
       - lint
       - test:
-          requires:
-            - lint
       - deploy_hosting:
           requires:
             - test
+            - lint
           filters:
             branches:
               only:
