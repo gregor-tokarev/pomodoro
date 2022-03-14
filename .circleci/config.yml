@@ -73,7 +73,7 @@ jobs:
       - save_cache:
           key: functions-npm-{{ checksum "package.json" }}
           paths:
-            - ./node_modules
+            - ./functions/node_modules
 #      - run:
 #          name: build functions
 #          command: npm run build
