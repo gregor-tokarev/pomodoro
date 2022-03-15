@@ -10,18 +10,18 @@ jobs:
       - restore_cache:
           key: all-npm-{{ checksum "package.json" }}
       - run:
-          name: "Install dependencies"
-          command: "npm i -D"
+          name: Install dependencies
+          command: npm i
       - save_cache:
           key: all-npm-{{ checksum "package.json" }}
           paths:
             - ./node_modules
       - run:
           name: lint scripts
-          command: "npm run lint"
+          command: npm run lint
       - run:
           name: lint styles
-          command: "npm run lint:style"
+          command: npm run lint:style
   test:
     resource_class: large
     docker:
@@ -31,15 +31,15 @@ jobs:
       - restore_cache:
           key: all-npm-{{ checksum "package.json" }}
       - run:
-          name: "Install dependencies"
-          command: "npm i"
+          name: Install dependencies
+          command: npm i
       - save_cache:
           key: all-npm-{{ checksum "package.json" }}
           paths:
             - ./node_modules
       - run:
           name: Run tests
-          command: "npm run test:unit:ci"
+          command: npm run test:unit:ci
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
       - store_test_results:
@@ -53,8 +53,8 @@ jobs:
       - restore_cache:
           key: all-npm-{{ checksum "package.json" }}
       - run:
-          name: "Install dependencies"
-          command: "npm i"
+          name: Install dependencies
+          command: npm i
       - save_cache:
           key: all-npm-{{ checksum "package.json" }}
           paths:
@@ -69,15 +69,11 @@ jobs:
           command: |
                 cd functions &&
                 npm i
-      - run:
-          name: Install tsc
-          command: |
-                cd functions &&
-                npm i typescript
-      - save_cache:
-          key: functions-npm-{{ checksum "functions/package.json" }}
-          paths:
-            - ./functions/node_modules
+#      - run:
+#          name: Install tsc
+#          command: |
+#                cd functions &&
+#                npm i typescript
       - run:
           name: deploy to firebase
           command: "./node_modules/.bin/firebase deploy --token \"$FIREBASE_DEPLOY_TOKEN\" --non-interactive"
