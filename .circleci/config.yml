@@ -70,8 +70,8 @@ jobs:
 workflows:
   deploy:
     jobs:
-      - insatll_deps
-      - install_function_deps
+      - install_deps
+      - install_funciton_deps
       #      - lint
       #      - test
       - deploy_hosting:
