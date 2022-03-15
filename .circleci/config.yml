@@ -29,6 +29,10 @@ jobs:
           command: |
             cd functions &&
             yarn
+      - save_cache:
+          key: functions-packages-{{ checksum "functions/package.json" }}
+          paths:
+            - ./functions/node_modules
   lint:
     resource_class: small
     docker:
