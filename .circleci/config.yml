@@ -23,7 +23,7 @@ jobs:
           name: lint styles
           command: npm run lint:style
   test:
-    resource_class: large
+    resource_class: medium
     docker:
       - image: circleci/node:14.18.2
     steps:
@@ -45,7 +45,7 @@ jobs:
       - store_test_results:
           path: ./reports/junit/
   deploy_hosting:
-    resource_class: large
+    resource_class: medium
     docker:
       - image: circleci/node:14.18.2
     steps:
@@ -86,12 +86,12 @@ orbs:
 workflows:
   deploy:
     jobs:
-#      - lint
-#      - test
+      - lint
+      - test
       - deploy_hosting:
-#          requires:
-#            - lint
-#            - test
+          requires:
+            - lint
+            - test
           filters:
             branches:
               only:
