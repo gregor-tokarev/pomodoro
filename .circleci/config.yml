@@ -16,7 +16,7 @@ jobs:
           key: all-packages-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-  install_funciton_deps:
+  install_function_deps:
     resource_class: small
     docker:
       - image: circleci/node:14.18.2
@@ -71,13 +71,13 @@ workflows:
   deploy:
     jobs:
       - install_deps
-      - install_funciton_deps
+      - install_function_deps
       #      - lint
       #      - test
       - deploy_hosting:
           requires:
             - install_deps
-            - install_funciton_deps
+            - install_function_deps
           filters:
             branches:
               only:
