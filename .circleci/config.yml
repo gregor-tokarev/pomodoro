@@ -2,35 +2,27 @@ version: 2.1
 
 templates:
   install_deps: &install_deps
-    resource_class: small
-    docker:
-      - image: circleci/node:14.18.2
-    steps:
-      - restore_cache:
-          key: all-packages-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: yarn
-      - save_cache:
-          key: all-packages-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
+    - restore_cache:
+        key: all-packages-{{ checksum "package.json" }}
+    - run:
+        name: Install dependencies
+        command: yarn
+    - save_cache:
+        key: all-packages-{{ checksum "package.json" }}
+        paths:
+          - ./node_modules
   install_function_deps: &install_function_deps
-    resource_class: small
-    docker:
-      - image: circleci/node:14.18.2
-    steps:
-      - restore_cache:
-          key: functions-packages-{{ checksum "functions/package.json" }}
-      - run:
-          name: Install function dependencies
-          command: >
-            cd functions &&
-            yarn
-      - save_cache:
-          key: functions-packages-{{ checksum "functions/package.json" }}
-          paths:
-            - ./functions/node_modules
+    - restore_cache:
+        key: functions-packages-{{ checksum "functions/package.json" }}
+    - run:
+        name: Install function dependencies
+        command: >
+          cd functions &&
+          yarn
+    - save_cache:
+        key: functions-packages-{{ checksum "functions/package.json" }}
+        paths:
+          - ./functions/node_modules
 jobs:
   lint:
     resource_class: small
@@ -39,12 +31,12 @@ jobs:
     steps:
       - checkout
       <<: *install_deps
-      - run:
-          name: lint scripts
-          command: npm run lint
-      - run:
-          name: lint styles
-          command: npm run lint:style
+        - run:
+            name: lint scripts
+            command: npm run lint
+        - run:
+            name: lint styles
+            command: npm run lint:style
   test:
     resource_class: large
     docker:
@@ -52,13 +44,13 @@ jobs:
     steps:
       - checkout
       <<: *install_deps
-      - run:
-          name: Run tests
-          command: npm run test:unit:ci
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
-      - store_test_results:
-          path: ./reports/junit/
+        - run:
+            name: Run tests
+            command: npm run test:unit:ci
+            environment:
+              JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+        - store_test_results:
+            path: ./reports/junit/
   deploy_hosting:
     resource_class: large
     docker:
@@ -67,12 +59,12 @@ jobs:
       - checkout
       <<: *install_deps
       <<: *install_function_deps
-      - run:
-          name: build web app
-          command: npm run build
-      - run:
-          name: deploy to firebase
-          command: "./node_modules/.bin/firebase deploy --token \"$FIREBASE_DEPLOY_TOKEN\" --non-interactive"
+        - run:
+            name: build web app
+            command: npm run build
+        - run:
+            name: deploy to firebase
+            command: "./node_modules/.bin/firebase deploy --token \"$FIREBASE_DEPLOY_TOKEN\" --non-interactive"
 
 workflows:
   deploy:
