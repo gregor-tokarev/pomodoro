@@ -80,9 +80,12 @@ jobs:
 workflows:
   deploy:
     jobs:
-      #      - lint
-      #      - test
+      - lint
+      - test
       - deploy_hosting:
+          requires:
+            - lint
+            - test
           filters:
             branches:
               only:
