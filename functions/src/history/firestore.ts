@@ -3,7 +3,9 @@ import * as functions from 'firebase-functions'
 import { createSecludedTask, removeSecludedTask } from '../secludedTask'
 import { UserDb } from '../auth/lib/user-db'
 
-export const createRecord = functions.firestore
+export const createRecord = functions
+  .region('europe-west3')
+  .firestore
   .document('history/{recordId}')
   .onCreate(async (snapshot) => {
     const user = new UserDb(snapshot.data().ownerId)
@@ -19,7 +21,9 @@ export const createRecord = functions.firestore
     ])
   })
 
-export const deleteRecord = functions.firestore
+export const deleteRecord = functions
+  .region('europe-west3')
+  .firestore
   .document('history/{recordId}')
   .onDelete(async snapshot => {
     if (!snapshot.data().timeEnd) {
@@ -41,7 +45,9 @@ export const deleteRecord = functions.firestore
     return Promise.all(taskDeleteOperations)
   })
 
-export const decrementRecordsCount = functions.firestore
+export const decrementRecordsCount = functions
+  .region('europe-west3')
+  .firestore
   .document('tasks/{taskId}')
   .onDelete(snapshot => {
     if (!snapshot.data().timeEnd) return

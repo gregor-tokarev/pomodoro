@@ -3,7 +3,9 @@ import { Task } from '../../../models/task.model'
 import * as admin from 'firebase-admin'
 import { UserDb } from '../auth/lib/user-db'
 
-export const deleteTask = functions.firestore
+export const deleteTask = functions
+  .region('europe-west3')
+  .firestore
   .document('tasks/{taskId}')
   .onDelete(async (snapshot) => {
     const deletedTask = snapshot.data() as Omit<Task, 'id'>
@@ -24,7 +26,9 @@ export const deleteTask = functions.firestore
     return Promise.all(queries)
   })
 
-export const decrementTasksCount = functions.firestore
+export const decrementTasksCount = functions
+  .region('europe-west3')
+  .firestore
   .document('tasks/{taskId}')
   .onDelete(snapshot => {
     const ownerId: string = snapshot.data().ownerId
@@ -33,7 +37,9 @@ export const decrementTasksCount = functions.firestore
     return user.incrementCounter('tasks', -1)
   })
 
-export const incrementTasksCount = functions.firestore
+export const incrementTasksCount = functions
+  .region('europe-west3')
+  .firestore
   .document('tasks/{taskId}')
   .onCreate(snapshot => {
     const ownerId: string = snapshot.data().ownerId

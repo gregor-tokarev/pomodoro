@@ -8,7 +8,9 @@ import { UserDb } from '../auth/lib/user-db'
 
 dayjs.extend(utc)
 
-export const finishRecord = functions.https
+export const finishRecord = functions
+  .region('europe-west3')
+  .https
   .onRequest(async (req, res) => {
     const { recordId } = req.query as { [key: string]: string }
 

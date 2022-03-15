@@ -1,21 +1,40 @@
 version: 2.1
 
 jobs:
-  lint:
+  install_deps:
     resource_class: small
     docker:
       - image: circleci/node:14.18.2
     steps:
       - checkout
       - restore_cache:
-          key: all-npm-{{ checksum "package.json" }}
+          key: all-packages-{{ checksum "package.json" }}
       - run:
           name: Install dependencies
-          command: npm i
+          command: yarn
       - save_cache:
-          key: all-npm-{{ checksum "package.json" }}
+          key: all-packages-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+  install_funciton_deps:
+    resource_class: small
+    docker:
+      - image: circleci/node:14.18.2
+    steps:
+      - checkout
+      - restore_cache:
+          key: functions-packages-{{ checksum "functions/package.json" }}
+      - run:
+          name: Install function dependencies
+          command: |
+            cd functions &&
+            yarn
+  lint:
+    resource_class: small
+    docker:
+      - image: circleci/node:14.18.2
+    steps:
+      - checkout
       - run:
           name: lint scripts
           command: npm run lint
@@ -28,15 +47,6 @@ jobs:
       - image: circleci/node:14.18.2
     steps:
       - checkout
-      - restore_cache:
-          key: all-npm-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: npm i
-      - save_cache:
-          key: all-npm-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
       - run:
           name: Run tests
           command: npm run test:unit:ci
@@ -50,30 +60,9 @@ jobs:
       - image: circleci/node:14.18.2
     steps:
       - checkout
-      - restore_cache:
-          key: all-npm-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: npm i
-      - save_cache:
-          key: all-npm-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
       - run:
           name: build web app
           command: npm run build
-      - restore_cache:
-          key: functions-npm-{{ checksum "functions/package.json" }}
-      - run:
-          name: Install function dependencies
-          command: |
-                cd functions &&
-                npm i
-#      - run:
-#          name: Install tsc
-#          command: |
-#                cd functions &&
-#                npm i typescript
       - run:
           name: deploy to firebase
           command: "./node_modules/.bin/firebase deploy --token \"$FIREBASE_DEPLOY_TOKEN\" --non-interactive"
@@ -81,10 +70,14 @@ jobs:
 workflows:
   deploy:
     jobs:
+      - insatll_deps
+      - install_function_deps
       #      - lint
       #      - test
       - deploy_hosting:
-          #          requires:
+          requires:
+            - install_deps
+            - install_funcion_deps
           #            - test
           #            - lint
           filters:
