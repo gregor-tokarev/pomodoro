@@ -49,6 +49,7 @@ onMounted(async () => {
 })
 
 async function timerStopHandler() {
+  changeFavicon('/favicon.ico')
   document.title = t('title')
 
   const audio = new Audio('/audio/door-bell.mp3')
