@@ -38,7 +38,7 @@ jobs:
       - image: circleci/node:14.18.2
     steps:
       - checkout
-      *install_deps
+      <<: *install_deps
       - run:
           name: lint scripts
           command: npm run lint
@@ -51,7 +51,7 @@ jobs:
       - image: circleci/node:14.18.2
     steps:
       - checkout
-      *install_deps
+      <<: *install_deps
       - run:
           name: Run tests
           command: npm run test:unit:ci
@@ -65,8 +65,8 @@ jobs:
       - image: circleci/node:14.18.2
     steps:
       - checkout
-      *install_deps
-      *install_function_deps
+      <<: *install_deps
+      <<: *install_function_deps
       - run:
           name: build web app
           command: npm run build
