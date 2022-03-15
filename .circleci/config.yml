@@ -30,41 +30,41 @@ jobs:
       - image: circleci/node:14.18.2
     steps:
       - checkout
-      <<: *install_deps
-        - run:
-            name: lint scripts
-            command: npm run lint
-        - run:
-            name: lint styles
-            command: npm run lint:style
+      *install_deps
+      - run:
+          name: lint scripts
+          command: npm run lint
+      - run:
+          name: lint styles
+          command: npm run lint:style
   test:
     resource_class: large
     docker:
       - image: circleci/node:14.18.2
     steps:
       - checkout
-      <<: *install_deps
-        - run:
-            name: Run tests
-            command: npm run test:unit:ci
-            environment:
-              JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
-        - store_test_results:
-            path: ./reports/junit/
+      *install_deps
+      - run:
+          name: Run tests
+          command: npm run test:unit:ci
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+      - store_test_results:
+          path: ./reports/junit/
   deploy_hosting:
     resource_class: large
     docker:
       - image: circleci/node:14.18.2
     steps:
       - checkout
-      <<: *install_deps
-      <<: *install_function_deps
-        - run:
-            name: build web app
-            command: npm run build
-        - run:
-            name: deploy to firebase
-            command: "./node_modules/.bin/firebase deploy --token \"$FIREBASE_DEPLOY_TOKEN\" --non-interactive"
+      *install_deps
+      *install_function_deps
+      - run:
+          name: build web app
+          command: npm run build
+      - run:
+          name: deploy to firebase
+          command: "./node_modules/.bin/firebase deploy --token \"$FIREBASE_DEPLOY_TOKEN\" --non-interactive"
 
 workflows:
   deploy:
