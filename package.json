@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm run watch:functions & npm run emulate & npm run serve",
+    "start": "yarn watch:functions & yarn emulate & yarn serve",
     "serve": "vue-cli-service serve",
     "emulate": "firebase emulators:start --import .firebase-emulator",
     "savedata": "firebase emulators:export --force .firebase-emulator",
-    "watch:functions": "cd functions && npm run watch",
+    "watch:functions": "cd functions && yarn watch",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:ci": "jest --ci --runInBand --reporters=default --reporters=jest-junit",
@@ -85,6 +85,6 @@
     "vue-loader": "^16.8.3"
   },
   "gitHooks": {
-    "pre-commit": "npm run lint:style && npm run lint"
+    "pre-commit": "yarn lint:style && yarn lint"
   }
 }
