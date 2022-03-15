@@ -81,7 +81,7 @@ jobs:
           telegram-bot-token: $TELEGRAM_BOT_TOKEN
 
 orbs:
-  telegram: woltsu/telegram@x.y.z
+  telegram: woltsu/telegram@0.0.9
 workflows:
   deploy:
     jobs:
