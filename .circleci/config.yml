@@ -79,18 +79,19 @@ jobs:
       - telegram/notify:
           message: Release finish
           telegram-bot-token: TELEGRAM_BOT_TOKEN
+          telegram-chat-id: TELEGRAM_CHAT_ID
 
 orbs:
   telegram: woltsu/telegram@0.0.9
 workflows:
   deploy:
     jobs:
-      - lint
-      - test
+#      - lint
+#      - test
       - deploy_hosting:
-          requires:
-            - lint
-            - test
+#          requires:
+#            - lint
+#            - test
           filters:
             branches:
               only:
