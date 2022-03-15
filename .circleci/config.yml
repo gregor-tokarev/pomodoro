@@ -76,7 +76,12 @@ jobs:
       - run:
           name: deploy to firebase
           command: "./node_modules/.bin/firebase deploy --token \"$FIREBASE_DEPLOY_TOKEN\" --non-interactive"
+      - telegram/notify:
+          message: Release finish
+          telegram-bot-token: $TELEGRAM_BOT_TOKEN
 
+orbs:
+  telegram: woltsu/telegram@x.y.z
 workflows:
   deploy:
     jobs:
