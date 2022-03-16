@@ -31,6 +31,8 @@ pnpm-debug.log*
 *.sw?
 
 firestore-debug.log
+firebase-debug.log
+ui-debug.log
 pubsub-debug.log
 .stylelintcache
 .fuse_hidden00026a6900000001
