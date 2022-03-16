@@ -288,7 +288,7 @@ const getters: GetterTree<TaskState, RootState> = {
   },
   getMaxOrderValue(state, getters, rootState, rootGetters): number {
     const user = rootGetters['authModule/getUser'] as User
-    return user.counters.tasks
+    return user.counters.tasks - 1
   },
   getMinOrderValue(state, getters): number {
     return Math.min(...getters.tasks.map((task: Task) => task.order))
