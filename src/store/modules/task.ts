@@ -237,7 +237,7 @@ const actions: ActionTree<TaskState, RootState> = {
         id: task.id
       }))
 
-      commit('SET_TASKS', tasks)
+      commit('SET_TASKS', tasks.sort((prev, next) => prev.order - next.order))
       return tasks
     } catch (err) {
       console.error(err)
@@ -253,7 +253,6 @@ const getters: GetterTree<TaskState, RootState> = {
         const timeUpdated = dayjs(task.updatedAt.toDate())
         return timeUpdated.isAfter(dayjs().subtract(1, 'd'))
       })
-      .sort((prev, next) => prev.order - next.order)
   },
   tasksInHistoryInterval(state, getters, rootState, rootGetters): (recordId: string) => Task[] {
     return recordId => {
