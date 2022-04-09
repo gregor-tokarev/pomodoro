@@ -164,7 +164,7 @@ function dragEnd(event: SortableStopEvent): void {
     return
   }
 
-  const task = tasks.value[event.oldIndex]
+  const task = tasks.value.find(task => task.order === event.oldIndex + startIndex)
   if (!task) {
     return
   }
