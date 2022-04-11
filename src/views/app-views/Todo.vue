@@ -71,8 +71,6 @@ const store = useStore()
 // tasks
 await store.dispatch('tasksModule/fetchTasks')
 
-const cacheValue = localStorage.getItem('showCompletedTask') === 'true' ?? false
-
 // const showCompleted = ref<boolean>(cacheValue)
 // watchEffect(() => {
 //   localStorage.setItem('showCompletedTask', String(showCompleted.value))
