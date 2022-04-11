@@ -293,16 +293,16 @@ const getters: GetterTree<TaskState, RootState> = {
     return Math.min(...getters.tasks.map((task: Task) => task.order))
   },
   runningTaskId(state, getters, _, rootGetters): string | null {
-    if (rootGetters['timerModule/runningRecord']?.isBreak) {
+    if (!rootGetters['timerModule/runningRecord'] || rootGetters['timerModule/runningRecord']?.isBreak) {
       return null
     }
 
-    return rootGetters['timerModule/runningRecord']
-      ? getters
-        .tasks
-        .find((task: Task) => task.status !== 'completed')
-        ?.id
-      : null
+    const tasks = getters
+      .tasks
+      .filter((task: Task) => task.status !== 'completed')
+      .sort((prev: Task, next: Task) => prev.order - next.order)
+
+    return tasks[0]?.id
   }
 }
 
