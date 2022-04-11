@@ -27,6 +27,9 @@ const mutations: MutationTree<TaskState> = {
   ADD_TASK(state, task: Task) {
     state.tasks.push(task)
   },
+  SORT_TASKS(state) {
+    state.tasks = state.tasks.sort((prev, next) => prev.order - next.order)
+  },
   DELETE_TASK(state, taskId: string) {
     const taskIndex = state.tasks.findIndex(task => task.id === taskId)
     const deletedTask = state.tasks[taskIndex]
@@ -198,6 +201,7 @@ const actions: ActionTree<TaskState, RootState> = {
         id: taskId,
         changes: { order: newOrder }
       })
+      commit('SORT_TASKS')
       await firestore
         .collection('tasks')
         .doc(taskId)

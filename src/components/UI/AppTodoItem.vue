@@ -37,12 +37,12 @@
 
     <AppContextMenu class="todo-item__context-menu" v-if="props.canEdit" v-model="isContextmenu"
                     container-selector=".app__body">
-      <li @click="changeOrder('up')"
+      <li v-if="props.todoitem.order !== minOrder" @click="changeOrder('up')"
           class="hint-text context-menu__item">
         <AppIcon :color="Colors.GRAY_300" icon-name="order-up"></AppIcon>
         Sort up
       </li>
-      <li @click="changeOrder('down')"
+      <li v-if="props.todoitem.order !== maxOrder" @click="changeOrder('down')"
           class="hint-text context-menu__item">
         <AppIcon :color="Colors.GRAY_300" icon-name="order-down"></AppIcon>
         Sort down
@@ -63,6 +63,7 @@ import { computed, ref } from 'vue'
 import dayjs from 'dayjs'
 import AppIcon from '@/components/UI/AppIcon.vue'
 import AppContextMenu from '@/components/UI/AppContextMenu.vue'
+import { useStore } from 'vuex'
 
 interface Props {
   todoitem: Task
@@ -85,6 +86,7 @@ const emit = defineEmits<{
 }>()
 
 const root = ref<HTMLElement>()
+const store = useStore()
 
 // ====
 // time
@@ -114,6 +116,9 @@ function changeOrder(direction: 'up' | 'down'): void {
 
   isContextmenu.value = false
 }
+
+const minOrder = store.getters['tasksModule/getMinOrderValue']
+const maxOrder = store.getters['tasksModule/getMaxOrderValue']
 
 // ====
 // text

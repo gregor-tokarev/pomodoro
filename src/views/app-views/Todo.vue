@@ -1,16 +1,14 @@
 <template>
   <div class="todo" ref="root">
-    <div class="subtitle-text todo__toggle-completed">
-      <AppToggle class="todo__toggle-button" v-model="showCompleted"></AppToggle>
-      Show completed tasks
-    </div>
     <Sortable
       class="todo__list"
       @dragEnd="dragEnd"
       dragged-element=".todo__item"
       handle-selector=".todo-item__drag"
     >
-      <li class="todo__item" v-for="task in tasks" :key="task.id">
+      <li class="todo__item" tabindex="-1" :data-no-drag="task.status === 'completed' ? true : undefined"
+          v-for="task in tasks"
+          :key="task.id">
         <div class="todo__item-overlay"></div>
         <AppTodoItem
           is-draggable
@@ -52,20 +50,19 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watchEffect } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { useStore } from 'vuex'
 import { Task, taskStatus } from '../../../models/task.model'
 import AppTodoItem from '@/components/UI/AppTodoItem.vue'
 import AppAddButton from '@/components/UI/AppAddButton.vue'
 import AppTextarea from '@/components/UI/AppTextarea.vue'
 import AppButton from '@/components/UI/AppButton.vue'
-import { SortableStopEvent } from '@shopify/draggable'
+import type { SortableStopEvent } from '@shopify/draggable'
 import { useI18n } from 'vue-i18n'
 import useVuelidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import Sortable from '@/components/utils/Sortable.vue'
 import firebase from 'firebase/compat'
-import AppToggle from '@/components/UI/AppToggle.vue'
 
 const { t } = useI18n()
 const store = useStore()
@@ -75,16 +72,13 @@ const store = useStore()
 await store.dispatch('tasksModule/fetchTasks')
 
 const cacheValue = localStorage.getItem('showCompletedTask') === 'true' ?? false
-const showCompleted = ref<boolean>(cacheValue)
-watchEffect(() => {
-  localStorage.setItem('showCompletedTask', String(showCompleted.value))
-})
 
-const tasks = computed<Task[]>(() => {
-  return showCompleted.value
-    ? store.getters['tasksModule/tasks']
-    : store.getters['tasksModule/tasks'].filter((task: Task) => task.status !== 'completed')
-})
+// const showCompleted = ref<boolean>(cacheValue)
+// watchEffect(() => {
+//   localStorage.setItem('showCompletedTask', String(showCompleted.value))
+// })
+
+const tasks = computed<Task[]>(() => store.getters['tasksModule/tasks'])
 
 // ====
 // Add-task form
@@ -160,14 +154,11 @@ function changeText(taskId: string, newText: string): void {
 // task change order
 function dragEnd(event: SortableStopEvent): void {
   const startIndex = store.getters['tasksModule/getMinOrderValue']
-  if (event.newIndex === event.oldIndex) {
-    return
-  }
+
+  if (event.newIndex === event.oldIndex) return
 
   const task = tasks.value.find(task => task.order === event.oldIndex + startIndex)
-  if (!task) {
-    return
-  }
+  if (!task) return
 
   store.dispatch('tasksModule/changeTaskOrder', {
     newOrder: startIndex + event.newIndex,
@@ -177,7 +168,7 @@ function dragEnd(event: SortableStopEvent): void {
 
 function changeOrder(taskId: string, newOrder: number): void {
   store.dispatch('tasksModule/changeTaskOrder', {
-    newOrder,
+    newOrder: newOrder,
     taskId
   })
 }
