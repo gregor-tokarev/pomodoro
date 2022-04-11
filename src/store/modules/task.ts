@@ -156,7 +156,7 @@ const actions: ActionTree<TaskState, RootState> = {
       const task: Task = getters.taskById(taskId)
       if (newOrder < task.order) {
         const tasksToReorder: Task[] = getters
-          .tasksOrderInterval(newOrder, task.order)
+          .intervalByOrders(newOrder, task.order)
           .filter((task: Task) => task.id !== taskId)
 
         promises = tasksToReorder.map(task => {
@@ -174,7 +174,7 @@ const actions: ActionTree<TaskState, RootState> = {
         })
       } else {
         const tasksToReorder: Task[] = getters
-          .tasksOrderInterval(task.order, newOrder)
+          .intervalByOrders(task.order, newOrder)
           .filter((task: Task) => task.id !== taskId)
 
         promises = tasksToReorder.map(task => {
@@ -278,7 +278,7 @@ const getters: GetterTree<TaskState, RootState> = {
       .filter((task: Task) => task.status !== 'completed')
       .slice(0, 5)
   },
-  tasksOrderInterval(state): (startOrder: number, stopOrder: number) => Task[] {
+  intervalByOrders(state): (startOrder: number, stopOrder: number) => Task[] {
     return (startOrder, stopOrder) =>
       state.tasks.filter(task => startOrder <= task.order && task.order <= stopOrder)
   },
