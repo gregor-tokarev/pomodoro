@@ -19,6 +19,9 @@
           @changeOrder="changeOrder($event.taskId, $event.newOrder)"
           @changeStatus="changeStatus($event.taskId, $event.status)"
           :todoitem="task"
+
+          :min-order="minOrder"
+          :max-order="maxOrder"
         ></AppTodoItem>
       </li>
     </Sortable>
@@ -150,6 +153,9 @@ function changeText(taskId: string, newText: string): void {
 
 // ====
 // task change order
+const minOrder = store.getters['tasksModule/getMinOrderValue']
+const maxOrder = store.getters['tasksModule/getMaxOrderValue']
+
 function dragEnd(event: SortableStopEvent): void {
   const startIndex = store.getters['tasksModule/getMinOrderValue']
 

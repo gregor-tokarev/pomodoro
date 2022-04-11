@@ -37,12 +37,12 @@
 
     <AppContextMenu class="todo-item__context-menu" v-if="props.canEdit" v-model="isContextmenu"
                     container-selector=".app__body">
-      <li v-if="props.todoitem.order !== minOrder" @click="changeOrder('up')"
+      <li v-if="props.todoitem.order !== props.minOrder" @click="changeOrder('up')"
           class="hint-text context-menu__item">
         <AppIcon :color="Colors.GRAY_300" icon-name="order-up"></AppIcon>
         Sort up
       </li>
-      <li v-if="props.todoitem.order !== maxOrder" @click="changeOrder('down')"
+      <li v-if="props.todoitem.order !== props.maxOrder" @click="changeOrder('down')"
           class="hint-text context-menu__item">
         <AppIcon :color="Colors.GRAY_300" icon-name="order-down"></AppIcon>
         Sort down
@@ -70,6 +70,8 @@ interface Props {
   isDraggable: boolean
   canEdit: boolean
   inProgress: boolean
+  minOrder: number
+  maxOrder: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -116,9 +118,6 @@ function changeOrder(direction: 'up' | 'down'): void {
 
   isContextmenu.value = false
 }
-
-const minOrder = store.getters['tasksModule/getMinOrderValue']
-const maxOrder = store.getters['tasksModule/getMaxOrderValue']
 
 // ====
 // text
