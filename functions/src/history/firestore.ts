@@ -15,7 +15,7 @@ export const createRecord = functions
     return Promise.all([
       createSecludedTask(
         snapshot.id,
-        `https://us-central1-pomodoro-3b7d3.cloudfunctions.net/finishRecord?recordId=${snapshot.id}`,
+        `https://europe-west3-pomodoro-3b7d3.cloudfunctions.net/finishRecord?recordId=${snapshot.id}`,
         time
       )
     ])
