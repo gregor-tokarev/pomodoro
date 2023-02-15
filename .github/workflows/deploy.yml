@@ -1,0 +1,20 @@
+name: deploy to firebase
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+                  cache: 'yarn'
+            - run: cd functions && yarn
+            - run: yarn build
+            - run: "./node_modules/.bin/firebase deploy --token \"$FIREBASE_DEPLOY_TOKEN\" --non-interactive"
