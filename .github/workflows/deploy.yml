@@ -20,4 +20,5 @@ jobs:
             - run: yarn
             - run: cd functions && yarn
             - run: yarn build
+            - run: echo $FIREBASE_DEPLOY_TOKEN
             - run: "./node_modules/.bin/firebase deploy --token $FIREBASE_DEPLOY_TOKEN"
