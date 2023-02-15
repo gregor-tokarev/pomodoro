@@ -35,7 +35,7 @@ jobs:
             - uses: actions/upload-artifact@v3
               with:
                 name: code-coverage
-                path: output/test/code-coverage
+                path: reports/junit/
 
     deploy:
         runs-on: ubuntu-latest
