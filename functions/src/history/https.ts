@@ -49,7 +49,7 @@ export const finishRecord = functions
       const breakInSeconds = settings.breakTime * 60
       await createSecludedTask(
         breakId,
-        `https://us-central1-pomodoro-3b7d3.cloudfunctions.net/finishRecord?recordId=${breakId}`,
+        `https://europe-west3-pomodoro-3b7d3.cloudfunctions.net/finishRecord?recordId=${breakId}`,
         breakInSeconds
       )
     }
