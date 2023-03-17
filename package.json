@@ -5,7 +5,7 @@
   "scripts": {
     "start": "yarn watch:functions & yarn emulate & yarn serve",
     "serve": "vue-cli-service serve",
-    "emulate": "firebase emulators:start --import .firebase-emulator",
+    "emulate": "if [ -d \".firebase-emulator\" ]; then firebase emulators:start --import .firebase-emulator; else firebase emulators:start; fi",
     "savedata": "firebase emulators:export --force .firebase-emulator",
     "watch:functions": "cd functions && yarn watch",
     "build": "vue-cli-service build",
@@ -16,6 +16,9 @@
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006 -c .storybook -s public",
     "build-storybook": "build-storybook"
+  },
+  "engines": {
+    "node": "^16"
   },
   "dependencies": {
     "@shopify/draggable": "^1.0.0-beta.8",
