@@ -15,7 +15,6 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                 node-version: 14
-                cache: 'npm'
             - run: yarn
             - run: yarn lint
             - run: yarn lint:style
@@ -29,7 +28,6 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                 node-version: 14
-                cache: 'npm'
             - run: yarn
             - run: yarn test:unit:ci
             - uses: actions/upload-artifact@v3
@@ -46,7 +44,6 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: 14
-                  cache: 'npm'
             - run: yarn
             - run: cd functions && yarn
             - run: yarn build
