@@ -5,7 +5,7 @@
 
       <div class="">
         <h1 class="title-text leftbar__app-name">Pomodoro</h1>
-        <h3 class="basic-text leftbar__app-slogan">the way you organize your success</h3>
+        <h3 class="basic-text leftbar__app-slogan">success tracker</h3>
       </div>
     </div>
 
